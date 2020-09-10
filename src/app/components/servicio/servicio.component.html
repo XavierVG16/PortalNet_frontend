@@ -1,0 +1,256 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Servicios
+        <small>Seccion Servicios </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a routerLink="/inicio"><i class="fa fa-dashboard"></i> Inicia</a></li>
+
+        <li class="active">Servicios</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Servicios</h3>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+                    <i class="fa fa-minus"></i></button>
+
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="box-tools pull-right">
+                <a class="btn   btn-xm btn-primary" data-toggle="modal" data-target="#myModal">
+                    <span> Agregar</span></a>
+
+            </div>
+            <br><br><br>
+
+            <div class="col-xs-12 table-responsive">
+
+
+
+                <table class="table table-bordered">
+
+                    <thead>
+                        <tr>
+                            <th style="width:1px; "> # </th>
+
+                            <th>Nombre Plan</th>
+                           
+                            <th>Precio</th>
+                       
+                            <th>Velocidad de Cargar (kbps)</th>
+                            <th>Velocidad de Descarga (kbps)</th>
+                            <th>Accion</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let servicio of servicioService.servicios | paginate:{itemsPerPage:5, currentPage: pageActual}; let i = index">
+
+                            <td>{{i+1}}</td>
+                            <td>{{servicio.nombre_plan}}</td>
+                         
+                            <td>{{servicio.precio}}</td>
+                           
+                            <td>{{servicio.subida_kbps}} kbps</td>
+                            <td>{{servicio.bajada_kbps}} kbps</td>
+                            <td> <a class="btn   btn-sm btn-primary   pull-left" (click)="editServicio(servicio)"
+                                    data-toggle="modal" style="margin: 2px;" data-target="#myModal">
+                                    <i class="fa fa-pencil"></i> Editar
+
+                                </a>
+
+                                <a class="btn   btn-sm btn-danger  pull-left" style="margin: 2px;"
+                                    (click)="deleteServicio(servicio.idplan_servicio, categoryForm)">
+                                    <i class="fa fa-times"></i> Eliminar
+                                </a></td>
+
+                        </tr>
+
+
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+                </table>
+                                        <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+           </div>
+        </div>
+
+        <!-- /.box-body -->
+        <div class="box-footer">
+
+
+            <!-- Modal -->
+
+        </div>
+        <!-- /.box-footer-->
+    </div>
+    <!-- /.box -->
+
+</section>
+<!-- /.content -->
+
+<div class="modal modal-primary" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">
+                    {{!servicioService.selectedServicio.idplan_servicio ?'Agregar' : 'Editar'}} Servicio</h4>
+            </div>
+            <form #servicioForm="ngForm" (ngSubmit)="addServicio(servicioForm)">
+                <div class="modal-body">
+
+                    <div class="box-body">
+                        <input type="hidden" name="idplan_servicio" #idplan_servicio
+                            [(ngModel)]="servicioService.selectedServicio.idplan_servicio">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nombre Plan (*)</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-desktop"></i>
+                                        </div>
+                                        <input type="text" name="nombre_plan" #name="ngModel" [(ngModel)]="servicioService.selectedServicio.nombre_plan"
+                                            class="form-control" required>
+                                    </div>
+                                   
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Precio (*)</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-dollar"></i>
+                                        </div>
+                                        <input type="text" name="precio" #name="ngModel" [(ngModel)]="servicioService.selectedServicio.precio"
+                                            class="form-control" required>
+                                    </div>
+                                 
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Comparticion (*)</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-share-alt"></i>
+                                        </div>
+                                    <input type="number" name="comparticion" #name="ngModel" [(ngModel)]="servicioService.selectedServicio.comparticion"
+                                        class="form-control" required>
+
+                                    </div>
+                                   
+                                </div>
+                                <div class="form-group">
+                                    <label>Carga Kbps</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa  fa-upload"></i>
+                                        </div>
+                                        <input type="text" name="subida_kbps" #name="ngModel" [(ngModel)]="servicioService.selectedServicio.subida_kbps"
+                                            class="form-control" disabled required>
+                                    
+                                    </div>
+                                  
+                                </div>
+                                <div class="form-group">
+                                    <label> Velocidad minima de Carga Kbps</label>
+                                    <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa  fa-cloud-upload"></i>
+                                    </div>
+                                        <input type="text" name="m_subida_kbps" #name="ngModel" [(ngModel)]="servicioService.selectedServicio.m_subida_kbps"
+                                            class="form-control" disabled required>
+                                    
+                                    </div>
+                               
+                                </div>
+                                <!-- /.form-group -->
+
+                                <!-- /.form-group -->
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Cantida Megas (*)</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-plus"></i>
+                                        </div>
+                                        <input type="number" name="cantidad_megas" onKeyUp="Suma()" #name="ngModel"
+                                            [(ngModel)]="servicioService.selectedServicio.cantidad_megas" class="form-control" required>
+                                    
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label>Descripcion</label>
+
+                                    <textarea name="descripcion" #name="ngModel"
+                                        [(ngModel)]="servicioService.selectedServicio.descripcion" class="form-control"
+                                        required id="" cols="25" rows="5"></textarea>
+                                </div>
+                                <!-- /.form-group -->
+                             
+                              
+                                <div class="form-group">
+                                    <label>Descarga Kbps</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-download"></i>
+                                        </div>
+                                        <input type="text" name="bajada_kbps" #name="ngModel" [(ngModel)]="servicioService.selectedServicio.bajada_kbps"
+                                            class="form-control" disabled required>
+                                    </div>
+                                   
+                                </div>
+                                <div class="form-group">
+                                    <label> Velocidad minima de Descarga Kbps</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-cloud-download"></i>
+                                        </div>
+                                    <input type="text" name="m_bajada_kbps" #name="ngModel" [(ngModel)]="servicioService.selectedServicio.m_bajada_kbps"
+                                        class="form-control" disabled required>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline pull-left" data-dismiss="modal" (click)="resetForm(servicioForm)"><i
+                            class="fa fa-remove"></i> Cerrar</button>
+
+                    <button class="btn btn-outline"> <i class="fa  fa-folder"></i> Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').focus()
+    })
+</script>

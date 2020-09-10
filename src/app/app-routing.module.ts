@@ -1,0 +1,36 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { EscritorioComponent } from './components/escritorio/escritorio.component';
+import { ProveedorComponent} from './components/proveedor/proveedor.component';
+import { ServicioComponent} from './components/servicio/servicio.component';
+import {EquipoComponent } from './components/equipo/equipo.component';
+
+import { ErrorComponent } from './components/error/error.component';
+const routes: Routes = [
+  {
+    path: 'inicio',
+    component: EscritorioComponent
+  },
+  {
+    path: 'proveedores',
+    component: ProveedorComponent
+  },
+  {
+    path: 'servicios',
+    component: ServicioComponent
+  },
+  {
+    path: 'equipos',
+    component: EquipoComponent
+  },
+  {
+    path: '**',
+    component: ErrorComponent
+  } 
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
