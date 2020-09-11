@@ -7,7 +7,7 @@ import { Servicio } from '../models/servicio';
 export class ServicioService {
   selectedServicio: Servicio;
   servicios: Servicio[];
-  readonly URL_API = 'http://localhost:3000/servicio/';
+  readonly URL_API = 'https://sistemaportalnet.herokuapp.com/servicio/';
 
   constructor(private http: HttpClient) {
     this.selectedServicio = new Servicio();
