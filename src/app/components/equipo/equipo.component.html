@@ -2,7 +2,7 @@
 <section class="content-header">
     <h1>
         Equipos
-        <small>Seccion Equipos </small>
+        <small>Seccion Equipos ISP </small>
     </h1>
     <ol class="breadcrumb">
         <li><a routerLink="/inicio"><i class="fa fa-dashboard"></i> Inicia</a></li>
@@ -17,7 +17,7 @@
     <!-- Default box -->
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Equipos de Instalacion</h3>
+            <h3 class="box-title">Equipos </h3>
 
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -44,14 +44,14 @@
                         <tr>
                             <th style="width:1px; "> # </th>
 
-                            <th>Equipo</th>
-                            <th>Descripcion</th>
-                            <th>Serie</th>
-                            <th>Proveedor</th>
-                            <th>Precio</th>
-                            <th>Cantidad</th>
-                            
-                            <th>Accion</th>
+                            <th>EQUIPOS</th>
+                            <th>DESCRIPCION</th>
+                            <th>SERIE</th>
+                            <th>PROVEEDOR</th>
+                            <th>PRECIO</th>
+                            <th>CANTIDAD</th>
+                            <th>ESTADO</th>
+                            <th>ACCION</th>
 
                         </tr>
                     </thead>
@@ -65,9 +65,14 @@
                             <td>{{equipo.serie}}</td>
                             <td>{{equipo.proveedor_nombre}} </td>
                            
-                            <td>{{equipo.precio}}</td>
+                            <td>$ {{equipo.precio}}</td>
                             <td>{{equipo.cantidad}} </td>
-                           
+                            <td > 
+                                <span *ngIf = "equipo.cantidad == 0"  class="label label-warning">Asignado</span>
+                                <span *ngIf = "equipo.cantidad != 0" class="label label-success">Disponible</span>
+                            </td>
+                            
+                        
                             
                             <td> <a class="btn   btn-sm btn-primary pull-left" (click)="editEquipo(equipo)"
                                     style="margin: 2px;" data-toggle="modal" data-target="#myModal">
@@ -116,7 +121,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">
-                    {{!equipoService.selectedEquipo.idequipo ?'Agregar' : 'Editar'}} Equipo</h4>
+                    {{!equipoService.selectedEquipo.idequipo ?'Agregar' : 'Editar'}} Equipo ISP</h4>
             </div>
             <form #equipoForm="ngForm" (ngSubmit)="addEquipo(equipoForm)">
                 <div class="modal-body">
@@ -129,7 +134,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Equipo (*)</label>
+                                    <label>EQUIPO (*)</label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
                                             <i class="fa fa-laptop"></i>
@@ -142,7 +147,7 @@
                                     
                                 </div>
                                 <div class="form-group">
-                                    <label>Descripcion (*)</label>
+                                    <label>DESCRIPCION (*)</label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
                                             <i class="fa fa-file-text-o"></i>
@@ -156,7 +161,7 @@
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
-                                    <label>Serie (*)</label>
+                                    <label>SERIE (*)</label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
                                             <i class="fa fa-tag"></i>
@@ -174,7 +179,7 @@
 
                                
                                 <div class="form-group">
-                                    <label>Proveedor</label>
+                                    <label>PROVEEDOR (*)</label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
                                             <i class="fa fa-users"></i>
@@ -193,7 +198,7 @@
 
                                     <div class="form-group">
                                     
-                                        <label>Precio (*)</label>
+                                        <label>PRECIO (*)</label>
                                     
                                         <div class="input-group">
                                             <div class="input-group-addon">
@@ -205,7 +210,7 @@
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="form-group">
-                                        <label>Cantidad</label>
+                                        <label>CANTIDAD (*)</label>
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-plus"></i>

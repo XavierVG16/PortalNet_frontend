@@ -49,7 +49,7 @@ export class EquipoComponent implements OnInit {
           .subscribe(res => {
             this.resetForm(form);
             this.getEquipos();
-            this.toastr.success('Actualizado con éxito!', 'Equipo', {
+            this.toastr.success('Actualizado con éxito!', 'Equipo ISP', {
               timeOut: 2000
             });
 
@@ -59,7 +59,7 @@ export class EquipoComponent implements OnInit {
           .subscribe(res => {
             this.getEquipos();
             this.resetForm(form);
-            this.toastr.success('Guardado con éxito!', 'Equipo', {
+            this.toastr.success('Guardado con éxito!', 'Equipo ISP', {
               timeOut: 2000
             });
             //M.toast({html: 'Save successfully'});
@@ -85,7 +85,7 @@ export class EquipoComponent implements OnInit {
         .subscribe(res => {
           this.getEquipos();
           this.resetForm(form);
-          this.toastr.success('Eliminado con éxito!', 'Equipo', { timeOut: 2000 });
+          this.toastr.success('Eliminado con éxito!', 'Equipo ISP', { timeOut: 2000 });
           //M.toast({html: 'Deleted Succesfully'});
         });
     }

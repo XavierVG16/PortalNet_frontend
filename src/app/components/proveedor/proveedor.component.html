@@ -6,7 +6,7 @@
     <ol class="breadcrumb">
         <li><a routerLink="/inicio"><i class="fa fa-dashboard"></i> Inicia</a></li>
 
-        <li class="active">Proveedores</li>
+        <li routerLinkActive="active">Proveedores</li>
     </ol>
 </section>
 
@@ -26,89 +26,11 @@
             </div>
         </div>
         <div class="box-body">
+            <div class="box-tools pull-right">
+                <a class="btn   btn-xm btn-primary" data-toggle="modal" data-target="#myModal">
+                    <span> Agregar</span></a>
 
-            <form #proveedorForm="ngForm" (ngSubmit)="addProveedor(proveedorForm)">
-                <input type="hidden" name="id_proveedor" #id_proveedor
-                    [(ngModel)]="proveedorService.selectedProveedor.id_proveedor">
-
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Proveedor (*)</label>
-                            <input type="text" name="proveedor_nombre" #name="ngModel"
-                                [(ngModel)]="proveedorService.selectedProveedor.proveedor_nombre" class="form-control"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label>Vendedor (*)</label>
-                            <input type="text" name="nombre_beneficiario" #name="ngModel"
-                                [(ngModel)]="proveedorService.selectedProveedor.nombre_beneficiario" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Telefono (*)</label>
-                            <input type="text" name="telefono" #name="ngModel" [(ngModel)]="proveedorService.selectedProveedor.telefono"
-                                class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>E-mail (*)</label>
-                            <input type="text" name="email" #name="ngModel"
-                                [(ngModel)]="proveedorService.selectedProveedor.email" class="form-control" required>
-                        </div>
-                     
-<div class="form-group">
-    <label>Direccion (*)</label>
-    <input type="text" name="direccion" #name="ngModel" [(ngModel)]="proveedorService.selectedProveedor.direccion"
-        class="form-control" required>
-</div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                        <label>Productos (*)</label>
-                        <textarea class="form-control" name="descripcion_p" id="" cols="30" rows="10"  #name="ngModel" [(ngModel)]="proveedorService.selectedProveedor.descripcion_p"></textarea>
-                        </div>
-                        <!-- /.form-group -->
-
-                    </div>
-                    <div class="col-md-4">
-                       
-                        <div class="form-group">
-                            <label>Banco (*)</label>
-                            <input type="text" name="banco" #name="ngModel"
-                                [(ngModel)]="proveedorService.selectedProveedor.banco" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Cuenta (*)</label>
-                            <input type="text" name="tipo_cuenta" #name="ngModel" [(ngModel)]="proveedorService.selectedProveedor.tipo_cuenta"
-                                class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Numero Cuenta (*)</label>
-                            <input type="text" name="n_cuenta" #name="ngModel" [(ngModel)]="proveedorService.selectedProveedor.n_cuenta"
-                                class="form-control" required>
-                        </div>
-<div class="form-group">
-    <label>Cedula (*)</label>
-    <input type="text" name="cedula" #name="ngModel" [(ngModel)]="proveedorService.selectedProveedor.cedula"
-        class="form-control" required>
-</div>
-<div class="form-group">
-    <label>Beneficiario (*)</label>
-    <input type="text" name="beneficiario" #name="ngModel" [(ngModel)]="proveedorService.selectedProveedor.beneficiario"
-        class="form-control" required>
-</div>
-                        <!-- /.form-group -->
-
-                    </div>
-                </div>
-
-
-                <button class="btn  pull-left btn-danger" style="margin: 10px ;" (click)="resetForm(proveedorForm)"><i
-                        class="fa fa-remove"></i> Cerrar</button>
-
-                <button class="btn  btn-primary" style="margin: 10px ;"> <i class="fa  fa-folder"></i> Guardar</button>
-
-            </form>
+            </div>
 
 
             <br><br><br>
@@ -123,15 +45,15 @@
                         <tr>
                             <th style="width: 1px;"> # </th>
 
-                            <th>Proveedor</th>
-                            <th>Vendedor</th>
-                            <th>Telefono</th>
-                            <th>Banco</th>
-                            <th>Cuenta</th>
-                            <th>Numero</th>
-                            <th>Cedula</th>
-                            <th>Beneficiario</th>
-                            <th>Accion</th>
+                            <th>PROVEEDOR</th>
+                            <th>VENDEDOR</th>
+                            <th>TELEFONO</th>
+                            <th>BANCO</th>
+                            <th>CUENTA</th>
+                            <th>NUMERO DE CUENTA</th>
+                            <th>CEDULA</th>
+                            <th>BENEFICIARIO</th>
+                            <th>ACCION</th>
 
                         </tr>
                     </thead>
@@ -142,15 +64,15 @@
                             <td style="width: 1px;">{{i+1}}</td>
                             <td>{{proveedor.proveedor_nombre}}</td>
                             <td>{{proveedor.nombre_beneficiario}} </td>
-                            
+
                             <td>{{proveedor.telefono}} </td>
                             <td>{{proveedor.banco}}</td>
                             <td>{{proveedor.tipo_cuenta}} </td>
-                            <td>{{proveedor.n_cuenta}} </td>                           
+                            <td>{{proveedor.n_cuenta}} </td>
                             <td>{{proveedor.cedula}}</td>
                             <td>{{proveedor.beneficiario}}</td>
                             <td> <a class="btn   btn-sm btn-primary   pull-left" (click)="editProveedor(proveedor)"
-                                    style="margin: 2px;">
+                                    style="margin: 2px;" data-toggle="modal" data-target="#myModal">
                                     <i class="fa fa-pencil"></i> Editar
 
                                 </a>
@@ -169,7 +91,7 @@
 
                     </tfoot>
                 </table>
-                                        <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+                <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
 
             </div>
         </div>
@@ -186,3 +108,127 @@
     <!-- /.box -->
 
 </section>
+
+
+<div class=" modal modal-primary   " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">
+                    {{!proveedorService.selectedProveedor.id_proveedor ?'Agregar' : 'Editar'}} Proveedor</h4>
+            </div>
+            <form #proveedorForm="ngForm" (ngSubmit)="addProveedor(proveedorForm)">
+                <div class="modal-body">
+
+                    <div class="box-body">
+
+                        <input type="hidden" name="id_proveedor" #id_proveedor
+                            [(ngModel)]="proveedorService.selectedProveedor.id_proveedor">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>PROVEEDOR (*)</label>
+                                    <input type="text" name="proveedor_nombre" #name="ngModel"
+                                        [(ngModel)]="proveedorService.selectedProveedor.proveedor_nombre"
+                                        class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>VENDEDOR (*)</label>
+                                    <input type="text" name="nombre_beneficiario" #name="ngModel"
+                                        [(ngModel)]="proveedorService.selectedProveedor.nombre_beneficiario"
+                                        class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>TELEFONO (*)</label>
+                                    <input type="text" name="telefono" #name="ngModel"
+                                        [(ngModel)]="proveedorService.selectedProveedor.telefono" class="form-control"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label>E-MAIL (*)</label>
+                                    <input type="text" name="email" #name="ngModel"
+                                        [(ngModel)]="proveedorService.selectedProveedor.email" class="form-control"
+                                        required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>DIRECCION (*)</label>
+                                    <input type="text" name="direccion" #name="ngModel"
+                                        [(ngModel)]="proveedorService.selectedProveedor.direccion" class="form-control"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>PRODUCTOS (*)</label>
+                                    <textarea class="form-control" name="descripcion_p" id="" cols="30" rows="12"
+                                        #name="ngModel"
+                                        [(ngModel)]="proveedorService.selectedProveedor.descripcion_p"></textarea>
+                                </div>
+                                <!-- /.form-group -->
+
+                            </div>
+                            <div class="col-md-4">
+
+                                <div class="form-group">
+                                    <label>BANCO (*)</label>
+                                    <input type="text" name="banco" #name="ngModel"
+                                        [(ngModel)]="proveedorService.selectedProveedor.banco" class="form-control"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label>CUENTA (*)</label>
+                                    <select name="tipo_cuenta" #name="ngModel"
+                                        [(ngModel)]="proveedorService.selectedProveedor.tipo_cuenta"
+                                        class="form-control" required>
+                                        <option value="selected"> </option>
+                                        <option>Ahorros</option>
+                                        <option>Corriente</option>
+                                    </select>
+
+                                </div>
+                                <div class="form-group">
+                                    <label>NUMERO DE CUENTA (*)</label>
+                                    <input type="text" name="n_cuenta" #name="ngModel"
+                                        [(ngModel)]="proveedorService.selectedProveedor.n_cuenta" class="form-control"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label>CEDULA (*)</label>
+                                    <input type="text" name="cedula" #name="ngModel"
+                                        [(ngModel)]="proveedorService.selectedProveedor.cedula" class="form-control"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label>BENEFICIARIO (*)</label>
+                                    <input type="text" name="beneficiario" #name="ngModel"
+                                        [(ngModel)]="proveedorService.selectedProveedor.beneficiario"
+                                        class="form-control" required>
+                                </div>
+                                <!-- /.form-group -->
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+
+
+                    <button class="btn btn-outline pull-left" data-dismiss="modal" (click)="resetForm(proveedorForm)"><i
+                            class="fa fa-remove"></i> Cerrar</button>
+
+                    <button class="btn btn-outline"> <i class="fa  fa-folder"></i> Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
