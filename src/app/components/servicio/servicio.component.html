@@ -9,7 +9,7 @@
     <ol class="breadcrumb">
         <li><a routerLink="/inicio"><i class="fa fa-dashboard"></i> Inicia</a></li>
 
-        <li class="active">Servicios</li>
+        <li routerActive="active">Servicios</li>
     </ol>
 </section>
 
@@ -51,7 +51,7 @@
                             <th>PRECIO</th>
                        
                             <th>VELOCIDAD DE CARGA (kbps)</th>
-                            <th>VELOCIDAD DE DESCARGAR (kbps)</th>
+                            <th>VELOCIDAD DE DESCARGA (kbps)</th>
                             <th>ACCION</th>
 
                         </tr>
@@ -61,7 +61,7 @@
                             *ngFor="let servicio of servicioService.servicios | paginate:{itemsPerPage:5, currentPage: pageActual}; let i = index">
 
                             <td>{{i+1}}</td>
-                            <td>{{servicio.nombre_plan}}</td>
+                            <td style="text-align: left ;" >{{servicio.nombre_plan}}</td>
                          
                             <td>{{servicio.precio}} $</td>
                            

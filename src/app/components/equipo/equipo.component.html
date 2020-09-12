@@ -7,7 +7,7 @@
     <ol class="breadcrumb">
         <li><a routerLink="/inicio"><i class="fa fa-dashboard"></i> Inicia</a></li>
 
-        <li class="active">Equipos</li>
+        <li routerActive="active">Equipos</li>
     </ol>
 </section>
 
@@ -60,10 +60,10 @@
                             *ngFor="let equipo of equipoService.equipos | paginate:{itemsPerPage:5, currentPage: pageActual}; let i = index ">
 
                             <td>{{i+1}}</td>
-                            <td>{{equipo.equipo}}</td>
-                            <td>{{equipo.descripcion}}</td>
-                            <td>{{equipo.serie}}</td>
-                            <td>{{equipo.proveedor_nombre}} </td>
+                            <td style="text-align: left ;">{{equipo.equipo}}</td>
+                            <td style="text-align: left ;">{{equipo.descripcion}}</td>
+                            <td style="text-align: left ;">{{equipo.serie}}</td>
+                            <td style="text-align: left ;">{{equipo.proveedor_nombre}} </td>
                            
                             <td>$ {{equipo.precio}}</td>
                             <td>{{equipo.cantidad}} </td>

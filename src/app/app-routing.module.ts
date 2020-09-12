@@ -3,7 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { EscritorioComponent } from './components/escritorio/escritorio.component';
 import { ProveedorComponent} from './components/proveedor/proveedor.component';
 import { ServicioComponent} from './components/servicio/servicio.component';
-import {EquipoComponent } from './components/equipo/equipo.component';
+import { EquipoComponent } from './components/equipo/equipo.component';
+import { ProductoComponent } from './components/producto/producto.component';
 
 import { ErrorComponent } from './components/error/error.component';
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'equipos',
     component: EquipoComponent
+  },
+  {
+    path: 'productos',
+    component: ProductoComponent
   },
   {
     path: '**',
