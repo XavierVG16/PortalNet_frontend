@@ -41,7 +41,7 @@ export class ServicioComponent implements OnInit {
           .subscribe(res => {
             this.resetForm(form);
             this.getServicios();
-            this.toastr.success('Actualizado con éxito!', 'Plan de Internt', {
+            this.toastr.success('Actualizado con éxito!', 'Plan de Internet', {
               timeOut: 2000
             });
 
@@ -51,7 +51,7 @@ export class ServicioComponent implements OnInit {
           .subscribe(res => {
             this.getServicios();
             this.resetForm(form);
-            this.toastr.success('Guardado con éxito!', 'Plan de Internt', {
+            this.toastr.success('Guardado con éxito!', 'Plan de Internet', {
               timeOut: 2000
             });
             //M.toast({html: 'Save successfully'});
@@ -72,12 +72,12 @@ export class ServicioComponent implements OnInit {
   }
 
   deleteServicio(_id: string, form: NgForm) {
-    if (confirm('Seguro que deseas eliminar el Plan de Internt?')) {
+    if (confirm('Seguro que deseas eliminar el Plan de Internet?')) {
       this.servicioService.deleteServicio(_id)
         .subscribe(res => {
           this.getServicios();
           this.resetForm(form);
-          this.toastr.success('Eliminado con éxito!', 'Plan de Internt', { timeOut: 2000 });
+          this.toastr.success('Eliminado con éxito!', 'Plan de Internet', { timeOut: 2000 });
           //M.toast({html: 'Deleted Succesfully'});
         });
     }

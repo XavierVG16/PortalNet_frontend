@@ -62,15 +62,15 @@
                             *ngFor="let proveedor of proveedorService.proveedores | paginate:{itemsPerPage:5, currentPage: pageActual}; let i = index">
 
                             <td style="width: 1px;">{{i+1}}</td>
-                            <td>{{proveedor.proveedor_nombre}}</td>
-                            <td>{{proveedor.nombre_beneficiario}} </td>
+                            <td style="text-align: left ;">{{proveedor.proveedor_nombre}}</td>
+                            <td style="text-align: left ;">{{proveedor.nombre_beneficiario}} </td>
 
                             <td>{{proveedor.telefono}} </td>
                             <td>{{proveedor.banco}}</td>
                             <td>{{proveedor.tipo_cuenta}} </td>
                             <td>{{proveedor.n_cuenta}} </td>
                             <td>{{proveedor.cedula}}</td>
-                            <td>{{proveedor.beneficiario}}</td>
+                            <td style="text-align: left ;">{{proveedor.beneficiario}}</td>
                             <td> <a class="btn   btn-sm btn-primary   pull-left" (click)="editProveedor(proveedor)"
                                     style="margin: 2px;" data-toggle="modal" data-target="#myModal">
                                     <i class="fa fa-pencil"></i> Editar
@@ -245,7 +245,7 @@
                                     <label>CEDULA (*)</label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa  fa-cc-jcb"></i>
+                                            <i class="fa fa-bold"></i>
                                         </div>
                                     <input type="text" name="cedula" #name="ngModel" [(ngModel)]="proveedorService.selectedProveedor.cedula"
                                         class="form-control" required>
@@ -256,7 +256,7 @@
                                     <label>BENEFICIARIO (*)</label>
                                      <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-user-secret"></i>
+                                            <i class="fa fa-bold"></i>
                                         </div>
                                     <input type="text" name="beneficiario" #name="ngModel" [(ngModel)]="proveedorService.selectedProveedor.beneficiario"
                                         class="form-control" required>
