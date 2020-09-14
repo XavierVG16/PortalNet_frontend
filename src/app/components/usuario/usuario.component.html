@@ -131,7 +131,7 @@
                                     <label>NOMBRE  (*)</label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-desktop"></i>
+                                            <i class="fa fa-user"></i>
                                         </div>
                                         <input type="text" name="nombre" #name="ngModel"
                                             [(ngModel)]="usuarioService.selectedUsuario.nombre"
@@ -144,7 +144,7 @@
                                     <label>APELLIDO (*)</label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-dollar"></i>
+                                            <i class="fa fa-keyboard-o"></i>
                                         </div>
                                         <input type="text" name="apellido" #name="ngModel"
                                             [(ngModel)]="usuarioService.selectedUsuario.apellido" class="form-control"
@@ -157,7 +157,7 @@
                                     <label>TELEFONO (*)</label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-share-alt"></i>
+                                            <i class="fa fa-phone"></i>
                                         </div>
                                         <input type="text" name="telefono" #name="ngModel"
                                             [(ngModel)]="usuarioService.selectedUsuario.telefono"
@@ -178,7 +178,7 @@
                                     <label>E-MAIL (*)</label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-plus"></i>
+                                            <i class="fa  fa-envelope-o"></i>
                                         </div>
                                         <input type="email" name="email"  #name="ngModel"
                                             [(ngModel)]="usuarioService.selectedUsuario.email"
@@ -191,10 +191,10 @@
                                     <label>TIPO USUARIO (*)</label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-plus"></i>
+                                            <i class="fa fa-users"></i>
                                         </div>
                                         <select class="form-control select2" name="t_usuario" #name="ngModel" [(ngModel)]="usuarioService.selectedUsuario.t_usuario" style="width: 100%;" required>
-                                            <option value="selected"> Seleccione Proveedor</option>
+                                            <option value="selected"> Tipo Usuario</option>
                                                                                 <option>Administrador</option>
                                                                                 <option>Empleado</option>
                                         
@@ -208,7 +208,7 @@
                                     <label>CONTRASEÑA (*)</label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <i class="fa fa-plus"></i>
+                                            <i class="fa fa-key"></i>
                                         </div>
                                         <input type="password" name="pass_usuario" #name="ngModel" [(ngModel)]="usuarioService.selectedUsuario.p"
                                             class="form-control" required>
