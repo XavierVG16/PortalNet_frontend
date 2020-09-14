@@ -33,9 +33,9 @@ export class UsuarioComponent implements OnInit {
       });
   }
   addUsuario(form?: NgForm) {
-    console.log(form.value)
+  
     if (form.valid) {
-      console.log(form.value);
+    
 
       if (form.value.idusuario) {
         this.usuarioService.putUsuario(form.value)
