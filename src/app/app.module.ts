@@ -18,6 +18,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { EquipoComponent } from './components/equipo/equipo.component';
 import { ProductoComponent } from './components/producto/producto.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
+import { ContratoComponent } from './components/contrato/contrato.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
     ErrorComponent,
     EquipoComponent,
     ProductoComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    ContratoComponent
   ],
   imports: [
     BrowserModule,

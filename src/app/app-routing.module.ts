@@ -6,6 +6,7 @@ import { ServicioComponent} from './components/servicio/servicio.component';
 import { EquipoComponent } from './components/equipo/equipo.component';
 import { ProductoComponent } from './components/producto/producto.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
+import { ContratoComponent} from './components/contrato/contrato.component';
 
 import { ErrorComponent } from './components/error/error.component';
 const routes: Routes = [
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'usuarios',
     component: UsuarioComponent
+  },
+  {
+    path: 'contratos',
+    component: ContratoComponent
   },
   {
     path: '**',
