@@ -19,8 +19,9 @@
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab_1" data-toggle="tab">Cliente</a></li>
-                    <li><a href="#tab_2" data-toggle="tab">Contrato</a></li>
+                    <li class="active"><a href="#tab_1" data-toggle="tab">Datos del Abonado</a></li>
+                    <li><a href="#tab_2" data-toggle="tab">Datos del Plan</a></li>
+                    <li><a href="#tab_3" data-toggle="tab">Instalacion</a></li>
 
 
 
@@ -29,10 +30,10 @@
                     <div class="tab-pane active" id="tab_1">
                         <form #clienteForm="ngForm" (ngSubmit)="addCliente(clienteForm)">
                             <div class="modal-body">
-                        
+
                                 <div class="box-body">
-                                    <input type="hidden" name="idusuario" >
-                        
+                                    <input type="hidden" name="idusuario">
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -41,10 +42,12 @@
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-credit-card"></i>
                                                     </div>
-                                                    <input type="text" name="cedula" class="form-control" #name="ngModel" [(ngModel)]="clienteService.selectedCliente.cedula" required>
+                                                    <input type="text" name="cedula" class="form-control"
+                                                        #name="ngModel"
+                                                        [(ngModel)]="clienteService.selectedCliente.cedula" required>
                                                 </div>
-                                            
-                                            
+
+
                                             </div>
                                             <div class="form-group">
                                                 <label>NOMBRE (*)</label>
@@ -52,10 +55,12 @@
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-user"></i>
                                                     </div>
-                                                    <input type="text" name="nombre"  class="form-control" #name="ngModel" [(ngModel)]="clienteService.selectedCliente.nombre" required>
+                                                    <input type="text" name="nombre" class="form-control"
+                                                        #name="ngModel"
+                                                        [(ngModel)]="clienteService.selectedCliente.nombre" required>
                                                 </div>
-                        
-                        
+
+
                                             </div>
                                             <div class="form-group">
                                                 <label>DIRECCION (*)</label>
@@ -63,10 +68,12 @@
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-map-pin"></i>
                                                     </div>
-                                                    <input type="text" name="direccion"  class="form-control" #name="ngModel" [(ngModel)]="clienteService.selectedCliente.direccion" required>
+                                                    <input type="text" name="direccion" class="form-control"
+                                                        #name="ngModel"
+                                                        [(ngModel)]="clienteService.selectedCliente.direccion" required>
                                                 </div>
-                        
-                        
+
+
                                             </div>
                                             <div class="form-group">
                                                 <label>TELEFONO (*)</label>
@@ -74,48 +81,54 @@
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-phone"></i>
                                                     </div>
-                                                    <input type="text" name="telefono"  class="form-control"  #name="ngModel" [(ngModel)]="clienteService.selectedCliente.telefono" required>
-                        
+                                                    <input type="text" name="telefono" class="form-control"
+                                                        #name="ngModel"
+                                                        [(ngModel)]="clienteService.selectedCliente.telefono" required>
+
                                                 </div>
 
-                                                
-                        
+
+
                                             </div>
-                        <div class="form-group">
-                            <label>CORREO ELECTRONICO (*)</label>
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-envelope-o"></i>
-                                </div>
-                                <input type="text" name="email" class="form-control" #name="ngModel" [(ngModel)]="clienteService.selectedCliente.email" required>
-                        
-                            </div>
-                        
-                        
-                        
-                        </div>
-                        
+                                            <div class="form-group">
+                                                <label>CORREO ELECTRONICO (*)</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-envelope-o"></i>
+                                                    </div>
+                                                    <input type="text" name="email" class="form-control" #name="ngModel"
+                                                        [(ngModel)]="clienteService.selectedCliente.email" required>
+
+                                                </div>
+
+
+
+                                            </div>
+
                                             <!-- /.form-group -->
-                        
+
                                             <!-- /.form-group -->
                                         </div>
-                        
+
                                         <div class="col-md-6">
-                                             <div class="form-group">
+                                            <div class="form-group">
                                                 <label>TIPO DE PROPIEDAD (*)</label>
                                                 <div class="input-group">
                                                     <div class="input-group-addon">
                                                         <i class="fa  fa-home"></i>
                                                     </div>
-                                                    <select name="propiedad" id="" #name="ngModel" [(ngModel)]="clienteService.selectedCliente.propiedad" class="form-control">
-                                                        <option>Propia</option>
+                                                    <select name="propiedad"  #name="ngModel"
+                                                        [(ngModel)]="clienteService.selectedCliente.propiedad"
+                                                        class="form-control">
+                                                        
                                                         <option>Arrendad</option>
-                                                        <option>familiar</option>
+                                                        <option>Familiar</option>
+                                                        <option>Propia</option>
                                                     </select>
-         
-                        
+
+
                                                 </div>
-                        
+
                                             </div>
                                             <div class="form-group">
                                                 <label>APELLIDO (*)</label>
@@ -123,52 +136,241 @@
                                                     <div class="input-group-addon">
                                                         <i class="fa  fa-keyboard-o"></i>
                                                     </div>
-                                                    <input type="text" name="apellido" #name="ngModel" [(ngModel)]="clienteService.selectedCliente.apellido" class="form-control" required>
-                        
+                                                    <input type="text" name="apellido" #name="ngModel"
+                                                        [(ngModel)]="clienteService.selectedCliente.apellido"
+                                                        class="form-control" required>
+
                                                 </div>
-                        
+
                                             </div>
                                             <div class="form-group">
                                                 <label>REFERENCIA (*)</label>
-                                                
-                                                    
-                                                    <textarea  class="form-control" name="referencia"  #name="ngModel" [(ngModel)]="clienteService.selectedCliente.referencia" id="" cols="30" rows="8"></textarea>
-                        
-                        
-                                               
-                        
+
+
+                                                <textarea class="form-control" name="referencia" #name="ngModel"
+                                                    [(ngModel)]="clienteService.selectedCliente.referencia" id=""
+                                                    cols="30" rows="8"></textarea>
+
+
+
+
                                             </div>
-                                        
-                        
+
+
                                         </div>
                                     </div>
                                     <!-- /.row -->
                                 </div>
-                        
-                        
-                        
+
+
+
                             </div>
-                           
-                                <button style="margin: 2%;" class="btn   btn-danger" data-dismiss="modal" (click)="resetForm(clienteForm)"><i
-                                        class="fa fa-remove"></i> Limpiar</button>
-                               <button style="margin: 2%;" class="btn btn-primary"> <i class="fa  fa-folder"></i> Guardar</button>
-                                
-                            
+
+                          
+
+
                         </form>
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_2">
-                        <h1>contrato</h1>
+
+                    
+                          
+                  
+                            
+                                <div class="row">
+                            
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                            <label for="">TIPO DE PLAN (*)</label>
+                                            <div class="input-group ">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-server"></i>
+
+                                                </span>
+                                                <select class="form-control select2" style="width: 100%;">
+                                                    <option selected="selected">Tipo de plan</option>
+                                                    <option *ngFor="let servicio of servicioService.servicios">{{servicio.nombre_plan}}</option>
+
+                                                </select>
+
+                                            </div>
+
+                                            
+                                            </div>
+                                            <!-- /input-group -->
+                                                <div class="form-group">
+                                                    <label for="">NOMBRE DEL WIFI (*)</label>
+                                                    <div class="input-group ">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-rss"></i>
+                                                
+                                                        </span>
+                                                        <input type="text" class="form-control" placeholder="Nombre del Wifi">
+                                                
+                                                
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    
+                                                    <label>
+                                                     
+                                                        <input type="checkbox" class="minimal" >
+                                                        Comparticion
+                                                    </label>
+                                                </div>
+                                        </div>
+                                        <!-- /.col-lg-6 -->
+                                        <div class="col-md-6 ">
+                                            <div class="form-group"> 
+                                                <label for="">TIPO DE ENLACE (*)</label>
+                                            <div class="input-group ">
+                                                
+                                                <span class="input-group-addon">
+                                                    <i class="fa  fa-share-alt"></i>
+                                                </span>
+                                                <select name="" id="" class="form-control">
+                                                    <option value="select">Enlace...</option>
+                                                    <option value="">Inalambrico</option>
+                                                    <option value="">Fibra Optica</option>
+                                                </select>
+                                            </div>
+                                            </div>
+                                            <!-- /input-group -->
+                                            <div class="form-group">
+                                                <label for="">CLAVE DEL WIFI (*)</label>
+                                                <div class="input-group input-group-sm">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa   fa-unlock-alt"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control" placeholder="Clave del Wifi">
+                                                </div>
+                                            </div>
+                                        </div> 
+                                      
+                                </div>
+                          
+                     
+                        
+
+
                     </div>
                     <!-- /.tab-pane -->
+<div class="tab-pane " id="tab_3">
 
+    
+    
+        <div class="row">
+     
+           
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">FECHA DE INSTALACION (*)</label>
+                        <div class="input-group ">
+                            <span class="input-group-addon">
+                                <i class="fa  fa-calendar"></i>
+                            </span>
+                            <input type="date" class="form-control"data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                        </div>
+                    </div>
+                   
+                    <!-- /input-group -->
+                </div>
+    
+    
+                <div class="col-md-6 ">
+                    <div class="form-group">
+                        <label for="">HORA DE INSTALACION (*)</label>
+                    
+                    <div class="input-group">
+    
+                <input type="time" class="form-control timepicker1">
+                   
+                    
+                   
+                    </div>
+                    <!-- /input-group -->
+                    </div>
+                </div> <br><br><br>
+                <!-- /.col-lg-6 -->
+                <div class="col-lg-6 ">
+                    <label for=""> EQUIPOP ISP</label>
+                    
+                    <div class="input-group input-group-sm">
+    
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">AGREGAR</button>
+                    </div>
+                    <!-- /input-group -->
+                </div>
+    
+    
+            
+        </div>
+    
+    <!-- /.col -->
+
+
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+    
+                        <th>EQUIPO</th>
+                        <th>DESCRIPCION</th>
+                        <th>SERIE</th>
+                        <th>CANTIDAD</th>
+                        <th>TOTAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+    
+                        <td>NOMBRE PORDUCTO</td>
+                        <td>DKLSFKS;DFLD;MDFLDKD;FSD;FL</td>
+                        <td>455-981-221</td>
+                        <td>1</td>
+                        <td>$64.50</td>
+                    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    
+    <div class="row">
+        <!-- accepted payments column -->
+    
+        <!-- /.col -->
+        <div class="col-xs-6">
+    
+    
+            <div class="table-responsive">
+                <table class="table">
+    
+                    <tr>
+                        <th>Total:</th>
+                        <td>$64.50</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+</div>
                     <!-- /.tab-pane -->
                 </div>
                 <!-- /.tab-content -->
             </div>
             <!-- nav-tabs-custom -->
 
- 
+
 
             <!-- /.col -->
 
@@ -178,3 +380,165 @@
     </div>
 
 </section>
+
+
+<div class="modal modal-defaul" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Agregar Equipo ISP</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="box-body">
+
+                <div class="col-xs-12 table-responsive">
+                
+                
+                
+                    <table class="table table-bordered">
+                
+                        <thead>
+                            <tr>
+                                <th style="width:1px; "> # </th>
+                
+                                <th>EQUIPOS</th>
+                                <th>DESCRIPCION</th>
+                                <th>CANTIDAD</th>
+                                <th>CANTIDAD DISPONIBLE</th>
+                                <th>PRECIO</th>
+                                <th>ESTADO</th>
+                                <th>ACCION</th>
+                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let equipo of equipoService.equipos | paginate:{itemsPerPage:5, currentPage: pageActual}; let i = index ">
+                
+                                <td>{{i+1}}</td>
+                                <td style="text-align: left ;">{{equipo.equipo}}</td>
+                                <td style="text-align: left ;">{{equipo.descripcion}}</td>
+                
+                
+                                <td><input  *ngIf="equipo.cantidad == 0" type="number"  disabled>
+                                <input *ngIf="equipo.cantidad != 0" type="number" ></td>
+                                <td>{{equipo.cantidad}} </td>
+                                <td>$ {{equipo.precio}}</td>
+                                <td>
+                                    <span *ngIf="equipo.cantidad == 0" class="label label-warning">Asignado</span>
+                                    <span *ngIf="equipo.cantidad != 0" class="label label-success">Disponible</span>
+                                </td>
+                
+                
+                
+                                <td> <a  *ngIf="equipo.cantidad == 0" class="btn   btn-sm btn-primary pull-left" (click)="editEquipo(equipo)" style="margin: 2px;"
+                                        data-toggle="modal" data-target="#myModal" disabled>
+                                        <i class="fa fa-pencil" ></i> Seleccionar
+                
+                                    </a>
+                                    <a *ngIf="equipo.cantidad != 0" class="btn   btn-sm btn-primary pull-left" (click)="editEquipo(equipo)"
+                                        style="margin: 2px;" data-toggle="modal" data-target="#myModal">
+                                        <i class="fa fa-pencil"></i> Seleccionar
+                                    
+                                    </a>
+                
+                                </td>
+                
+                            </tr>
+                
+                
+                        </tbody>
+                        <tfoot>
+                
+                        </tfoot>
+                    </table>
+                    <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+                
+                </div>
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        //Initialize Select2 Elements
+        $(".select2").select2();
+        //Datemask dd/mm/yyyy
+        $("#datemask").inputmask("dd/mm/yyyy", { "placeholder": "dd/mm/yyyy" });
+        //Datemask2 mm/dd/yyyy
+        $("#datemask2").inputmask("mm/dd/yyyy", { "placeholder": "mm/dd/yyyy" });
+
+        //Money Euro
+        $("[data-mask]").inputmask();
+
+        //Date range picker
+        $('#reservation').daterangepicker();
+        //Date range picker with time picker
+        $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' });
+        //Date range as a button
+        $('#daterange-btn').daterangepicker(
+            {
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                startDate: moment().subtract(29, 'days'),
+                endDate: moment()
+            },
+            function (start, end) {
+                $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+        );
+
+        //Date picker
+        $('#datepicker').datepicker({
+            autoclose: true
+        });
+
+        //iCheck for checkbox and radio inputs
+        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+            checkboxClass: 'icheckbox_minimal-blue',
+            radioClass: 'iradio_minimal-blue'
+        });
+        //Red color scheme for iCheck
+        $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+            checkboxClass: 'icheckbox_minimal-red',
+            radioClass: 'iradio_minimal-red'
+        });
+        //Flat red color scheme for iCheck
+        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'iradio_flat-green'
+        });
+
+        //Colorpicker
+        $(".my-colorpicker1").colorpicker();
+        //color picker with addon
+        $(".my-colorpicker2").colorpicker();
+
+        //Timepicker
+        $(".timepicker1").timepicker({
+            showInputs: false
+        });
+        $('#input_starttime').pickatime({});
+    });
+</script>
