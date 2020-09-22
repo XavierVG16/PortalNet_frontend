@@ -79,10 +79,18 @@
             <!-- Optionally, you can add icons to the links -->
             <li routerLinkActive="active"><a routerLink="inicio"><i class="fa fa-dashboard"></i> <span>INICIO</span></a>
             </li>
-<li routerLinkActive="active"><a routerLink="/contratos"><i class="fa fa-briefcase"></i> <span>CONTRATO DE SERVICIOS</span></a>
-</li>
-           
+     
+<li class="treeview" routerLinkActive="active">
+    <a href="#"><i class="fa fa-briefcase"></i> <span> INTERNET RECIDENCIAL</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+        <li routerLinkActive="active"><a routerLink="/contratos">Contratar Servicio</a></li>
 
+    </ul>
+</li>
             <li class="treeview">
                 <a href="#"><i class="fa  fa-wrench"></i> <span>ASISTENCIA TECNICA</span>
                     <span class="pull-right-container">
@@ -94,34 +102,34 @@
                     <li routerLinkActive="active"><a routerLink=""> <span>Visita Tecnica</span></a></li>
                 </ul>
             </li>
-        
-                <li class="treeview" routerLinkActive="active">
-                    <a href="#"><i class="fa  fa-sitemap"></i> <span>SERVICIOS</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li routerLinkActive="active"><a routerLink="servicios"> <span>Planes de Internet</span></a>
-                        </li>
-                       
-                
-                    </ul>
-                </li>
-        <li class="treeview">
-            <a href="#"><i class="fa  fa-users"></i> <span>CLIENTES</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu">
-                <li routerLinkActive="active"><a routerLink=""> <span>Abonado</span></a>
-                </li>
-                <li routerLinkActive="active"><a routerLink=""> <span>Contrato</span></a></li>
-                      <li routerLinkActive="active"><a routerLink=""> <span>Orden Instalacion</span></a></li>
 
-            </ul>
-        </li>
+            <li class="treeview" routerLinkActive="active">
+                <a href="#"><i class="fa  fa-sitemap"></i> <span>SERVICIOS</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li routerLinkActive="active"><a routerLink="servicios"> <span>Planes de Internet</span></a>
+                    </li>
+
+
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class="fa  fa-users"></i> <span>CLIENTES</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li routerLinkActive="active"><a routerLink=""> <span>Abonado</span></a>
+                    </li>
+                    <li routerLinkActive="active"><a routerLink=""> <span>Contrato</span></a></li>
+                    <li routerLinkActive="active"><a routerLink=""> <span>Orden Instalacion</span></a></li>
+
+                </ul>
+            </li>
             <li class="treeview">
                 <a href="#"><i class="fa  fa-pie-chart"></i> <span>FINANZAS</span>
                     <span class="pull-right-container">

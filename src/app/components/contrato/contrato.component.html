@@ -1,7 +1,7 @@
 <section class="content-header">
     <h1>
-        Contrato
-        <small>Seccion Contrato Servicio </small>
+        Internet Recidencial
+        <small>Seccion Contratar Servicio </small>
     </h1>
     <ol class="breadcrumb">
         <li><a routerLink="/inicio"><i class="fa fa-dashboard"></i> Inicia</a></li>
@@ -21,14 +21,16 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#tab_1" data-toggle="tab">Datos del Abonado</a></li>
                     <li><a href="#tab_2" data-toggle="tab">Datos del Plan</a></li>
-                    <li><a href="#tab_3" data-toggle="tab">Instalacion</a></li>
+                    <li><a href="#tab_3" data-toggle="tab">Equipos ISP</a></li>
+                    <li><a href="#tab_4" data-toggle="tab">Instalacion</a></li>
 
 
 
                 </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="tab_1">
-                        <form #clienteForm="ngForm" (ngSubmit)="addCliente(clienteForm)">
+                <form  #contratoForm="ngForm" (ngSubmit)="addContrato(contratoForm)">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_1">
+
                             <div class="modal-body">
 
                                 <div class="box-body">
@@ -42,9 +44,7 @@
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-credit-card"></i>
                                                     </div>
-                                                    <input type="text" name="cedula" class="form-control"
-                                                        #name="ngModel"
-                                                        [(ngModel)]="clienteService.selectedCliente.cedula" required>
+                                                    <input type="text" name="cedula" class="form-control" #name="ngModel" [(ngModel)]="contratoService.selectedContrato.cedula" required>
                                                 </div>
 
 
@@ -55,9 +55,7 @@
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-user"></i>
                                                     </div>
-                                                    <input type="text" name="nombre" class="form-control"
-                                                        #name="ngModel"
-                                                        [(ngModel)]="clienteService.selectedCliente.nombre" required>
+                                                    <input type="text" name="nombre" class="form-control" #name="ngModel" [(ngModel)]="contratoService.selectedContrato.nombre" required>
                                                 </div>
 
 
@@ -68,9 +66,7 @@
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-map-pin"></i>
                                                     </div>
-                                                    <input type="text" name="direccion" class="form-control"
-                                                        #name="ngModel"
-                                                        [(ngModel)]="clienteService.selectedCliente.direccion" required>
+                                                    <input type="text" name="direccion" class="form-control" #name="ngModel" [(ngModel)]="contratoService.selectedContrato.direccion" required>
                                                 </div>
 
 
@@ -81,9 +77,7 @@
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-phone"></i>
                                                     </div>
-                                                    <input type="text" name="telefono" class="form-control"
-                                                        #name="ngModel"
-                                                        [(ngModel)]="clienteService.selectedCliente.telefono" required>
+                                                    <input type="text" name="telefono" class="form-control" #name="ngModel" [(ngModel)]="contratoService.selectedContrato.telefono" required>
 
                                                 </div>
 
@@ -96,8 +90,7 @@
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-envelope-o"></i>
                                                     </div>
-                                                    <input type="text" name="email" class="form-control" #name="ngModel"
-                                                        [(ngModel)]="clienteService.selectedCliente.email" required>
+                                                    <input type="text" name="email" class="form-control" #name="ngModel" [(ngModel)]="contratoService.selectedContrato.email" required>
 
                                                 </div>
 
@@ -117,11 +110,9 @@
                                                     <div class="input-group-addon">
                                                         <i class="fa  fa-home"></i>
                                                     </div>
-                                                    <select name="propiedad"  #name="ngModel"
-                                                        [(ngModel)]="clienteService.selectedCliente.propiedad"
-                                                        class="form-control">
-                                                        
-                                                        <option>Arrendad</option>
+                                                    <select name="propiedad" class="form-control" #name="ngModel" [(ngModel)]="contratoService.selectedContrato.propiedad" required>
+
+                                                        <option>Arrendada</option>
                                                         <option>Familiar</option>
                                                         <option>Propia</option>
                                                     </select>
@@ -136,9 +127,8 @@
                                                     <div class="input-group-addon">
                                                         <i class="fa  fa-keyboard-o"></i>
                                                     </div>
-                                                    <input type="text" name="apellido" #name="ngModel"
-                                                        [(ngModel)]="clienteService.selectedCliente.apellido"
-                                                        class="form-control" required>
+                                                    <input type="text" name="apellido"
+                                                        class="form-control" #name="ngModel" [(ngModel)]="contratoService.selectedContrato.apellido" required>
 
                                                 </div>
 
@@ -147,9 +137,8 @@
                                                 <label>REFERENCIA (*)</label>
 
 
-                                                <textarea class="form-control" name="referencia" #name="ngModel"
-                                                    [(ngModel)]="clienteService.selectedCliente.referencia" id=""
-                                                    cols="30" rows="8"></textarea>
+                                                <textarea class="form-control" name="referencia" #name="ngModel" [(ngModel)]="contratoService.selectedContrato.referencia"  cols="30"
+                                                    rows="8"></textarea>
 
 
 
@@ -166,207 +155,257 @@
 
                             </div>
 
-                          
-
-
-                        </form>
-                    </div>
-                    <!-- /.tab-pane -->
-                    <div class="tab-pane" id="tab_2">
-
-                    
-                          
-                  
-                            
-                                <div class="row">
-                            
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                            <label for="">TIPO DE PLAN (*)</label>
-                                            <div class="input-group ">
-                                                <span class="input-group-addon">
-                                                    <i class="fa fa-server"></i>
-
-                                                </span>
-                                                <select class="form-control select2" style="width: 100%;">
-                                                    <option selected="selected">Tipo de plan</option>
-                                                    <option *ngFor="let servicio of servicioService.servicios">{{servicio.nombre_plan}}</option>
-
-                                                </select>
-
-                                            </div>
-
-                                            
-                                            </div>
-                                            <!-- /input-group -->
-                                                <div class="form-group">
-                                                    <label for="">NOMBRE DEL WIFI (*)</label>
-                                                    <div class="input-group ">
-                                                        <span class="input-group-addon">
-                                                            <i class="fa fa-rss"></i>
-                                                
-                                                        </span>
-                                                        <input type="text" class="form-control" placeholder="Nombre del Wifi">
-                                                
-                                                
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    
-                                                    <label>
-                                                     
-                                                        <input type="checkbox" class="minimal" >
-                                                        Comparticion
-                                                    </label>
-                                                </div>
-                                        </div>
-                                        <!-- /.col-lg-6 -->
-                                        <div class="col-md-6 ">
-                                            <div class="form-group"> 
-                                                <label for="">TIPO DE ENLACE (*)</label>
-                                            <div class="input-group ">
-                                                
-                                                <span class="input-group-addon">
-                                                    <i class="fa  fa-share-alt"></i>
-                                                </span>
-                                                <select name="" id="" class="form-control">
-                                                    <option value="select">Enlace...</option>
-                                                    <option value="">Inalambrico</option>
-                                                    <option value="">Fibra Optica</option>
-                                                </select>
-                                            </div>
-                                            </div>
-                                            <!-- /input-group -->
-                                            <div class="form-group">
-                                                <label for="">CLAVE DEL WIFI (*)</label>
-                                                <div class="input-group input-group-sm">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa   fa-unlock-alt"></i>
-                                                    </span>
-                                                    <input type="text" class="form-control" placeholder="Clave del Wifi">
-                                                </div>
-                                            </div>
-                                        </div> 
-                                      
-                                </div>
-                          
-                     
-                        
-
-
-                    </div>
-                    <!-- /.tab-pane -->
-<div class="tab-pane " id="tab_3">
-
-    
-    
-        <div class="row">
-     
-           
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="">FECHA DE INSTALACION (*)</label>
-                        <div class="input-group ">
-                            <span class="input-group-addon">
-                                <i class="fa  fa-calendar"></i>
-                            </span>
-                            <input type="date" class="form-control"data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                         </div>
-                    </div>
-                   
-                    <!-- /input-group -->
-                </div>
-    
-    
-                <div class="col-md-6 ">
-                    <div class="form-group">
-                        <label for="">HORA DE INSTALACION (*)</label>
-                    
-                    <div class="input-group">
-    
-                <input type="time" class="form-control timepicker1">
-                   
-                    
-                   
-                    </div>
-                    <!-- /input-group -->
-                    </div>
-                </div> <br><br><br>
-                <!-- /.col-lg-6 -->
-                <div class="col-lg-6 ">
-                    <label for=""> EQUIPOP ISP</label>
-                    
-                    <div class="input-group input-group-sm">
-    
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">AGREGAR</button>
-                    </div>
-                    <!-- /input-group -->
-                </div>
-    
-    
-            
-        </div>
-    
-    <!-- /.col -->
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="tab_2">
+
+                            <div class="row">
+
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">TIPO DE PLAN (*)</label>
+                                        <div class="input-group ">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-server"></i>
+
+                                            </span>
+                                            <select class="form-control select2" name="tipo_servicio" #name="ngModel" [(ngModel)]="contratoService.selectedContrato.tipo_servicio" style="width: 100%;" required>
+                                                <option selected="selected">Tipo de plan</option>
+                                                <option *ngFor="let servicio of servicioService.servicios">
+                                                    {{servicio.nombre_plan}} </option>
+
+                                            </select>
+
+                                        </div>
+
+
+                                    </div>
+                                    <!-- /input-group -->
+                                    <div class="form-group">
+                                        <label for="">NOMBRE DEL WIFI (*)</label>
+                                        <div class="input-group ">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-rss"></i>
+
+                                            </span>
+                                            <input type="text" class="form-control" name="wifi_nombre" #name="ngModel" [(ngModel)]="contratoService.selectedContrato.wifi_nombre" required>
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label>
+
+                                            <input type="checkbox" ng-model="checked" ng-init="checked=true"class="minimal">
+                                            Router Adicional
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">CLAVE DEL WIFI 2 (*)</label>
+                                        <div class="input-group ">
+                                            <span class="input-group-addon">
+                                                <i class="fa   fa-unlock-alt"></i>
+                                            </span>
+                                            <input type="text" class="form-control" name="wifi_clave" #name="ngModel"
+                                                [(ngModel)]="contratoService.selectedContrato.wifi_clave" required>
+                                        </div>
+                                    
+                                    </div>
+                                    <div class="form-group" ng-if="checked">
+                                        <label for="">NOMBRE DEL WIFI 2 (*)</label>
+                                        <div class="input-group ">
+                                              <span class="input-group-addon">
+                                                <i class="fa fa-rss"></i>
+                                    
+                                            </span>
+                                            <input type="text" class="form-control">
+                                    
+                                    
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <!-- /.col-lg-6 -->
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label for="">TIPO DE ENLACE (*)</label>
+                                        <div class="input-group ">
+
+                                            <span class="input-group-addon">
+                                                <i class="fa  fa-share-alt"></i>
+                                            </span>
+                                            <select name="tipo_enlace" #name="ngModel" [(ngModel)]="contratoService.selectedContrato.tipo_enlace" class="form-control" required>
+                                                <option value="select">Enlace...</option>
+                                                <option>Inalambrico</option>
+                                                <option>Fibra Optica</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- /input-group -->
+                                    <div class="form-group" >
+                                        <label for="">CLAVE DEL WIFI  (*)</label>
+                                        <div class="input-group ">
+                                            <span class="input-group-addon">
+                                                <i class="fa   fa-unlock-alt"></i>
+                                            </span>
+                                            <input type="text" class="form-control" name="wifi_clave"  #name="ngModel" [(ngModel)]="contratoService.selectedContrato.wifi_clave" required>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                              
+
+                            </div>
+
+                          
+
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane " id="tab_3">
 
 
 
-    <!-- Table row -->
-    <div class="row">
-        <div class="col-xs-12 table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-    
-                        <th>EQUIPO</th>
-                        <th>DESCRIPCION</th>
-                        <th>SERIE</th>
-                        <th>CANTIDAD</th>
-                        <th>TOTAL</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-    
-                        <td>NOMBRE PORDUCTO</td>
-                        <td>DKLSFKS;DFLD;MDFLDKD;FSD;FL</td>
-                        <td>455-981-221</td>
-                        <td>1</td>
-                        <td>$64.50</td>
-                    </tr>
-    
-                </tbody>
-            </table>
-        </div>
-        <!-- /.col -->
-    </div>
-    <!-- /.row -->
-    
-    <div class="row">
-        <!-- accepted payments column -->
-    
-        <!-- /.col -->
-        <div class="col-xs-6">
-    
-    
-            <div class="table-responsive">
-                <table class="table">
-    
-                    <tr>
-                        <th>Total:</th>
-                        <td>$64.50</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <!-- /.col -->
-    </div>
-</div>
-                    <!-- /.tab-pane -->
-                </div>
-                <!-- /.tab-content -->
+                            <div class="row">
+
+
+
+                                <!-- /.col-lg-6 -->
+                                <div class="col-lg-6 ">
+                                    <label for=""> EQUIPOP ISP</label>
+
+                                    <div class="input-group ">
+                                        <a class="btn btn-primary" data-toggle="modal"
+                                            data-target="#myModal">Agregar</a>
+  
+                                    </div>
+                                    <!-- /input-group -->
+                                </div>
+                                <br>
+
+
+
+                            </div>
+
+                            <!-- /.col -->
+                          
+
+<!--modal-->
+
+                            <!-- Table row -->
+                            <div class="row">
+                                
+                                <div class="col-xs-12 table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+
+                                                <th>EQUIPO</th>
+                                                <th>DESCRIPCION</th>
+                                                <th>SERIE</th>
+                                                <th>CANTIDAD</th>
+                                                <th>TOTAL</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let equipo of  equiposISp" >
+
+                                                <td>{{equipo.equipo_n}}</td>
+                                                <td>{{equipo.descripcion}}</td>
+                                                <td>{{equipo.serie}}</td>
+                                                <td>{{equipo.cantidad}}</td>
+                                                <td>$ {{equipo.precio }}</td>
+                                            
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+
+                            <div class="row">
+                                <!-- accepted payments column -->
+
+                                <!-- /.col -->
+                                <div class="col-xs-6">
+
+
+                                    <div class="table-responsive">
+                                        <table class="table">
+
+                                            <tr>
+                                                <th>Total:</th>
+                                                <td>Sumar total</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane " id="tab_4">
+
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">FECHA DE INSTALACION (*)</label>
+                                        <div class="input-group ">
+                                            <span class="input-group-addon">
+                                                <i class="fa  fa-calendar"></i>
+                                            </span>
+                                            <input type="date" class="form-control"
+                                                data-inputmask="'alias': 'dd/mm/yyyy'" name="dia_instalacion"  #name="ngModel" [(ngModel)]="contratoService.selectedContrato.dia_instalacion"data-mask>
+                                        </div>
+                                    </div>
+
+                                    <!-- /input-group -->
+                                </div>
+
+
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label for="">HORA DE INSTALACION (*)</label>
+
+                                        <div class="input-group">
+
+                                            <input type="time" name="hora_instalacion" #name="ngModel" [(ngModel)]="contratoService.selectedContrato.hora_instalacion" class="form-control timepicker1">
+
+
+
+                                        </div>
+                                        <!-- /input-group -->
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+                            <!-- /.col -->
+
+
+
+
+                        </div>
+                        <!-- /.tab-pane -->
+                        
+                    </div>
+                    <!-- /.tab-content -->
+<a class="btn  btn-danger" data-dismiss="modal" (click)="resetForm(contratoForm)"><i
+                            class="fa fa-remove" style="margin: 3px; "></i> Limpiar</a>
+                 
+                    
+                    <button class="btn btn-primary" style="margin: 3px; "> <i class="fa  fa-folder"></i> Guardar</button>
+                </form>
             </div>
             <!-- nav-tabs-custom -->
 
@@ -396,70 +435,70 @@
 
                 <div class="box-body">
 
-                <div class="col-xs-12 table-responsive">
-                
-                
-                
-                    <table class="table table-bordered">
-                
-                        <thead>
-                            <tr>
-                                <th style="width:1px; "> # </th>
-                
-                                <th>EQUIPOS</th>
-                                <th>DESCRIPCION</th>
-                                <th>CANTIDAD</th>
-                                <th>CANTIDAD DISPONIBLE</th>
-                                <th>PRECIO</th>
-                                <th>ESTADO</th>
-                                <th>ACCION</th>
-                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                *ngFor="let equipo of equipoService.equipos | paginate:{itemsPerPage:5, currentPage: pageActual}; let i = index ">
-                
-                                <td>{{i+1}}</td>
-                                <td style="text-align: left ;">{{equipo.equipo}}</td>
-                                <td style="text-align: left ;">{{equipo.descripcion}}</td>
-                
-                
-                                <td><input  *ngIf="equipo.cantidad == 0" type="number"  disabled>
-                                <input *ngIf="equipo.cantidad != 0" type="number" ></td>
-                                <td>{{equipo.cantidad}} </td>
-                                <td>$ {{equipo.precio}}</td>
-                                <td>
-                                    <span *ngIf="equipo.cantidad == 0" class="label label-warning">Asignado</span>
-                                    <span *ngIf="equipo.cantidad != 0" class="label label-success">Disponible</span>
-                                </td>
-                
-                
-                
-                                <td> <a  *ngIf="equipo.cantidad == 0" class="btn   btn-sm btn-primary pull-left" (click)="editEquipo(equipo)" style="margin: 2px;"
-                                        data-toggle="modal" data-target="#myModal" disabled>
-                                        <i class="fa fa-pencil" ></i> Seleccionar
-                
-                                    </a>
-                                    <a *ngIf="equipo.cantidad != 0" class="btn   btn-sm btn-primary pull-left" (click)="editEquipo(equipo)"
-                                        style="margin: 2px;" data-toggle="modal" data-target="#myModal">
+                    <div class="col-xs-12 table-responsive">
+
+
+
+                        <table class="table table-bordered">
+
+                            <thead>
+                                <tr>
+                                    <th style="width:1px; "> # </th>
+
+                                    <th>EQUIPOS</th>
+                                    <th>DESCRIPCION</th>
+                                    <th>CANTIDAD</th>
+                                  
+                                    <th>PRECIO</th>
+                                    <th>ESTADO</th>
+                                    <th>ACCION</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let equipo of equipoService.equipos | paginate:{itemsPerPage:5, currentPage: pageActual}; let i = index ">
+
+                                    <td>{{i+1}}</td>
+                                    <td style="text-align: left ;">{{equipo.equipo}}</td>
+                                    <td style="text-align: left ;">{{equipo.descripcion}}</td>
+
+
+                                    <td>{{equipo.cantidad}} </td>
+                                    <td>$ {{equipo.precio}}</td>
+                                    <td>
+                                        <span *ngIf="equipo.cantidad == 0" class="label label-warning">Asignado</span>
+                                        <span *ngIf="equipo.cantidad != 0" class="label label-success">Disponible</span>
+                                    </td>
+
+
+
+                                    <td> <a *ngIf="equipo.cantidad == 0" class="btn   btn-sm btn-primary pull-left"
+                                            (click)="selectEquipo(equipo)" style="margin: 2px;" data-toggle="modal"
+                                            data-target="#myModal" disabled>
+                                            <i class="fa fa-pencil"></i> Seleccionar
+
+                                        </a>
+                                    <a *ngIf="equipo.cantidad != 0" class="btn   btn-sm btn-primary pull-left" (click)="selectEquipo(equipo)"
+                                        style="margin: 2px;" data-toggle="modal" data-target="#myModal" >
                                         <i class="fa fa-pencil"></i> Seleccionar
                                     
                                     </a>
-                
-                                </td>
-                
-                            </tr>
-                
-                
-                        </tbody>
-                        <tfoot>
-                
-                        </tfoot>
-                    </table>
-                    <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
-                
-                </div>
+                                        
+
+                                    </td>
+
+                                </tr>
+
+
+                            </tbody>
+                            <tfoot>
+
+                            </tfoot>
+                        </table>
+                        <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+
+                    </div>
                 </div>
 
 
@@ -472,6 +511,7 @@
         </div>
     </div>
 </div>
+
 
 
 <script>
