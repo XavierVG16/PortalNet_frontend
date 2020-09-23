@@ -3,6 +3,9 @@ import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
 import {ServicioService} from '../../services/servicio.service';
 import {Servicio} from '../../models/servicio';
+import { MatTableDataSource } from '@angular/material/table';
+
+
 import { from } from 'rxjs';
 @Component({
   selector: 'app-servicio',
@@ -12,11 +15,12 @@ import { from } from 'rxjs';
 export class ServicioComponent implements OnInit {
 
   constructor(public servicioService: ServicioService, private toastr: ToastrService) { }
-
+  dataSource = null;
   filterPost = '';
 
   pageActual: number = 1;
   ngOnInit(): void {
+   // this.dataSource = new MatTableDataSource(this.datos);
     this.getServicios();
   }
   resetForm(form?: NgForm) {
@@ -27,6 +31,7 @@ export class ServicioComponent implements OnInit {
   }
 
   getServicios() {
+  
     this.servicioService.getServicios()
       .subscribe(res => {
         this.servicioService.servicios = res as Servicio[];

@@ -8,7 +8,7 @@ import { Equipo } from '../models/equipo';
 export class EquipoService {
   selectedEquipo: Equipo;
   equipos: Equipo[];
-  readonly URL_API = 'https://sistemaportalnet.herokuapp.com/equipo/';
+  readonly URL_API = 'https://sistemaportalnet.herokuapp.com//equipo/';
 
   constructor(private http: HttpClient) {
     this.selectedEquipo = new Equipo();

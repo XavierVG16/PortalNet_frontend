@@ -4,6 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+/***materlia amgular */
+import {DemoMaterialModule} from './material-module';
+
+
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -39,9 +43,12 @@ import { ContratoComponent } from './components/contrato/contrato.component';
     HttpClientModule,
     FormsModule,
     NgxPaginationModule,
-    BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot() // ToastrModule added
+    DemoMaterialModule,
    
+
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
+
   ],
   providers: [],
   bootstrap: [AppComponent]

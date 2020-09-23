@@ -1,4 +1,6 @@
 export class Contrato {
+
+    
     constructor(
         idcliente = '', cedula = '', nombre = '', apellido = '', direccion = '', propiedad = '', referencia = '', estado = '', descripcion_estado = '', telefono = '', email = '',
         /*datosn contrato*/
@@ -6,7 +8,7 @@ export class Contrato {
         /** datos de la orden de contrato */
         dia_instalacion = '', hora_instalacion = '', total = '', idorden_instalacion = '',
         /** datos detalle de equipos */
-        equipo = '', cantidad = 0, total_equipo = 0, iddetalle_equipo = ''
+        equipo = '', cantidad = 0, total_equipo = 0, iddetalle_equipo = '', cheked = false
     ) {
         this.idcliente = idcliente,
             this.cedula = cedula,
@@ -34,7 +36,8 @@ export class Contrato {
             this.cantidad = cantidad,
             this.equipo = equipo,
             this.total,
-            this.iddetalle_equipo = iddetalle_equipo
+            this.iddetalle_equipo = iddetalle_equipo,
+            this.checked = cheked
 
     }
     idcliente: string;
@@ -64,5 +67,7 @@ export class Contrato {
     cantidad: number;
     total_equipo: number;
     iddetalle_equipo: string;
+    checked: boolean;
 
+    
 }

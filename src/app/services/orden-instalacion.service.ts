@@ -9,7 +9,7 @@ import { OrdenInstalacion } from '../models/orden-instalacion';
 export class OrdenInstalacionService {
   selectedOrdeninstalacion: OrdenInstalacion;
   Ordeninstalaciones: OrdenInstalacion[];
-  readonly URL_API = 'https://sistemaportalnet.herokuapp.com/orden/';
+  readonly URL_API = 'http://localhost:3000/orden/';
 
   constructor(private http: HttpClient) {
     this.selectedOrdeninstalacion = new OrdenInstalacion();

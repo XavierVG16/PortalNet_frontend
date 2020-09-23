@@ -8,15 +8,15 @@ import { Contrato } from '../models/contrato';
 export class ContratoService {
   selectedContrato: Contrato;
   contratos : Contrato[];
-  readonly URL_API = 'https://sistemaportalnet.herokuapp.com/contrato/';
+  readonly URL_API = 'https://sistemaportalnet.herokuapp.com//contrato/';
 
 
   constructor(private http: HttpClient) { 
     this.selectedContrato = new Contrato();
   }
 
-  postContrato( contrato: Contrato) {
-    return this.http.post(this.URL_API, contrato);
+  postContrato( contrato: Contrato, idcontrato) {
+    return this.http.post(this.URL_API, contrato, idcontrato);
   }
 
   postDetalle(equiposISp: string []) {
