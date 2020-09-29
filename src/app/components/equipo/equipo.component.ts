@@ -42,7 +42,7 @@ export class EquipoComponent implements OnInit {
   }
   addEquipo(form?: NgForm) {
     if (form.valid) {
-  
+      console.log(form.value);
 
       if (form.value.idequipo) {
         this.equipoService.putEquipo(form.value)

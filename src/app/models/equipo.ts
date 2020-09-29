@@ -1,5 +1,5 @@
 export class Equipo {
-    constructor(idequipo = '', equipo = '', caantidad = '', precio = '', serie = '', _proveedor_nombre = '', descripcion='') {
+    constructor(idequipo = '', equipo = '', caantidad = '', precio = 0, serie = '', _proveedor_nombre = '', descripcion='') {
         this.idequipo = idequipo,
             this.equipo = equipo,
             this.cantidad = this.cantidad,
@@ -9,7 +9,7 @@ export class Equipo {
     }
     idequipo: string;
     equipo: string;
-    cantidad: string;
+    cantidad: number;
     precio: string;
     serie: string;
     _proveedor_nombre: string;

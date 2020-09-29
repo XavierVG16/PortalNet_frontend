@@ -23,6 +23,10 @@ import { EquipoComponent } from './components/equipo/equipo.component';
 import { ProductoComponent } from './components/producto/producto.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ContratoComponent } from './components/contrato/contrato.component';
+import { FacturaComponent } from './components/factura/factura.component';
+import { ContratoListaComponent } from './components/contrato-lista/contrato-lista.component';
+import { ClienteComponent } from './components/cliente/cliente.component';
+import { OrdenInstalacionComponent } from './components/orden-instalacion/orden-instalacion.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,11 @@ import { ContratoComponent } from './components/contrato/contrato.component';
     EquipoComponent,
     ProductoComponent,
     UsuarioComponent,
-    ContratoComponent
+    ContratoComponent,
+    FacturaComponent,
+    ContratoListaComponent,
+    ClienteComponent,
+    OrdenInstalacionComponent
   ],
   imports: [
     BrowserModule,

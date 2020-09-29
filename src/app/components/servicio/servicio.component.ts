@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit , ViewChild} from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
 import {ServicioService} from '../../services/servicio.service';
 import {Servicio} from '../../models/servicio';
+/**tabla */
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 
@@ -12,17 +15,63 @@ import { from } from 'rxjs';
   templateUrl: './servicio.component.html',
   styleUrls: ['./servicio.component.css']
 })
-export class ServicioComponent implements OnInit {
+export class ServicioComponent implements AfterViewInit {
+  servicios: Servicio[] = [];
+  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
+  dataSource;
 
-  constructor(public servicioService: ServicioService, private toastr: ToastrService) { }
-  dataSource = null;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.servicioService.getServicios()
+      .subscribe(
+        res => {
+          console.log(res)
+
+          this.dataSource = new MatTableDataSource(res);
+        },
+        err => console.log(err)
+      )
+  }
+  
+  constructor(public servicioService: ServicioService, private toastr: ToastrService) { 
+   
+
+
+     
+
+  }
   filterPost = '';
-
+  
+ 
   pageActual: number = 1;
   ngOnInit(): void {
-   // this.dataSource = new MatTableDataSource(this.datos);
     this.getServicios();
+    this.servicioService.getServicios()
+      .subscribe(
+        res => {
+          console.log(res)
+          this.dataSource = new MatTableDataSource(res);
+          this.servicios = res as Servicio[];
+
+        },
+        err => console.log(err)
+      )
+     
   }
+  
+  /**tabla */
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+  /** funciones */
   resetForm(form?: NgForm) {
     if (form) {
       form.reset();

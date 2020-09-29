@@ -4,11 +4,11 @@ export class Contrato {
     constructor(
         idcliente = '', cedula = '', nombre = '', apellido = '', direccion = '', propiedad = '', referencia = '', estado = '', descripcion_estado = '', telefono = '', email = '',
         /*datosn contrato*/
-        tipo_servicio = '', tipo_enlace = '', wifi_nombre = '', wifi_clave = '', idcontrato_servicio = '',
+        tipo_servicio = '', tipo_enlace = '', wifi_nombre = '', wifi_clave = '', wifi_nombre2 = '', wifi_clave2 = '', idcontrato_servicio = '',
         /** datos de la orden de contrato */
         dia_instalacion = '', hora_instalacion = '', total = '', idorden_instalacion = '',
         /** datos detalle de equipos */
-        equipo = '', cantidad = 0, total_equipo = 0, iddetalle_equipo = '', cheked = false
+        equipo = '', cantidad = 0, total_equipo = 0, iddetalle_equipo = '', disabled = false
     ) {
         this.idcliente = idcliente,
             this.cedula = cedula,
@@ -26,7 +26,9 @@ export class Contrato {
             this.tipo_servicio = tipo_servicio,
             this.tipo_enlace = tipo_enlace,
             this.wifi_nombre = wifi_nombre,
-            this.wifi_clave = wifi_clave
+            this.wifi_clave = wifi_clave,
+              this.wifi_nombre2 = wifi_nombre2,
+            this.wifi_clave2 = wifi_clave2
         /** datos de la orden de contrato */
         this.dia_instalacion = dia_instalacion,
             this.hora_instalacion = hora_instalacion,
@@ -37,7 +39,7 @@ export class Contrato {
             this.equipo = equipo,
             this.total,
             this.iddetalle_equipo = iddetalle_equipo,
-            this.checked = cheked
+            this.disabled = disabled
 
     }
     idcliente: string;
@@ -57,6 +59,8 @@ export class Contrato {
     tipo_enlace: string;
     wifi_nombre: string;
     wifi_clave: string;
+    wifi_nombre2: string;
+    wifi_clave2: string;
     /** datos de la orden de contrato */
     dia_instalacion: string;
     hora_instalacion: string;
@@ -67,7 +71,8 @@ export class Contrato {
     cantidad: number;
     total_equipo: number;
     iddetalle_equipo: string;
-    checked: boolean;
+    disabled : boolean;
+  
 
     
 }

@@ -7,14 +7,14 @@ import { Servicio } from '../models/servicio';
 export class ServicioService {
   selectedServicio: Servicio;
   servicios: Servicio[];
-  readonly URL_API = 'https://sistemaportalnet.herokuapp.com/servicio/';
+  readonly URL_API = 'https://sistema-portalnet.herokuapp.com/servicio/';
 
   constructor(private http: HttpClient) {
     this.selectedServicio = new Servicio();
   }
 
   getServicios() {
-    return this.http.get(this.URL_API);
+    return this.http.get<Servicio[]>(this.URL_API);
   }
 
   postServicio(servicio: Servicio) {

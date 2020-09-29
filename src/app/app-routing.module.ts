@@ -7,8 +7,12 @@ import { EquipoComponent } from './components/equipo/equipo.component';
 import { ProductoComponent } from './components/producto/producto.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ContratoComponent} from './components/contrato/contrato.component';
+import { FacturaComponent } from './components/factura/factura.component';
+import {ContratoListaComponent} from './components/contrato-lista/contrato-lista.component';
+import { ClienteComponent } from  './components/cliente/cliente.component';
 
 import { ErrorComponent } from './components/error/error.component';
+import { Cliente } from './models/cliente';
 const routes: Routes = [
   {
     path: 'inicio',
@@ -38,6 +42,19 @@ const routes: Routes = [
     path: 'contratos',
     component: ContratoComponent
   },
+  {
+    path: 'factura',
+    component: FacturaComponent
+  },
+  {
+    path:'contratos_lista',
+    component: ContratoListaComponent
+  },
+  {
+    path: 'abonados  ',
+    component: ClienteComponent
+  },
+ 
   {
     path: '**',
     component: ErrorComponent

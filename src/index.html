@@ -49,7 +49,14 @@
 
 <script src="assets/js/jquery.inputmask.js"></script>
 <script src="assets/js/jquery.inputmask.date.extensions.js"></script>
-<script src="assets/js/jquery.inputmask.extensions.js"></script>
+<script type="text/javascript">
 
+  function onCheckboxChanged(checked) {
+    if (checked)
+      $("#hiddenRow").fadeIn(1500, 'linear');
+
+    else $("#hiddenRow").fadeOut(900, 'linear');
+  }
+</script>
 <script src="assets/js/select2.full.min.js"></script>
 </html>

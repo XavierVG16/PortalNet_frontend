@@ -8,7 +8,7 @@ export class ProveedorService {
 
   selectedProveedor: Proveedor;
   proveedores: Proveedor[];
-  readonly URL_API = 'https://sistemaportalnet.herokuapp.com/proveedor/';
+  readonly URL_API = 'https://sistema-portalnet.herokuapp.com/proveedor/';
 
   constructor(private http: HttpClient) {
     this.selectedProveedor = new Proveedor();

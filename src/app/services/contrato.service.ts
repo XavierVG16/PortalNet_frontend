@@ -7,19 +7,24 @@ import { Contrato } from '../models/contrato';
 })
 export class ContratoService {
   selectedContrato: Contrato;
-  contratos : Contrato[];
-  readonly URL_API = 'https://sistemaportalnet.herokuapp.com//contrato/';
+  contratos: Contrato[];
+  readonly URL_API = 'https://sistema-portalnet.herokuapp.com/contrato/';
 
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.selectedContrato = new Contrato();
   }
-
-  postContrato( contrato: Contrato, idcontrato) {
-    return this.http.post(this.URL_API, contrato, idcontrato);
+  getContratos() {
+    return this.http.get(this.URL_API);
   }
-
-  postDetalle(equiposISp: string []) {
-    return this.http.post(this.URL_API + '/detalle', equiposISp);
+  getContrato() {
+    return this.http.get(this.URL_API);
+  }
+  postContrato(contrato: Contrato, orden_instalacion) {
+    // return this.http.post(this.URL_API, contrato, orden_instalacion);
+    return this.http.post(this.URL_API + `/${orden_instalacion}`, contrato);
+  }
+  postDetalle(equiposISp: string[], orden_instalacion) {
+    return this.http.post('https://sistema-portalnet.herokuapp.com/detalle/equipos' + `/${orden_instalacion}`, equiposISp);
   }
 }
