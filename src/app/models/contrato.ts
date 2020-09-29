@@ -8,7 +8,8 @@ export class Contrato {
         /** datos de la orden de contrato */
         dia_instalacion = '', hora_instalacion = '', total = '', idorden_instalacion = '',
         /** datos detalle de equipos */
-        equipo = '', cantidad = 0, total_equipo = 0, iddetalle_equipo = '', disabled = false
+        equipo = '', cantidad = 0, total_equipo = 0, iddetalle_equipo = '', disabled = false,
+        nombre_plan = '', precio = ''
     ) {
         this.idcliente = idcliente,
             this.cedula = cedula,
@@ -40,6 +41,9 @@ export class Contrato {
             this.total,
             this.iddetalle_equipo = iddetalle_equipo,
             this.disabled = disabled
+            /**plan */
+        this.nombre_plan = nombre_plan,
+            this.precio = precio
 
     }
     idcliente: string;
@@ -72,6 +76,10 @@ export class Contrato {
     total_equipo: number;
     iddetalle_equipo: string;
     disabled : boolean;
+    /**plan */
+    nombre_plan: string;
+    precio: string;
+  
   
 
     

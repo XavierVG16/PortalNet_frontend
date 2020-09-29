@@ -23,32 +23,35 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="colum-md-6">
-                            <div class="form-group">
-                                <label for="">NUMERO DE CEDULA (*)</label>
-                                <div class="input-group margin">
-                                    <div class="input-group-btn">
-                                        <button type="button" class="btn btn-primary btn-flat" >BUSCAR</button>
+                            <form #buscarForm="ngForm" (ngSubmit)="buscar(buscarForm)">
+                                <div class="form-group">
+                                    <label for="">NUMERO DE CEDULA (*)</label>
+                                    <div class="input-group margin">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary ">BUSCAR</button>
+                                        </div>
+                                        <!-- /btn-group -->
+                                        <input type="text" name="cedula" #name="ngModel"
+                                            [(ngModel)]="facturaService.selectedContrato.cedula" style="width: 50%;"
+                                            class="form-control">
                                     </div>
-                                    <!-- /btn-group -->
-                                    <input type="text" style="width: 50%;" class="form-control">
                                 </div>
-                            </div>
-
+                            </form>
 
                         </div>
                     </div>
 
-                    <br><br><br>
+                    <br>
                     <div class="col-xs-12 table-responsive">
-                    
-                    
-                    
+
+
+
                         <table class="table table-bordered">
-                    
+
                             <thead>
                                 <tr>
                                     <th style="width:1px; "> # </th>
-                    
+
                                     <th>NOMBRE</th>
                                     <th>APELLIDO</th>
                                     <th>TELEFONO</th>
@@ -57,55 +60,154 @@
                                     <th>PRECIO</th>
                                     <th>ESTADO</th>
                                     <th>ACCION</th>
-                    
+
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                    
-                                    <td></td>
-                                    <td style="text-align: left ;"></td>
-                                    <td style="text-align: left ;"></td>
-                                    <td style="text-align: left ;"></td>
-                                    <td style="text-align: left ;"> </td>
-                    
-                                    <td></td>
-                                    <td> </td>
+                                <tr *ngFor="let contrato of facturaService.contratos | paginate:{itemsPerPage:5, currentPage: pageActual}; let i = index ">
+
+                                    <td>{{i+1}}</td>
+                                    <td style="text-align: left ;">{{contrato.nombre}}</td>
+                                    <td style="text-align: left ;">{{contrato.apellido}}</td>
+                                    <td style="text-align: left ;">{{contrato.telefono}}</td>
+                                    <td style="text-align: left ;">{{contrato.direccion}} </td>
+
+                                    <td>{{contrato.nombre_plan}}</td>
+                                    <td>$ {{contrato.precio}} </td>
                                     <td>
-                                        <span class="label label-warning">Pendiente</span>
-                                        <span  class="label label-success">Pagado</span>
+                                        <span class="label label-danger" *ngIf="contrato.estado == 0"> Pendiente</span>
+                                        <span class="label label-success" *ngIf="contrato.estado != 0">Pagado</span>
                                     </td>
-                    
-                    
-                    
-                                    <td> <a class="btn   btn-sm btn-primary pull-left"  style="margin: 2px;"
+
+
+
+                                    <td> <a class="btn   btn-sm btn-primary pull-left" (click)="editFactura(contrato) " style="margin: 2px;"
                                             data-toggle="modal" data-target="#myModal">
                                             <i class="fa  fa-pencil-square-o"></i></a>
-                                            <a class="btn   btn-sm btn-warning pull-left" style="margin: 2px;" data-toggle="modal" data-target="#myModal">
-                                                <i class="fa  fa-print"></i></a>
-                    
-                                        </td>
-                    
+                                        <a *ngIf="contrato.estado != 0" class="btn   btn-sm btn-warning pull-left"
+                                            style="margin: 2px;" data-toggle="modal" data-target="#myModal">
+                                            <i class="fa  fa-print"></i></a>
+
+                                    </td>
+
                                 </tr>
-                    
-                    
+
+
                             </tbody>
                             <tfoot>
-                    
+
                             </tfoot>
                         </table>
-                    
+
                     </div>
                 </div>
+                    <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
 
             </div>
             <!-- /.tab-pane -->
             <div class="tab-pane" id="tab_2">
-                pagos
+                <div class="box-body">
+                <div class="col-xs-12 table-responsive">
+                
+                    <table class="table table-bordered">
+                
+                        <thead>
+                            <tr>
+                                <th style="width:1px; "> # </th>
+                
+                                <th>NOMBRE</th>
+                                <th>APELLIDO</th>
+                                <th>TELEFONO</th>
+                                <th>DIRECCION</th>
+                                <th>PLAN</th>
+                                <th>PRECIO</th>
+                                <th>ESTADO</th>
+                              
+                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let contrato of facturaService.facturas | paginate:{itemsPerPage:5, currentPage: pageActual}; let i = index " >
+                
+                                <td *ngIf="contrato.estado == 1" >{{i+1}}</td>
+                                <td  *ngIf="contrato.estado == 1" style="text-align: left ;">{{contrato.nombre}}</td>
+                                <td  *ngIf="contrato.estado == 1" style="text-align: left ;">{{contrato.apellido}}</td>
+                                <td  *ngIf="contrato.estado == 1" style="text-align: left ;">{{contrato.telefono}}</td>
+                                <td  *ngIf="contrato.estado == 1" style="text-align: left ;">{{contrato.direccion}} </td>
+                
+                                <td *ngIf="contrato.estado == 1" >{{contrato.nombre_plan}}</td>
+                                <td *ngIf="contrato.estado == 1" >$ {{contrato.precio}} </td>
+                                <td *ngIf="contrato.estado == 1" >
+                                    <span class="label label-success" *ngIf="contrato.estado == 1">Pagado</span>
+                                </td>
+                
+                            </tr>
+                
+                
+                        </tbody>
+                        <tfoot>
+                
+                        </tfoot>
+                    </table>
+                
+                </div>
+
+                </div>
+
             </div>
             <!-- /.tab-pane -->
             <div class="tab-pane" id="tab_3">
-                pagos pendientes
+                <div class="box-body">
+                <div class="col-xs-12 table-responsive">
+                
+                    <table class="table table-bordered">
+                
+                        <thead>
+                            <tr>
+                                <th style="width:1px; "> # </th>
+                
+                                <th>NOMBRE</th>
+                                <th>APELLIDO</th>
+                                <th>TELEFONO</th>
+                                <th>DIRECCION</th>
+                                <th>PLAN</th>
+                                <th>PRECIO</th>
+                                <th>ESTADO</th>
+                              
+                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let contrato of facturaService.facturas | paginate:{itemsPerPage:5, currentPage: pageActual}; let i = index " >
+                
+                                <td *ngIf="contrato.estado == 0" >{{i+1}}</td>
+                                <td  *ngIf="contrato.estado == 0" style="text-align: left ;">{{contrato.nombre}}</td>
+                                <td  *ngIf="contrato.estado == 0" style="text-align: left ;">{{contrato.apellido}}</td>
+                                <td  *ngIf="contrato.estado == 0" style="text-align: left ;">{{contrato.telefono}}</td>
+                                <td  *ngIf="contrato.estado == 0" style="text-align: left ;">{{contrato.direccion}} </td>
+                
+                                <td *ngIf="contrato.estado == 0" >{{contrato.nombre_plan}}</td>
+                                <td *ngIf="contrato.estado == 0" >$ {{contrato.precio}} </td>
+                                <td *ngIf="contrato.estado == 0" >
+                                    <span class="label label-danger" *ngIf="contrato.estado == 0"> Pendiente</span>
+                                    <span class="label label-success" *ngIf="contrato.estado != 0">Pagado</span>
+                                </td>
+                
+                            </tr>
+                
+                
+                        </tbody>
+                        <tfoot>
+                
+                        </tfoot>
+                    </table>
+                
+                </div>
+                </div>
+                                    <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+
             </div>
             <!-- /.tab-pane -->
         </div>
@@ -122,14 +224,77 @@
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Detalle Pago</h4>
             </div>
-            <form >
+            <form>
                 <div class="modal-body">
 
                     <div class="box-body">
 
-                     
+
 
                         <div class="row">
+                            <div class="col-md-6">
+                              
+                                <div class="form-group">
+                                    <label>NOMBRE (*)</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input type="text" name="nombre" class="form-control" #name="ngModel"
+                                            [(ngModel)]="facturaService.selectedContrato.nombre" disabled>
+                                    </div>
+                        
+                        
+                                </div>
+                            <div class="form-group">
+                                <label>N DE CEDULA </label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-credit-card"></i>
+                                    </div>
+                                    <input type="text" name="cedula" class="form-control" #name="ngModel"
+                                        [(ngModel)]="facturaService.selectedContrato.cedula" disabled>
+                                </div>
+                            
+                            
+                            </div>
+                               
+                            
+                             
+                        
+                           
+                            </div>
+                            <div class="col-md-6">
+                            
+                                <div class="form-group">
+                                    <label>APELLIDO</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input type="text" name="apellido" class="form-control" #name="ngModel"
+                                            [(ngModel)]="facturaService.selectedContrato.apellido" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">FECHA </label>
+                                    <div class="input-group ">
+                                        <span class="input-group-addon">
+                                            <i class="fa  fa-calendar"></i>
+                                        </span>
+                                        <input type="date" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" name="dia_instalacion"
+                                            #name="ngModel" [(ngModel)]="facturaService.selectedContrato.dia_instalacion" data-mask>
+                                    </div>
+                                </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            </div>
+                        
                          
                         </div>
                         <!-- /.row -->
@@ -137,8 +302,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-outline pull-left" data-dismiss="modal" ><i
-                            class="fa fa-remove"></i> Cancelar</button>
+                    <button class="btn btn-outline pull-left" data-dismiss="modal"><i class="fa fa-remove"></i>
+                        Cancelar</button>
 
                     <button class="btn btn-outline"> <i class="fa  fa-folder"></i> Pagar</button>
                 </div>

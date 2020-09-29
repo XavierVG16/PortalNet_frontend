@@ -8,7 +8,7 @@ import { Contrato } from '../models/contrato';
 export class ContratoService {
   selectedContrato: Contrato;
   contratos: Contrato[];
-  readonly URL_API = 'https://sistema-portalnet.herokuapp.com/contrato/';
+  readonly URL_API = 'https://sistemaportalnet.herokuapp.com/contrato/';
 
 
   constructor(private http: HttpClient) {
@@ -17,14 +17,14 @@ export class ContratoService {
   getContratos() {
     return this.http.get(this.URL_API);
   }
-  getContrato() {
-    return this.http.get(this.URL_API);
+  getContrato(id: string) {
+    return this.http.get(this.URL_API+`/${id}`);
   }
   postContrato(contrato: Contrato, orden_instalacion) {
     // return this.http.post(this.URL_API, contrato, orden_instalacion);
     return this.http.post(this.URL_API + `/${orden_instalacion}`, contrato);
   }
   postDetalle(equiposISp: string[], orden_instalacion) {
-    return this.http.post('https://sistema-portalnet.herokuapp.com/detalle/equipos' + `/${orden_instalacion}`, equiposISp);
+    return this.http.post('http://localhost:3000/contrato/detalle/equipos' + `/${orden_instalacion}`, equiposISp);
   }
 }
