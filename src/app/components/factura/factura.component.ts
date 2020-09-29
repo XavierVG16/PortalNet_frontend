@@ -25,7 +25,7 @@ export class FacturaComponent implements OnInit {
       .subscribe(res => {
         this.facturaService.contratos = res as Contrato[];
       },
-        err => console.log(err)
+        err => console.log(err)  
       )
   }
 
