@@ -9,7 +9,8 @@ export class Contrato {
         dia_instalacion = '', hora_instalacion = '', total = '', idorden_instalacion = '',
         /** datos detalle de equipos */
         equipo = '', cantidad = 0, total_equipo = 0, iddetalle_equipo = '', disabled = false,
-        nombre_plan = '', precio = ''
+        nombre_plan = '', precio = '', descripcion= '',
+        fecha_pago_prox = 0 ,idfactura='',fecha_actual=''
     ) {
         this.idcliente = idcliente,
             this.cedula = cedula,
@@ -43,7 +44,11 @@ export class Contrato {
             this.disabled = disabled
             /**plan */
         this.nombre_plan = nombre_plan,
-            this.precio = precio
+            this.precio = precio,
+            this.descripcion=descripcion,
+            this.fecha_pago_prox =fecha_pago_prox,
+            this.fecha_actual = fecha_actual,
+            this.idfactura = idfactura
 
     }
     idcliente: string;
@@ -79,6 +84,11 @@ export class Contrato {
     /**plan */
     nombre_plan: string;
     precio: string;
+    descripcion: string;
+    /**factura */
+    idfactura: string;
+    fecha_actual: string;
+    fecha_pago_prox: number;
   
   
 

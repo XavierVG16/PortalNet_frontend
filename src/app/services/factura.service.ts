@@ -10,7 +10,7 @@ export class FacturaService {
   selectedContrato: Contrato;
   contratos: Contrato[];
   facturas: Contrato[];
-  readonly URL_API = 'https://sistemaportalnet.herokuapp.com/factura/';
+  readonly URL_API = 'http://localhost:3000/factura/';
 
   constructor(private http: HttpClient) { 
     this.selectedContrato = new Contrato();
@@ -20,5 +20,10 @@ export class FacturaService {
   }
   getFactura(id: string) {
     return this.http.get(this.URL_API + `/${id}`);
+  }
+ 
+  putFactura(factura: Contrato)
+  {
+    return this.http.put(this.URL_API , factura );
   }
 }

@@ -8,7 +8,7 @@ import { Contrato } from '../models/contrato';
 export class ContratoService {
   selectedContrato: Contrato;
   contratos: Contrato[];
-  readonly URL_API = 'https://sistemaportalnet.herokuapp.com/contrato/';
+  readonly URL_API = 'http://localhost:3000/contrato/';
 
 
   constructor(private http: HttpClient) {

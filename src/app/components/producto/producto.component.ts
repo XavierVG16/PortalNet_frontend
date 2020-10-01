@@ -39,9 +39,7 @@ export class ProductoComponent implements OnInit {
           .subscribe(res => {
             this.resetForm(form);
             this.getProductos();
-            this.toastr.success('Actualizado con éxito!', 'Producto Cyber', {
-              timeOut: 2000
-            });
+            this.toastr.success('Actualizado con éxito!', 'Producto Cyber');
 
           });
       } else {

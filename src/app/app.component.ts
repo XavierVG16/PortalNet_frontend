@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FacturaService } from './services/factura.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'PortalNet';
+  constructor(public facturaService: FacturaService, private toastr: ToastrService) { }
 }

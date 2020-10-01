@@ -43,4 +43,20 @@ export class FacturaComponent implements OnInit {
   editFactura(contrato: Contrato ) {
     this.facturaService.selectedContrato = contrato;
   }
+  addFactura(form: NgForm){
+    if(form.valid){
+      console.log(form.value)
+      this.facturaService.putFactura(form.value)
+      .subscribe(res =>{
+        this.toastr.success('Pago con éxito!', 'Factura');
+      }
+        )
+     
+    }
+    else {
+      this.toastr.error('Complete los campos', 'Por favor!');
+
+    }
+    
+  }
 }

@@ -9,7 +9,7 @@ export class ProductoService {
 
   selectedProducto : Producto;
   productos : Producto[];
-  readonly URL_API = 'https://sistemaportalnet.herokuapp.com/producto';
+  readonly URL_API = 'http://localhost:3000/producto';
 
   constructor(private http: HttpClient) {
     this.selectedProducto = new Producto();
