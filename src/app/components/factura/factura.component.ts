@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
 import { FacturaService } from '../../services/factura.service';
 import { Contrato } from '../../models/contrato';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+
 
 @Component({
   selector: 'app-factura',
@@ -11,23 +15,39 @@ import { Contrato } from '../../models/contrato';
 })
 export class FacturaComponent implements OnInit {
   facturas: [];
-  constructor(public facturaService: FacturaService, private toastr: ToastrService) { }
-  id: string;
-  pageActual: number = 1;
+
+  displayedColumns: string[] = ['nombre', 'apellido', 'cedula','direccion', 'telefono','estado', 'accion'];
+  displayedColumns2: string[] = ['nombre', 'apellido', 'cedula', 'direccion', 'telefono', 'fecha_pago','dia_pago' ,'estado'];
+
+  dataSource;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  constructor(public facturaService: FacturaService, private toastr: ToastrService) {
+    this.facturaService.getFacturas()
+    .subscribe(res=>{
+      this.facturaService.facturas = res as Contrato[];
+      this.dataSource = new MatTableDataSource(this.facturaService.facturas);
+
+      this.dataSource.paginator = this.paginator;
+    })
+   }
+ 
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
  
   ngOnInit(): void {
     this.getFacturas();
   }
 
-  buscar(form?: NgForm) {
-    this.id = form.value.cedula
-    this.facturaService.getFactura(this.id)
-      .subscribe(res => {
-        this.facturaService.contratos = res as Contrato[];
-      },
-        err => console.log(err)  
-      )
-  }
+
 
   getFacturas(){
     this.facturaService.getFacturas()

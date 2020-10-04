@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+
 import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
 
@@ -10,11 +14,22 @@ import { Proveedor } from 'src/app/models/proveedor';
   styleUrls: ['./proveedor.component.css']
 })
 export class ProveedorComponent implements OnInit {
+  displayedColumns: string[] = ['proveedor', 'vendedor', 'telefono', 'banco','cuenta', 'numero_c','cedula','beneficiario', 'accion'];
+  dataSource;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   constructor(public proveedorService: ProveedorService, private toastr: ToastrService) { }
 
 
   pageActual: number = 1;
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
   ngOnInit(): void {
     this.getProveedores();
   }
@@ -28,6 +43,8 @@ export class ProveedorComponent implements OnInit {
     this.proveedorService.getProveedores()
       .subscribe(res => {
         this.proveedorService.proveedores = res as Proveedor[];
+        this.dataSource = new MatTableDataSource(this.proveedorService.proveedores);
+        this.dataSource.paginator = this.paginator;
       });
   }
   addProveedor(form?: NgForm) {

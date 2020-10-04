@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Equipo } from '../../models/equipo';
 import { EquipoService } from '../../services/equipo.service';
 import { Proveedor } from '../../models/proveedor';
 import { ProveedorService } from '../../services/proveedor.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-equipo',
@@ -12,13 +15,26 @@ import { ProveedorService } from '../../services/proveedor.service';
   styleUrls: ['./equipo.component.css']
 })
 export class EquipoComponent implements OnInit {
-  filter: '';
-  constructor(public equipoService: EquipoService, public proveedorService: ProveedorService, private toastr: ToastrService) { }
-  pageActual: number = 1;
+  displayedColumns: string[] = ['equipo', 'descripcion', 'serie','proveedor','precio', 'cantidad', 'estado', 'accion'];
+
+  dataSource;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  constructor(public equipoService: EquipoService, public proveedorService: ProveedorService, private toastr: ToastrService) { 
+
+  }
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
   ngOnInit(): void {
     this.getEquipos();
     this.getProveedores();
     this.resetForm();
+
   }
 
   resetForm(form?: NgForm) {
@@ -32,6 +48,8 @@ export class EquipoComponent implements OnInit {
     this.equipoService.getEquipos()
       .subscribe(res => {
         this.equipoService.equipos = res as Equipo[];
+        this.dataSource = new MatTableDataSource(this.equipoService.equipos);
+        this.dataSource.paginator = this.paginator;
       });
   }
   getProveedores() {

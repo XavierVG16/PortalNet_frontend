@@ -8,6 +8,11 @@ import { Equipo } from 'src/app/models/equipo';
 import { ServicioService } from '../../services/servicio.service';
 import { Servicio } from '../../models/servicio';
 import { from } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+
+
 
 
 @Component({
@@ -15,13 +20,25 @@ import { from } from 'rxjs';
   templateUrl: './contrato.component.html',
   styleUrls: ['./contrato.component.css']
 
+
 })
 export class ContratoComponent implements OnInit {
-  equiposISp = [];
-  orden_instalacion = Math.floor((Math.random() * 10000) + 1);
-  total: number;
-  resultado;
+/**pas0 a paso */
 
+
+  equiposISp = [];
+  total: number;
+  orden_instalacion = Math.floor((Math.random() * 10000) + 1);
+
+  displayedColumns: string[] = ['equipo', 'descripcion', 'cantidad', 'estado', 'accion'];
+  dataSource;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   constructor(
     public contratoService: ContratoService,
     public equipoService: EquipoService,
@@ -31,11 +48,10 @@ export class ContratoComponent implements OnInit {
 
   }
 
-  pageActual: number = 1;
-
-
   ms = 'Cliente'
-
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
 
   ngOnInit(): void {
     this.getEquipos();
@@ -64,8 +80,10 @@ export class ContratoComponent implements OnInit {
     this.equipoService.getEquipos()
       .subscribe(res => {
         this.equipoService.equipos = res as Equipo[];
-
+        this.dataSource = new MatTableDataSource(this.equipoService.equipos);
+        this.dataSource.paginator = this.paginator;
       });
+
   }
 
   getServicios() {
@@ -103,7 +121,7 @@ export class ContratoComponent implements OnInit {
           })
 
       }
-      window.location.reload();
+      this.id();
     }
     else{
       this.toastr.error('Complete la tabla de detalle Equipos ISP ', 'Por favor!');
@@ -191,6 +209,11 @@ export class ContratoComponent implements OnInit {
       this.total = this.total + element.precio;
 
     }
+
+  }
+
+  id(){
+    this.orden_instalacion = Math.floor((Math.random() * 10000) + 1);
 
   }
 

@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import {ProductoService} from '../../services/producto.service';
 import { Producto } from 'src/app/models/producto';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+
 @Component({
   selector: 'app-producto',
   templateUrl: './producto.component.html',
   styleUrls: ['./producto.component.css']
 })
 export class ProductoComponent implements OnInit {
-
+  displayedColumns: string[] = ['producto', 'descripcion', 'precio','cantidad', 'estado', 'accion'];
+  dataSource;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   constructor(public productoService: ProductoService, private toastr: ToastrService) { }
   pageActual: number = 1;
   ngOnInit(): void {
@@ -27,6 +38,8 @@ export class ProductoComponent implements OnInit {
     this.productoService.getProductos()
       .subscribe(res => {
         this.productoService.productos = res as Producto[];
+        this.dataSource = new MatTableDataSource(this.productoService.productos);
+        this.dataSource.paginator = this.paginator;
       });
   }
 

@@ -8,13 +8,13 @@ export class ClienteService {
 
   selectedCliente: Cliente;
   clientes: Cliente[];
-  readonly URL_API = 'http://localhost:3000/cliente/';
+  readonly URL_API = 'https://sistemaportalnet.herokuapp.com/cliente/';
 
   constructor(private http: HttpClient) {
     this.selectedCliente = new Cliente();
   }
   getClientes() {
-    return this.http.get(this.URL_API);
+    return this.http.get<Cliente[]>(this.URL_API);
   }
   getCliente(idcliente: string) {
     return this.http.get(this.URL_API + `/${idcliente}`);

@@ -1,12 +1,12 @@
-import {AfterViewInit, Component, OnInit , ViewChild} from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+
 import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
 import {ServicioService} from '../../services/servicio.service';
 import {Servicio} from '../../models/servicio';
-/**tabla */
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 
 
 import { from } from 'rxjs';
@@ -17,35 +17,22 @@ import { from } from 'rxjs';
 })
 export class ServicioComponent implements AfterViewInit {
   servicios: Servicio[] = [];
-  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
-  dataSource;
 
+  displayedColumns: string[] = ['plan', 'precio', 'velocidad_c', 'velocidad_d', 'accion'];
+  dataSource;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.servicioService.getServicios()
-      .subscribe(
-        res => {
-          console.log(res)
-
-          this.dataSource = new MatTableDataSource(res);
-        },
-        err => console.log(err)
-      )
   }
   
-  constructor(public servicioService: ServicioService, private toastr: ToastrService) { 
-   
+  constructor(public servicioService: ServicioService, private toastr: ToastrService) {  }
 
 
-     
-
-  }
-  filterPost = '';
-  
- 
   pageActual: number = 1;
   ngOnInit(): void {
     this.getServicios();
@@ -53,7 +40,7 @@ export class ServicioComponent implements AfterViewInit {
       .subscribe(
         res => {
           console.log(res)
-          this.dataSource = new MatTableDataSource(res);
+      
           this.servicios = res as Servicio[];
 
         },
@@ -62,15 +49,7 @@ export class ServicioComponent implements AfterViewInit {
      
   }
   
-  /**tabla */
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
   /** funciones */
   resetForm(form?: NgForm) {
     if (form) {
@@ -84,6 +63,9 @@ export class ServicioComponent implements AfterViewInit {
     this.servicioService.getServicios()
       .subscribe(res => {
         this.servicioService.servicios = res as Servicio[];
+        this.dataSource = new MatTableDataSource(this.servicioService.servicios);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
   }
   addServicio(form?: NgForm) {

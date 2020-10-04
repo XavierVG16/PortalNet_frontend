@@ -1,1 +1,95 @@
-<p>cliente works!</p>
+<section class="content-header">
+    <h1>
+        Clientes
+        <small>Seccion Abonados </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a routerLink="/inicio"><i class="fa fa-dashboard"></i> Inicia</a></li>
+
+        <li routerActive="active">Abonados</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Abonados </h3>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+                    <i class="fa fa-minus"></i></button>
+
+            </div>
+        </div>
+        <div class="box-body">
+            
+<!-- Material input -->
+
+                <mat-form-field>
+                    <mat-label>Buscar</mat-label>
+                    <input matInput type="text" class="form-control" (keyup)="applyFilter($event)" placeholder="..." #input autofocus>
+                </mat-form-field>
+
+                <table  bordered="true" mat-table [dataSource]="dataSource" class="table table-bordered" matSort>
+
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="nombre">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRE </th>
+
+                        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+
+
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="apellido">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> APELLIDO </th>
+                        <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="direccion">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> DIRECCION </th>
+                        <td mat-cell *matCellDef="let element"> {{element.direccion}} </td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="telefono">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> TELEFONO </th>
+                        <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="estado">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> ESTADO </th>
+                        <td mat-cell *matCellDef="let element"> <span *ngIf="element.estado == 'Activo'" class="label label-succes">Activo</span>
+                        <span *ngIf="element.estado == 'Inactivo'" class="label label-danger">Inactivo</span>  </td>
+                    </ng-container>
+                    <ng-container matColumnDef="accion">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> ACCION </th>
+                        <td mat-cell *matCellDef="let element">
+                            
+       
+                             <button class="btnt btn-warning "> Ver mas</button>
+                        
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No se econtraron  "{{input.value}}"</td>
+                    </tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+
+
+        </div>
+        <div class="box-footer">
+
+        </div>
+    </div>
+</section>

@@ -9,5 +9,4 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AppComponent {
   title = 'PortalNet';
-  constructor(public facturaService: FacturaService, private toastr: ToastrService) { }
 }

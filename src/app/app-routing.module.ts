@@ -51,7 +51,7 @@ const routes: Routes = [
     component: ContratoListaComponent
   },
   {
-    path: 'abonados  ',
+    path: 'abonados',
     component: ClienteComponent
   },
  
