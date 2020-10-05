@@ -49,13 +49,11 @@ export class ContratoComponent implements OnInit {
   }
 
   ms = 'Cliente'
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-  }
 
   ngOnInit(): void {
     this.getEquipos();
     this.getServicios();
+    this.dataSource.sort = this.sort;
 
   }
   resetForm(form?: NgForm) {
