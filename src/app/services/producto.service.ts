@@ -1,33 +1,33 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Producto } from '../models/producto';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Producto} from '../models/producto';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class ProductoService {
 
-  selectedProducto : Producto;
-  productos : Producto[];
-  readonly URL_API = 'https://sistemaportalnet.herokuapp.com/producto';
+    selectedProducto : Producto;
+    productos : Producto[];
+    readonly URL_API = 'https://sistemaportalnet.herokuapp.com/producto';
 
-  constructor(private http: HttpClient) {
-    this.selectedProducto = new Producto();
-    
-   }
-  getProductos() {
-    return this.http.get(this.URL_API);
-  }
+    constructor(private http : HttpClient) {
+        this.selectedProducto = new Producto();
 
-  postProducto(producto: Producto) {
-    return this.http.post(this.URL_API, producto);
-  }
+    }
+    getProductos() {
+        return this.http.get(this.URL_API);
+    }
 
-  putProducto(producto: Producto) {
-    return this.http.put(this.URL_API + `/${producto.idproducto}`, producto);
-  }
+    postProducto(producto : Producto) {
+        return this.http.post(this.URL_API, producto);
+    }
 
-  deleteProducto(idproducto: string) {
-    return this.http.delete(this.URL_API + `/${idproducto}`);
-  }
+    putProducto(producto : Producto) {
+        return this.http.put(this.URL_API + `/${
+            producto.idproducto
+        }`, producto);
+    }
+
+    deleteProducto(idproducto : string) {
+        return this.http.delete(this.URL_API + `/${idproducto}`);
+    }
 }
