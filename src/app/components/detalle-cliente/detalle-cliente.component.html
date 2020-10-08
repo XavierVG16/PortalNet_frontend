@@ -1,0 +1,373 @@
+<section class="content-header">
+    <h1>
+        Clientes
+        <small>Seccion Detalle Abonados </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a routerLink="/inicio"><i class="fa fa-dashboard"></i> Inicia</a></li>
+        <li><a routerLink="/abonados"><i class="fa fa-dashboard"></i> Abonados</a></li>
+        <li routerActive="active">Detalle</li>
+    </ol>
+</section>
+
+<section class="content">
+    
+    <div class="box-body">
+  <!-- Custom Tabs (Pulled to the right) -->
+  <div class="nav-tabs-custom">
+    <ul class="nav nav-tabs pull-right">
+      <li class="active"><a href="#tab_1-1" data-toggle="tab">Datos</a></li>
+      <li><a href="#tab_2-2" data-toggle="tab">Contrato</a></li>
+      <li><a href="#tab_3-3" data-toggle="tab">Equipos ISP</a></li>
+      <li><a href="#tab_4-4" data-toggle="tab">Orden Instalacion</a></li>
+      <li><a href="#tab_5-5" data-toggle="tab">Traslados</a></li>
+      <li><a href="#tab_6-6" data-toggle="tab">Factura</a></li>
+     
+      <li class="pull-left header"><i class="fa fa-user"></i> Detalle Abonado</li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab_1-1">
+          <form #clienteForm="ngForm" (ngSubmit)="editCliente(cedula, nombre, direccion, telefono, email, propiedad, apellido, referencia)">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>CEDULA (*)</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-credit-card"></i>
+                        </div>
+                        <input type="text" class="form-control" [value]="cliente.cedula" #cedula>
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+                    <label>NOMBRE (*)</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <input type="text"  class="form-control" [value]="cliente.nombre" #nombre>
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+                    <label>DIRECCION (*)</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-map-pin"></i>
+                        </div>
+                        <input type="text" name="direccion" class="form-control" [value]="cliente.direccion" #direccion>
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+                    <label>TELEFONO (*)</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <input type="text" name="telefono" class="form-control" [value]="cliente.telefono" #telefono>
+
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label>CORREO ELECTRONICO (*)</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-envelope-o"></i>
+                        </div>
+                        <input type="text" name="email" class="form-control" [value]="cliente.email" #email>
+
+                    </div>
+                </div>
+
+                <!-- /.form-group -->
+
+                <!-- /.form-group -->
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>TIPO DE PROPIEDAD (*)</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa  fa-home"></i>
+                        </div>
+                        <select name="propiedad"  class="form-control" [value]="cliente.propiedad"  #propiedad>
+
+                            <option>Arrendada</option>
+                            <option>Familiar</option>
+                            <option>Propia</option>
+                        </select>
+
+
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label>APELLIDO (*)</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa  fa-keyboard-o"></i>
+                        </div>
+                        <input type="text" name="apellido" class="form-control" [value]="cliente.apellido" #apellido>
+
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label>REFERENCIA (*)</label>
+
+
+                    <textarea class="form-control" name="referencia"  cols="30"
+                        rows="8" [value]="cliente.referencia" #referencia></textarea>
+
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+        <button class="btn btn-primary"> <i class="fa  fa-pencil"></i> Editar</button>
+    </form>
+      </div>
+      <!-- /.tab-pane -->
+      <div class="tab-pane" id="tab_2-2">
+        <mat-accordion class="example-headers-align">
+            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Detalle Contrato
+                </mat-panel-title>
+                <mat-panel-description>
+                
+                  <mat-icon>bookmark</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+          
+              <div class="row">
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">TIPO DE PLAN (*)</label>
+                        <div class="input-group ">
+                            <span class="input-group-addon">
+                                <i class="fa fa-server"></i>
+
+                            </span>
+                            <select class="form-control select2" name="tipo_servicio" #name="ngModel"
+                                [(ngModel)]="contratoService.selectedContrato.tipo_servicio"
+                                style="width: 100%;" required>
+                                <option selected="selected">Tipo de plan</option>
+                                <option *ngFor="let servicio of servicioService.servicios">
+                                    {{servicio.nombre_plan}} </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+                    <!-- /input-group -->
+                    <div class="form-group">
+                        <label for="">NOMBRE DEL WIFI (*)</label>
+                        <div class="input-group ">
+                            <span class="input-group-addon">
+                                <i class="fa fa-rss"></i>
+
+                            </span>
+                            <input type="text" class="form-control" name="wifi_nombre" #name="ngModel"
+                                [(ngModel)]="contratoService.selectedContrato.wifi_nombre" required>
+
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+
+                            <input type="checkbox" onchange="onCheckboxChanged(this.checked)"
+                                name="member" class="minimal" />
+
+                            ROUTER ADICIONAL
+                        </label>
+
+
+                    </div>
+                    <div id="hiddenRow" style="display:none;">
+                        <div class="form-group ">
+                            <label for="">NOMBRE DEL WIFI II (*)</label>
+                            <div class="input-group ">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-rss"></i>
+
+                                </span>
+                                <input type="text" class="form-control" name="wifi_nombre2" #name="ngModel"
+                                [(ngModel)]="contratoService.selectedContrato.wifi_nombre2">
+
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">CLAVE DEL WIFI II (*)</label>
+                            <div class="input-group ">
+                                <span class="input-group-addon">
+                                    <i class="fa   fa-unlock-alt"></i>
+                                </span>
+                                <input type="text" class="form-control" name="wifi_clave2" #name="ngModel"
+                                [(ngModel)]="contratoService.selectedContrato.wifi_clave2" >
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <!-- /.col-lg-6 -->
+                <div class="col-md-6 ">
+                    <div class="form-group">
+                        <label for="">TIPO DE ENLACE (*)</label>
+                        <div class="input-group ">
+
+                            <span class="input-group-addon">
+                                <i class="fa  fa-share-alt"></i>
+                            </span>
+                            <select name="tipo_enlace" #name="ngModel"
+                                [(ngModel)]="contratoService.selectedContrato.tipo_enlace"
+                                class="form-control" required>
+                                <option value="select">Enlace...</option>
+                                <option>Inalambrico</option>
+                                <option>Fibra Optica</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- /input-group -->
+                    <div class="form-group">
+                        <label for="">CLAVE DEL WIFI (*)</label>
+                        <div class="input-group ">
+                            <span class="input-group-addon">
+                                <i class="fa   fa-unlock-alt"></i>
+                            </span>
+                            <input type="text" class="form-control" name="wifi_clave" #name="ngModel"
+                                [(ngModel)]="contratoService.selectedContrato.wifi_clave" required>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+              <mat-action-row>
+                <button mat-button color="primary" (click)="nextStep()">Next</button>
+              </mat-action-row>
+            </mat-expansion-panel>
+          
+            <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Orden De Instalacion
+                </mat-panel-title>
+                <mat-panel-description>
+                  
+                  <mat-icon>map</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+          
+              <mat-form-field>
+                <mat-label>Equipos ISP</mat-label>
+                <input matInput>
+              </mat-form-field>
+          
+              <mat-action-row>
+                <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                <button mat-button color="primary" (click)="nextStep()">Next</button>
+              </mat-action-row>
+            </mat-expansion-panel>
+          
+            <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Equipos ISP
+                </mat-panel-title>
+                <mat-panel-description>
+                  
+                  <mat-icon>date_range</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+          
+              <mat-form-field>
+                <mat-label>Date</mat-label>
+                <input matInput [matDatepicker]="picker" (focus)="picker.open()" readonly>
+              </mat-form-field>
+              <mat-datepicker #picker></mat-datepicker>
+          
+              <mat-action-row>
+                <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                <button mat-button color="primary" (click)="nextStep()">End</button>
+              </mat-action-row>
+            </mat-expansion-panel>
+          
+          </mat-accordion>
+      </div>
+      <!-- /.tab-pane -->
+      <div class="tab-pane" id="tab_3-3">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        It has survived not only five centuries, but also the leap into electronic typesetting,
+        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+        sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+        like Aldus PageMaker including versions of Lorem Ipsum.
+      </div>
+      <!-- /.tab-pane -->
+      <div class="tab-pane" id="tab_4-4">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        It has survived not only five centuries, but also the leap into electronic typesetting,
+        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+        sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+        like Aldus PageMaker including versions of Lorem Ipsum.
+      </div>
+      <!-- /.tab-pane -->
+      <div class="tab-pane" id="tab_5-5">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        It has survived not only five centuries, but also the leap into electronic typesetting,
+        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+        sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+        like Aldus PageMaker including versions of Lorem Ipsum.
+      </div>
+      <!-- /.tab-pane -->
+      <div class="tab-pane" id="tab_6-6">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        It has survived not only five centuries, but also the leap into electronic typesetting,
+        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+        sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+        like Aldus PageMaker including versions of Lorem Ipsum.
+      </div>
+      <!-- /.tab-pane -->
+    </div>
+    <!-- /.tab-content -->
+  </div>
+  <!-- nav-tabs-custom -->
+    </div>
+</section>
+  
+
+
+  
+

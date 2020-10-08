@@ -1,27 +1,29 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {ToastrService} from 'ngx-toastr';
-import {ContratoService} from '../../services/contrato.service';
-import {Contrato} from '../../models/contrato';
-import {EquipoService} from '../../services/equipo.service';
-import {Equipo} from 'src/app/models/equipo';
-import {ServicioService} from '../../services/servicio.service';
-import {Servicio} from '../../models/servicio';
-import {from} from 'rxjs';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatSort} from '@angular/material/sort';
-import {MatPaginator} from '@angular/material/paginator';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { ContratoService } from '../../services/contrato.service';
+import { Contrato } from '../../models/contrato';
+import { EquipoService } from '../../services/equipo.service';
+import { Equipo } from 'src/app/models/equipo';
+import { ServicioService } from '../../services/servicio.service';
+import { Servicio } from '../../models/servicio';
+import { from } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+
+import { Router } from '@angular/router'
 
 
-@Component({selector: 'app-contrato', templateUrl: './contrato.component.html', styleUrls: ['./contrato.component.css']})
+@Component({ selector: 'app-contrato', templateUrl: './contrato.component.html', styleUrls: ['./contrato.component.css'] })
 export class ContratoComponent implements OnInit { /**pas0 a paso */
 
 
     equiposISp = [];
-    total : number;
+    total: number;
     orden_instalacion = Math.floor((Math.random() * 10000) + 1);
 
-    displayedColumns : string[] = [
+    displayedColumns: string[] = [
         'equipo',
         'descripcion',
         'cantidad',
@@ -29,14 +31,14 @@ export class ContratoComponent implements OnInit { /**pas0 a paso */
         'accion'
     ];
     dataSource;
-    @ViewChild(MatPaginator)paginator : MatPaginator;
-    @ViewChild(MatSort)sort : MatSort;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
 
-    applyFilter(event : Event) {
+    applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();
     }
-    constructor(public contratoService : ContratoService, public equipoService : EquipoService, public servicioService : ServicioService, private toastr : ToastrService) {}
+    constructor(public contratoService: ContratoService, public equipoService: EquipoService, public servicioService: ServicioService, private toastr: ToastrService, private router: Router) { }
 
     ngOnInit(): void {
         this.getEquipos();
@@ -45,21 +47,21 @@ export class ContratoComponent implements OnInit { /**pas0 a paso */
 
 
     }
-    resetForm(form? : NgForm) {
+    resetForm(form?: NgForm) {
         if (form) {
             form.reset();
             this.total = 0;
             this.contratoService.selectedContrato = new Contrato();
             this.equiposISp = [{
-                    "id": "",
-                    "equipo": "",
-                    "equipo_n": "",
-                    "descripcion": "",
-                    "serie": "",
-                    "cantidad": "",
-                    "precio": 0,
-                    "idorden_instalacion": " "
-                }];
+                "id": "",
+                "equipo": "",
+                "equipo_n": "",
+                "descripcion": "",
+                "serie": "",
+                "cantidad": "",
+                "precio": 0,
+                "idorden_instalacion": " "
+            }];
 
         }
     }
@@ -80,7 +82,7 @@ export class ContratoComponent implements OnInit { /**pas0 a paso */
         });
     }
 
-    addContrato(form? : NgForm) {
+    addContrato(form?: NgForm) {
 
         if (form.valid) {
             this.contratoService.postContrato(form.value, this.orden_instalacion).subscribe(res => {
@@ -106,6 +108,7 @@ export class ContratoComponent implements OnInit { /**pas0 a paso */
 
             }
             this.orden_instalacion = Math.floor((Math.random() * 10000) + 1);
+            this.router.navigate(['/inicio'])
 
         } else {
             this.toastr.error('Complete la tabla de detalle Equipos ISP ', 'Por favor!');
@@ -115,7 +118,7 @@ export class ContratoComponent implements OnInit { /**pas0 a paso */
 
     }
 
-    selectEquipo(equipo : Equipo) {
+    selectEquipo(equipo: Equipo) {
 
         this.equipoService.selectedEquipo = equipo;
 
@@ -145,7 +148,7 @@ export class ContratoComponent implements OnInit { /**pas0 a paso */
     }
 
 
-    deleteCategory(_id : string) {
+    deleteCategory(_id: string) {
         if (confirm('Seguro que deseas borrar el equipo?')) {
 
 
@@ -174,7 +177,7 @@ export class ContratoComponent implements OnInit { /**pas0 a paso */
             this.calcular();
 
 
-            this.toastr.success('Se borro con éxito!', 'Equipo ISP', {timeOut: 2000});
+            this.toastr.success('Se borro con éxito!', 'Equipo ISP', { timeOut: 2000 });
             // M.toast({html: 'Deleted Succesfully'});
 
         }

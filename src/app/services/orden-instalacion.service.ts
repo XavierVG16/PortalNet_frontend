@@ -13,7 +13,7 @@ export class OrdenInstalacionService {
 
   constructor(private http: HttpClient) {
     this.selectedOrdeninstalacion = new OrdenInstalacion();
-   }
+  }
   getOrden_instalaciones() {
     return this.http.get(this.URL_API);
   }
@@ -28,5 +28,5 @@ export class OrdenInstalacionService {
 
   deleteOrden_instalacion(idorden_instalacion: string) {
     return this.http.delete(this.URL_API + `/${idorden_instalacion}`);
-}
+  }
 }

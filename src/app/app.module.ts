@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule} from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http'
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule, Routes } from '@angular/router';
 /***materlia amgular */
-import {DemoMaterialModule} from './material-module';
+import { DemoMaterialModule } from './material-module';
 
 
 
@@ -27,6 +28,7 @@ import { FacturaComponent } from './components/factura/factura.component';
 import { ContratoListaComponent } from './components/contrato-lista/contrato-lista.component';
 import { ClienteComponent } from './components/cliente/cliente.component';
 import { OrdenInstalacionComponent } from './components/orden-instalacion/orden-instalacion.component';
+import { DetalleClienteComponent } from './components/detalle-cliente/detalle-cliente.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { OrdenInstalacionComponent } from './components/orden-instalacion/orden-
     FacturaComponent,
     ContratoListaComponent,
     ClienteComponent,
-    OrdenInstalacionComponent
+    OrdenInstalacionComponent,
+    DetalleClienteComponent
   ],
   imports: [
     BrowserModule,
@@ -52,10 +55,11 @@ import { OrdenInstalacionComponent } from './components/orden-instalacion/orden-
     FormsModule,
     NgxPaginationModule,
     DemoMaterialModule,
-   
+
 
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
+
 
   ],
   providers: [],
