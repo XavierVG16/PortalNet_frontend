@@ -25,6 +25,9 @@ export class ClienteService {
   postCliente(cliente: Cliente) {
     return this.http.post(this.URL_API, cliente);
   }
+  putEstado ( id: string,estado : string ){
+    return this.http.put(this.URL_API + `/estado/${id}`,{estado})
+  }
   putCliente(id: string, cedula: string, nombre: string, apellido: string, direccion: string, propiedad: string, referencia: string, email: string, telefono: string) {
     return this.http.put(this.URL_API + `/${id}`, { cedula, nombre, apellido, direccion, propiedad, referencia, email, telefono })
   }

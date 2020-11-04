@@ -8,7 +8,10 @@ import { EquipoService } from '../../services/equipo.service';
 import { Equipo } from 'src/app/models/equipo';
 import { ServicioService } from '../../services/servicio.service';
 import { Servicio } from '../../models/servicio';
+import{DetalleEquipoService} from '../../services/detalle-equipo.service';
+import{DetalleEquipo} from '../../models/detalle-equipo';
 import { NgForm } from '@angular/forms';
+import { from } from 'rxjs';
 
 
 @Component({
@@ -19,9 +22,13 @@ import { NgForm } from '@angular/forms';
 export class DetalleClienteComponent implements OnInit {
   id: string;
   cliente: Cliente;
+  detalleEquipo: DetalleEquipo;
+  contrato: Contrato;
+   array :string [];
+
   constructor(private activatedRoute: ActivatedRoute, public clienteService: ClienteService,
     public equipoService: EquipoService, public servicioService: ServicioService,
-    public contratoService: ContratoService,
+    public contratoService: ContratoService, public detalleEquipoService: DetalleEquipoService,
     private router: Router) { }
 
   step = 0;
@@ -44,20 +51,22 @@ export class DetalleClienteComponent implements OnInit {
       this.clienteService.getCliente(this.id)
         .subscribe(
           res => {
-
-            this.cliente = res[0];
-            console.log(this.cliente[0])
+            this.cliente  = res;
+            console.log(res)
+            this.getContrato();
+            
           },
-          err => console.log(err)
+    
         )
     });
 
-    this.getContrato();
+     
+    this.getServicios();
+ 
   }
 
   editCliente(cedula: HTMLInputElement, nombre: HTMLInputElement, direccion: HTMLInputElement, telefono: HTMLInputElement, email: HTMLInputElement, propiedad: HTMLInputElement, apellido: HTMLInputElement, referencia: HTMLInputElement): boolean {
-    //nombre, 
-    console.log(direccion.value)
+    
     this.clienteService.putCliente(this.cliente.idcliente, cedula.value, nombre.value, apellido.value, direccion.value, propiedad.value, referencia.value, email.value, telefono.value)
       .subscribe(res => {
         console.log(res)
@@ -68,11 +77,28 @@ export class DetalleClienteComponent implements OnInit {
   }
 
   getContrato() {
-    this.contratoService.getContrato(this.id)
+    this.contratoService.getContrato(this.cliente.idcliente)
       .subscribe(res => {
-        this.contratoService.contratos = res as Contrato[];
-        console.log(this.contratoService)
+        this.contrato = res;
+        console.log(this.contrato)
+
+
       })
+    
+
+      /*this.detalleEquipoService.getDetalleEquipo(res.idorden_instalacion)
+      .subscribe(res=>{
+        this.detalleEquipo = res;
+        console.log(this.detalleEquipo)
+      }) */
   }
+
+  getServicios() {
+    this.servicioService.getServicios().subscribe(res => {
+        this.servicioService.servicios = res as Servicio[];
+        
+
+    });
+}
 
 }

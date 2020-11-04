@@ -14,6 +14,9 @@ export class UsuarioService {
     getUsuarios() {
         return this.http.get(this.URL_API);
     }
+    getUsuario(idusuario:  string) {
+        return this.http.get<Usuario>(this.URL_API +  `/${idusuario}`);
+    }
     postUsuario(usuario: Usuario) {
         return this.http.post(this.URL_API, usuario);
     }

@@ -10,31 +10,33 @@ import { ContratoComponent } from './components/contrato/contrato.component';
 import { FacturaComponent } from './components/factura/factura.component';
 import { ContratoListaComponent } from './components/contrato-lista/contrato-lista.component';
 import { ClienteComponent } from './components/cliente/cliente.component';
-import { DetalleClienteComponent } from './components/detalle-cliente/detalle-cliente.component'
+import { DetalleClienteComponent } from './components/detalle-cliente/detalle-cliente.component';
 import { ErrorComponent } from './components/error/error.component';
+import {PerfilComponent} from './components/perfil/perfil.component';
 import { Cliente } from './models/cliente';
+import { AuthGuard} from './auth.guard'
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '/inicio',
-    pathMatch: 'full'
-  },
+
   {
     path: 'inicio',
-    component: EscritorioComponent
+    component: EscritorioComponent,
+    canActivate: [AuthGuard]
   },
 
   {
     path: 'proveedores',
-    component: ProveedorComponent
+    component: ProveedorComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'servicios',
-    component: ServicioComponent
+    component: ServicioComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'equipos',
-    component: EquipoComponent
+    component: EquipoComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'productos',
@@ -42,27 +44,39 @@ const routes: Routes = [
   },
   {
     path: 'usuarios',
-    component: UsuarioComponent
+    component: UsuarioComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'contratos',
-    component: ContratoComponent
+    component: ContratoComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'factura',
-    component: FacturaComponent
+    component: FacturaComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'contratos_lista',
-    component: ContratoListaComponent
+    component: ContratoListaComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'abonados',
-    component: ClienteComponent
+    component: ClienteComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'detalle/:id',
-    component: DetalleClienteComponent
+    component: DetalleClienteComponent,
+    canActivate: [AuthGuard]
+
+  },
+  {
+    path: 'perfil/:id',
+    component: PerfilComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

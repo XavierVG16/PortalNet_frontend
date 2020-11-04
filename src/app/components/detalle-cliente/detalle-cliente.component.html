@@ -17,11 +17,9 @@
   <div class="nav-tabs-custom">
     <ul class="nav nav-tabs pull-right">
       <li class="active"><a href="#tab_1-1" data-toggle="tab">Datos</a></li>
-      <li><a href="#tab_2-2" data-toggle="tab">Contrato</a></li>
-      <li><a href="#tab_3-3" data-toggle="tab">Equipos ISP</a></li>
-      <li><a href="#tab_4-4" data-toggle="tab">Orden Instalacion</a></li>
-      <li><a href="#tab_5-5" data-toggle="tab">Traslados</a></li>
-      <li><a href="#tab_6-6" data-toggle="tab">Factura</a></li>
+      <li><a href="#tab_2-2" data-toggle="tab">Contratos</a></li>
+      <li><a href="#tab_3-3" data-toggle="tab">Visita Tecnica</a></li>
+      <li><a href="#tab_4-4" data-toggle="tab">Factura</a></li>  
      
       <li class="pull-left header"><i class="fa fa-user"></i> Detalle Abonado</li>
     </ul>
@@ -139,185 +137,116 @@
       </div>
       <!-- /.tab-pane -->
       <div class="tab-pane" id="tab_2-2">
-        <mat-accordion class="example-headers-align">
-            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Detalle Contrato
-                </mat-panel-title>
-                <mat-panel-description>
-                
-                  <mat-icon>bookmark</mat-icon>
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-          
-              <div class="row">
-
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="">TIPO DE PLAN (*)</label>
-                        <div class="input-group ">
-                            <span class="input-group-addon">
-                                <i class="fa fa-server"></i>
-
-                            </span>
-                            <select class="form-control select2" name="tipo_servicio" #name="ngModel"
-                                [(ngModel)]="contratoService.selectedContrato.tipo_servicio"
-                                style="width: 100%;" required>
-                                <option selected="selected">Tipo de plan</option>
-                                <option *ngFor="let servicio of servicioService.servicios">
-                                    {{servicio.nombre_plan}} </option>
-
-                            </select>
-
-                        </div>
-
-
-                    </div>
-                    <!-- /input-group -->
-                    <div class="form-group">
-                        <label for="">NOMBRE DEL WIFI (*)</label>
-                        <div class="input-group ">
-                            <span class="input-group-addon">
-                                <i class="fa fa-rss"></i>
-
-                            </span>
-                            <input type="text" class="form-control" name="wifi_nombre" #name="ngModel"
-                                [(ngModel)]="contratoService.selectedContrato.wifi_nombre" required>
-
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-
-                        <label>
-
-                            <input type="checkbox" onchange="onCheckboxChanged(this.checked)"
-                                name="member" class="minimal" />
-
-                            ROUTER ADICIONAL
-                        </label>
-
-
-                    </div>
-                    <div id="hiddenRow" style="display:none;">
-                        <div class="form-group ">
-                            <label for="">NOMBRE DEL WIFI II (*)</label>
+          <ng-container *ngFor="let element of contrato; let i = index " >
+            <mat-accordion class="example-headers-align">
+                <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Detalle 
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Contrato #{{i+1}}
+                      <mat-icon>bookmark</mat-icon>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+              
+                  <div class="row">
+    
+    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">TIPO DE PLAN (*)</label>
                             <div class="input-group ">
                                 <span class="input-group-addon">
-                                    <i class="fa fa-rss"></i>
-
+                                    <i class="fa fa-server"></i>
+    
                                 </span>
-                                <input type="text" class="form-control" name="wifi_nombre2" #name="ngModel"
-                                [(ngModel)]="contratoService.selectedContrato.wifi_nombre2">
+                                <select class="form-control select2" name="tipo_servicio" disabled>                                  style="width: 100%;" required>
+                                    <option selected="selected">{{element.nombre_plan}}</option>
+                                    <option *ngFor="let servicio of servicioService.servicios">
+                                        {{servicio.nombre_plan}} </option>
+    
+                                </select>
+    
+                            </div>
+    
+    
+                        </div>
+                        <div class="form-group">
+                            <label>COMPARTICION (*)</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-share-alt"></i>
+                                </div>
+                            <input type="number" name="comparticion"  [value]="element.comparticion"
+                                class="form-control" disabled required>
 
+                            </div>
+                        </div>
 
+                        <div class="form-group">
+                            <label> VELOCIDAD MINIMA DE CARGA (kbps)</label>
+                            <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa  fa-cloud-upload"></i>
+                            </div>
+                                <input type="text" name="m_subida_kbps" [value]="element.m_subida_kbps"
+                                    class="form-control" disabled required>
+                            
+                            </div>
+                       
+                        </div>
+                    </div>
+                    <!-- /.col-lg-6 -->
+                    <div class="col-md-6 ">
+                        <div class="form-group">
+                            <label for="">TIPO DE ENLACE (*)</label>
+                            <div class="input-group ">
+    
+                                <span class="input-group-addon">
+                                    <i class="fa  fa-share-alt"></i>
+                                </span>
+                                <select name="tipo_enlace"   class="form-control" required>
+                                    <option value="select">{{element.tipo_enlace}}</option>
+                                    <option>Inalambrico</option>
+                                    <option>Fibra Optica</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="">CLAVE DEL WIFI II (*)</label>
-                            <div class="input-group ">
-                                <span class="input-group-addon">
-                                    <i class="fa   fa-unlock-alt"></i>
-                                </span>
-                                <input type="text" class="form-control" name="wifi_clave2" #name="ngModel"
-                                [(ngModel)]="contratoService.selectedContrato.wifi_clave2" >
+                            <label>PRECIO (*)</label>
+                            
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text" name="precio"  [value]="element.precio"
+                                class="form-control" disabled>
+                                <span class="input-group-addon">.00</span>
+                              </div>
+                        </div>
+                        <div class="form-group">
+                            <label> VELOCIDAD MINIMA DE DESCARGA (kbps)</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-cloud-download"></i>
+                                </div>
+                            <input type="text" name="m_bajada_kbps" [value]="element.m_bajada_kbps"    class="form-control" disabled required>
+                            
                             </div>
-
                         </div>
+                     
                     </div>
-
-
-
+    
+    
                 </div>
-                <!-- /.col-lg-6 -->
-                <div class="col-md-6 ">
-                    <div class="form-group">
-                        <label for="">TIPO DE ENLACE (*)</label>
-                        <div class="input-group ">
-
-                            <span class="input-group-addon">
-                                <i class="fa  fa-share-alt"></i>
-                            </span>
-                            <select name="tipo_enlace" #name="ngModel"
-                                [(ngModel)]="contratoService.selectedContrato.tipo_enlace"
-                                class="form-control" required>
-                                <option value="select">Enlace...</option>
-                                <option>Inalambrico</option>
-                                <option>Fibra Optica</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!-- /input-group -->
-                    <div class="form-group">
-                        <label for="">CLAVE DEL WIFI (*)</label>
-                        <div class="input-group ">
-                            <span class="input-group-addon">
-                                <i class="fa   fa-unlock-alt"></i>
-                            </span>
-                            <input type="text" class="form-control" name="wifi_clave" #name="ngModel"
-                                [(ngModel)]="contratoService.selectedContrato.wifi_clave" required>
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-            </div>
-              <mat-action-row>
-                <button mat-button color="primary" (click)="nextStep()">Next</button>
-              </mat-action-row>
-            </mat-expansion-panel>
-          
-            <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Orden De Instalacion
-                </mat-panel-title>
-                <mat-panel-description>
-                  
-                  <mat-icon>map</mat-icon>
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-          
-              <mat-form-field>
-                <mat-label>Equipos ISP</mat-label>
-                <input matInput>
-              </mat-form-field>
-          
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                <button mat-button color="primary" (click)="nextStep()">Next</button>
-              </mat-action-row>
-            </mat-expansion-panel>
-          
-            <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Equipos ISP
-                </mat-panel-title>
-                <mat-panel-description>
-                  
-                  <mat-icon>date_range</mat-icon>
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-          
-              <mat-form-field>
-                <mat-label>Date</mat-label>
-                <input matInput [matDatepicker]="picker" (focus)="picker.open()" readonly>
-              </mat-form-field>
-              <mat-datepicker #picker></mat-datepicker>
-          
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                <button mat-button color="primary" (click)="nextStep()">End</button>
-              </mat-action-row>
-            </mat-expansion-panel>
-          
-          </mat-accordion>
+                  <mat-action-row>
+                    <button mat-button color="warn" >Imprimir</button>
+                    <button mat-button color="primary">Editar</button>
+                  </mat-action-row>
+                </mat-expansion-panel>
+              
+              </mat-accordion>
+          </ng-container>
+        
       </div>
       <!-- /.tab-pane -->
       <div class="tab-pane" id="tab_3-3">
@@ -340,30 +269,11 @@
         like Aldus PageMaker including versions of Lorem Ipsum.
       </div>
       <!-- /.tab-pane -->
-      <div class="tab-pane" id="tab_5-5">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-        It has survived not only five centuries, but also the leap into electronic typesetting,
-        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-        sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-        like Aldus PageMaker including versions of Lorem Ipsum.
-      </div>
-      <!-- /.tab-pane -->
-      <div class="tab-pane" id="tab_6-6">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-        It has survived not only five centuries, but also the leap into electronic typesetting,
-        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-        sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-        like Aldus PageMaker including versions of Lorem Ipsum.
-      </div>
-      <!-- /.tab-pane -->
     </div>
     <!-- /.tab-content -->
   </div>
   <!-- nav-tabs-custom -->
+  
     </div>
 </section>
   

@@ -27,9 +27,7 @@ export class ProveedorComponent implements OnInit {
 
 
   pageActual: number = 1;
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-  }
+ 
   ngOnInit(): void {
     this.getProveedores();
   }
@@ -45,6 +43,8 @@ export class ProveedorComponent implements OnInit {
         this.proveedorService.proveedores = res as Proveedor[];
         this.dataSource = new MatTableDataSource(this.proveedorService.proveedores);
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+
       });
   }
   addProveedor(form?: NgForm) {
@@ -92,8 +92,12 @@ export class ProveedorComponent implements OnInit {
         .subscribe(res => {
           this.getProveedores();
           this.resetForm(form);
-          this.toastr.success('Eliminado con éxito!', 'Proveedor', { timeOut: 2000 });
+          this.toastr.success('Eliminado con éxito!', 'Proveedor');
           //M.toast({html: 'Deleted Succesfully'});
+        },
+        err =>{
+          this.toastr.error(`${err.error.status}`, 'Error!');
+
         });
     }
   }

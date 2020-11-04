@@ -5,6 +5,7 @@ import { Equipo } from '../../models/equipo';
 import { EquipoService } from '../../services/equipo.service';
 import { Proveedor } from '../../models/proveedor';
 import { ProveedorService } from '../../services/proveedor.service';
+
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -27,9 +28,7 @@ export class EquipoComponent implements OnInit {
   constructor(public equipoService: EquipoService, public proveedorService: ProveedorService, private toastr: ToastrService) { 
 
   }
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-  }
+ 
   ngOnInit(): void {
     this.getEquipos();
     this.getProveedores();
@@ -50,6 +49,8 @@ export class EquipoComponent implements OnInit {
         this.equipoService.equipos = res as Equipo[];
         this.dataSource = new MatTableDataSource(this.equipoService.equipos);
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+
       });
   }
   getProveedores() {

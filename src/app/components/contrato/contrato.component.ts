@@ -87,6 +87,8 @@ export class ContratoComponent implements OnInit { /**pas0 a paso */
         if (form.valid) {
             this.contratoService.postContrato(form.value, this.orden_instalacion).subscribe(res => {
                 this.toastr.success('Guardado con éxito!', 'Datos');
+                this.addEquipos();
+                this.resetForm();
             })
 
         } else {

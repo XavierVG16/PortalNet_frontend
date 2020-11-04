@@ -1,14 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 /***materlia amgular */
 import { DemoMaterialModule } from './material-module';
-
-
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -29,6 +27,12 @@ import { ContratoListaComponent } from './components/contrato-lista/contrato-lis
 import { ClienteComponent } from './components/cliente/cliente.component';
 import { OrdenInstalacionComponent } from './components/orden-instalacion/orden-instalacion.component';
 import { DetalleClienteComponent } from './components/detalle-cliente/detalle-cliente.component';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthGuard } from './auth.guard';
+import { TokenInterceptorService } from './services/token-interceptor.service';
+import { PerfilComponent } from './components/perfil/perfil.component';
+
+
 
 @NgModule({
   declarations: [
@@ -46,7 +50,8 @@ import { DetalleClienteComponent } from './components/detalle-cliente/detalle-cl
     ContratoListaComponent,
     ClienteComponent,
     OrdenInstalacionComponent,
-    DetalleClienteComponent
+    DetalleClienteComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
@@ -59,10 +64,18 @@ import { DetalleClienteComponent } from './components/detalle-cliente/detalle-cl
 
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
+    
 
 
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

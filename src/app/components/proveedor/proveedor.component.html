@@ -33,18 +33,13 @@
             </div>
 
 
-            <br>
+            <br><br>
 
-
+            <mat-form-field>
+                <mat-label>Buscar</mat-label>
+                <input matInput type="text" class="form-control" (keyup)="applyFilter($event)" placeholder="..." #input>
+            </mat-form-field>
             <div class="col-xs-12 table-responsive">
-
-
-               
-        <mat-form-field>
-            <mat-label>Buscar</mat-label>
-            <input matInput type="text" class="form-control" (keyup)="applyFilter($event)" placeholder="..." #input autofocus>
-        </mat-form-field>
-        
         <table bordered="true" mat-table [dataSource]="dataSource" class="table table-bordered" matSort>
         
             <!-- Position Column -->
@@ -130,7 +125,7 @@
         
             <!-- Row shown when there is no matching data. -->
             <tr class="mat-row" *matNoDataRow>
-                <td class="mat-cell" colspan="4">No se econtraron "{{input.value}}"</td>
+                <td class="mat-cell" colspan="4">No se encontro "{{input.value}}"</td>
             </tr>
         </table>
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

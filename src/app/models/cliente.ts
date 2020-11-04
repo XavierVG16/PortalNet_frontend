@@ -13,7 +13,7 @@ export class Cliente {
         this.email = email
 
     }
-
+    insertId: string;
     idcliente: string;
     cedula: string
     nombre: string;

@@ -99,6 +99,10 @@ export class ServicioComponent implements OnInit {
                 this.resetForm(form);
                 this.toastr.success('Eliminado con éxito!', 'Plan de Internet', {timeOut: 2000});
                 // M.toast({html: 'Deleted Succesfully'});
+            }, 
+            err =>{
+                console.log(err)
+                this.toastr.info(`${err.error.status}`, 'Error!', {timeOut: 2000});
             });
         }
     }

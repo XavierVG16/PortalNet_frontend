@@ -1,3 +1,5 @@
+import { Data } from '@angular/router'
+
 export class Contrato {
 
     
@@ -10,7 +12,7 @@ export class Contrato {
         /** datos detalle de equipos */
         equipo = '', cantidad = 0, total_equipo = 0, iddetalle_equipo = '', disabled = false,
         nombre_plan = '', precio = '', descripcion= '',
-        fecha_pago_prox = 0 ,idfactura='',fecha_actual=''
+        fecha_pago_prox = '' ,idfactura='',fecha_actual='', fecha_pago='' , fecha_pago2='', idusuario=''
     ) {
         this.idcliente = idcliente,
             this.cedula = cedula,
@@ -48,7 +50,11 @@ export class Contrato {
             this.descripcion=descripcion,
             this.fecha_pago_prox =fecha_pago_prox,
             this.fecha_actual = fecha_actual,
-            this.idfactura = idfactura
+            this.idfactura = idfactura,
+            this.fecha_pago = fecha_pago,
+            this.fecha_pago2 = fecha_pago2,
+            this.idusuario= idusuario
+            
 
     }
     idcliente: string;
@@ -88,7 +94,10 @@ export class Contrato {
     /**factura */
     idfactura: string;
     fecha_actual: string;
-    fecha_pago_prox: number;
+    fecha_pago: string;
+    fecha_pago2: string;
+    fecha_pago_prox: string;
+    idusuario: string;
   
   
 

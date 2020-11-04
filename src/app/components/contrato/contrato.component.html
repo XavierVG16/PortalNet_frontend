@@ -12,483 +12,345 @@
 
 <section class="content">
     <div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">Contrato </h3>
 
-        <div class="box-body">
+    </div>
+    <form #contratoForm="ngForm">
 
+    <mat-vertical-stepper>
 
-            <!-- Custom Tabs -->
-            <div class="nav-tabs-custom">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab_1" data-toggle="tab">Datos del Abonado</a></li>
-                    <li><a href="#tab_2" data-toggle="tab">Datos del Plan</a></li>
-                    <li><a href="#tab_3" data-toggle="tab">Equipos ISP</a></li>
-                    <li><a href="#tab_4" data-toggle="tab">Instalacion</a></li>
+        <mat-step label="Datos del Abonado" state="phone">
+            <div class="box-body">
 
-
-
-                </ul>
-                <form #contratoForm="ngForm" (ngSubmit)="addContrato(contratoForm)">
-                    <div class="tab-content">
-                        
-                        <div class="tab-pane active" id="tab_1">
-
-                            <div class="modal-body">
-
-                                <div class="box-body">
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>CEDULA (*)</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-credit-card"></i>
-                                                    </div>
-                                                    <input type="text" name="cedula" class="form-control"
-                                                        #name="ngModel"
-                                                        [(ngModel)]="contratoService.selectedContrato.cedula" required>
-                                                </div>
-
-
-                                            </div>
-                                            <div class="form-group">
-                                                <label>NOMBRE (*)</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-user"></i>
-                                                    </div>
-                                                    <input type="text" name="nombre" class="form-control"
-                                                        #name="ngModel"
-                                                        [(ngModel)]="contratoService.selectedContrato.nombre" required>
-                                                </div>
-
-
-                                            </div>
-                                            <div class="form-group">
-                                                <label>DIRECCION (*)</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-map-pin"></i>
-                                                    </div>
-                                                    <input type="text" name="direccion" class="form-control"
-                                                        #name="ngModel"
-                                                        [(ngModel)]="contratoService.selectedContrato.direccion"
-                                                        required>
-                                                </div>
-
-
-                                            </div>
-                                            <div class="form-group">
-                                                <label>TELEFONO (*)</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-phone"></i>
-                                                    </div>
-                                                    <input type="text" name="telefono" class="form-control"
-                                                        #name="ngModel"
-                                                        [(ngModel)]="contratoService.selectedContrato.telefono"
-                                                        required>
-
-                                                </div>
-
-
-
-                                            </div>
-                                            <div class="form-group">
-                                                <label>CORREO ELECTRONICO (*)</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-envelope-o"></i>
-                                                    </div>
-                                                    <input type="text" name="email" class="form-control" #name="ngModel"
-                                                        [(ngModel)]="contratoService.selectedContrato.email" required>
-
-                                                </div>
-
-
-
-                                            </div>
-
-                                            <!-- /.form-group -->
-
-                                            <!-- /.form-group -->
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>TIPO DE PROPIEDAD (*)</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa  fa-home"></i>
-                                                    </div>
-                                                    <select name="propiedad" class="form-control" #name="ngModel"
-                                                        [(ngModel)]="contratoService.selectedContrato.propiedad"
-                                                        required>
-
-                                                        <option>Arrendada</option>
-                                                        <option>Familiar</option>
-                                                        <option>Propia</option>
-                                                    </select>
-
-
-                                                </div>
-
-                                            </div>
-                                            <div class="form-group">
-                                                <label>APELLIDO (*)</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa  fa-keyboard-o"></i>
-                                                    </div>
-                                                    <input type="text" name="apellido" class="form-control"
-                                                        #name="ngModel"
-                                                        [(ngModel)]="contratoService.selectedContrato.apellido"
-                                                        required>
-
-                                                </div>
-
-                                            </div>
-                                            <div class="form-group">
-                                                <label>REFERENCIA (*)</label>
-
-
-                                                <textarea class="form-control" name="referencia" #name="ngModel"
-                                                    [(ngModel)]="contratoService.selectedContrato.referencia" cols="30"
-                                                    rows="8"></textarea>
-
-
-
-
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                    <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>CEDULA (*)</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-credit-card"></i>
                                 </div>
-
-
-
+                                <input type="text" name="cedula" class="form-control"
+                                    #name="ngModel"
+                                    [(ngModel)]="contratoService.selectedContrato.cedula" required>
                             </div>
 
+
                         </div>
-                        <!-- /.tab-pane -->
-                        <div class="tab-pane" id="tab_2">
-
-                            <div class="row">
-
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">TIPO DE PLAN (*)</label>
-                                        <div class="input-group ">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-server"></i>
-
-                                            </span>
-                                            <select class="form-control select2" name="tipo_servicio" #name="ngModel"
-                                                [(ngModel)]="contratoService.selectedContrato.tipo_servicio"
-                                                style="width: 100%;" required>
-                                                <option selected="selected">Tipo de plan</option>
-                                                <option *ngFor="let servicio of servicioService.servicios">
-                                                    {{servicio.nombre_plan}} </option>
-
-                                            </select>
-
-                                        </div>
-
-
-                                    </div>
-                                    <!-- /input-group -->
-                                    <div class="form-group">
-                                        <label for="">NOMBRE DEL WIFI (*)</label>
-                                        <div class="input-group ">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-rss"></i>
-
-                                            </span>
-                                            <input type="text" class="form-control" name="wifi_nombre" #name="ngModel"
-                                                [(ngModel)]="contratoService.selectedContrato.wifi_nombre" required>
-
-
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        <label>
-
-                                            <input type="checkbox" onchange="onCheckboxChanged(this.checked)"
-                                                name="member" class="minimal" />
-
-                                            ROUTER ADICIONAL
-                                        </label>
-
-
-                                    </div>
-                                    <div id="hiddenRow" style="display:none;">
-                                        <div class="form-group ">
-                                            <label for="">NOMBRE DEL WIFI II (*)</label>
-                                            <div class="input-group ">
-                                                <span class="input-group-addon">
-                                                    <i class="fa fa-rss"></i>
-
-                                                </span>
-                                                <input type="text" class="form-control" name="wifi_nombre2" #name="ngModel"
-                                                [(ngModel)]="contratoService.selectedContrato.wifi_nombre2">
-
-
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">CLAVE DEL WIFI II (*)</label>
-                                            <div class="input-group ">
-                                                <span class="input-group-addon">
-                                                    <i class="fa   fa-unlock-alt"></i>
-                                                </span>
-                                                <input type="text" class="form-control" name="wifi_clave2" #name="ngModel"
-                                                [(ngModel)]="contratoService.selectedContrato.wifi_clave2" >
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-
-
+                        <div class="form-group">
+                            <label>NOMBRE (*)</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-user"></i>
                                 </div>
-                                <!-- /.col-lg-6 -->
-                                <div class="col-md-6 ">
-                                    <div class="form-group">
-                                        <label for="">TIPO DE ENLACE (*)</label>
-                                        <div class="input-group ">
+                                <input type="text" name="nombre" class="form-control"
+                                    #name="ngModel"
+                                    [(ngModel)]="contratoService.selectedContrato.nombre" required>
+                            </div>
 
-                                            <span class="input-group-addon">
-                                                <i class="fa  fa-share-alt"></i>
-                                            </span>
-                                            <select name="tipo_enlace" #name="ngModel"
-                                                [(ngModel)]="contratoService.selectedContrato.tipo_enlace"
-                                                class="form-control" required>
-                                                <option value="select">Enlace...</option>
-                                                <option>Inalambrico</option>
-                                                <option>Fibra Optica</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- /input-group -->
-                                    <div class="form-group">
-                                        <label for="">CLAVE DEL WIFI (*)</label>
-                                        <div class="input-group ">
-                                            <span class="input-group-addon">
-                                                <i class="fa   fa-unlock-alt"></i>
-                                            </span>
-                                            <input type="text" class="form-control" name="wifi_clave" #name="ngModel"
-                                                [(ngModel)]="contratoService.selectedContrato.wifi_clave" required>
-                                        </div>
-                                    </div>
 
+                        </div>
+                        <div class="form-group">
+                            <label>DIRECCION (*)</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-map-pin"></i>
                                 </div>
+                                <input type="text" name="direccion" class="form-control"
+                                    #name="ngModel"
+                                    [(ngModel)]="contratoService.selectedContrato.direccion"
+                                    required>
+                            </div>
 
 
+                        </div>
+                        <div class="form-group">
+                            <label>TELEFONO (*)</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <input type="text" name="telefono" class="form-control"
+                                    #name="ngModel"
+                                    [(ngModel)]="contratoService.selectedContrato.telefono"
+                                    required>
 
                             </div>
 
 
 
                         </div>
-                        <!-- /.tab-pane -->
-                        <div class="tab-pane " id="tab_3">
-
-
-
-                            <div class="row">
-
-
-
-                                <!-- /.col-lg-6 -->
-                                <div class="col-lg-6 ">
-                                    <label for=""> EQUIPOP ISP</label>
-
-                                    <div class="input-group ">
-                                        <a class="btn btn-primary" data-toggle="modal"
-                                            data-target="#myModal">Agregar</a>
-
-                                    </div>
-                                    <!-- /input-group -->
+                        <div class="form-group">
+                            <label>CORREO ELECTRONICO (*)</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-envelope-o"></i>
                                 </div>
-                                <br>
-
-
+                                <input type="text" name="email" class="form-control" #name="ngModel"
+                                    [(ngModel)]="contratoService.selectedContrato.email" required>
 
                             </div>
 
-                            <!-- /.col -->
 
 
-                            <!--modal-->
-
-                            <!-- Table row -->
-                            <div class="row">
-
-                                <div class="col-xs-12 table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-
-                                                <th>EQUIPO</th>
-                                                <th>DESCRIPCION</th>
-                                                <th>SERIE</th>
-                                                <th>CANTIDAD</th>
-                                                <th>TOTAL</th>
-                                                <th>ACCION</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let equipo of  equiposISp">
-
-                                                <td *ngIf="equipo.cantidad != '' " style="text-align: left ;">
-                                                    {{equipo.equipo_n}}</td>
-                                                <td *ngIf="equipo.cantidad != '' " style="text-align: left ;">
-                                                    {{equipo.descripcion}}</td>
-                                                <td *ngIf="equipo.cantidad != '' ">{{equipo.serie}}</td>
-                                                <td *ngIf="equipo.cantidad != '' ">{{equipo.cantidad}}</td>
-                                                <td *ngIf="equipo.cantidad != '' ">$ {{equipo.precio }}</td>
-
-                                                <td *ngIf="equipo.cantidad != '' ">
-                                                    <a class="btn   btn-sm btn-danger  pull-left" style="margin: 2px;"
-                                                        (click)="deleteCategory(equipo.id)">
-                                                        <i class="fa fa-times"></i>
-                                                    </a></td>
-
-                                                <td style="text-align: left ;"></td>
-                                                <td style="text-align: left ;"></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- /.row -->
-
-                            <div class="row">
-                                <!-- accepted payments column -->
-
-                                <!-- /.col -->
-                                <div class="col-xs-6">
-
-
-                                    <div class="table-responsive">
-                                        <table class="table">
-
-                                            <tr>
-                                                <th>Total:</th>
-                                                <td>$ {{total}}</td>
-
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- /.col -->
-                            </div>
                         </div>
-                        <!-- /.tab-pane -->
-                        <div class="tab-pane " id="tab_4">
 
+                        <!-- /.form-group -->
 
+                        <!-- /.form-group -->
+                    </div>
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">FECHA DE INSTALACION (*)</label>
-                                        <div class="input-group ">
-                                            <span class="input-group-addon">
-                                                <i class="fa  fa-calendar"></i>
-                                            </span>
-                                            <input type="date" class="form-control"
-                                                data-inputmask="'alias': 'dd/mm/yyyy'" name="dia_instalacion"
-                                                #name="ngModel"
-                                                [(ngModel)]="contratoService.selectedContrato.dia_instalacion"
-                                                data-mask>
-                                        </div>
-                                    </div>
-
-                                    <!-- /input-group -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>TIPO DE PROPIEDAD (*)</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa  fa-home"></i>
                                 </div>
+                                <select name="propiedad" class="form-control" #name="ngModel"
+                                    [(ngModel)]="contratoService.selectedContrato.propiedad"
+                                    required>
 
-
-                                <div class="col-md-6 ">
-                                    <div class="form-group">
-                                        <label for="">HORA DE INSTALACION (*)</label>
-
-                                        <div class="input-group">
-
-                                            <input type="time" name="hora_instalacion" #name="ngModel"
-                                                [(ngModel)]="contratoService.selectedContrato.hora_instalacion"
-                                                class="form-control timepicker1">
-
-
-
-                                        </div>
-                                        <!-- /input-group -->
-                                    </div>
-                                </div>
-                                <a class="btn  btn-danger" style="margin: 10px;" (click)="resetForm(contratoForm)"><i
-                                        class="fa fa-remove"></i>
-                                    Limpiar</a>
-
-                                <button class="btn btn-primary" style="margin: 10px;"> <i class="fa  fa-folder"></i>
-                                    Guardar Datos</button>
-                                    <a class="btn  btn-default" style="margin: 10px;" (click)="addEquipos()"><i class="fa fa-remove"></i>
-                                        Guardar Equios ISP</a>
+                                    <option>Arrendada</option>
+                                    <option>Familiar</option>
+                                    <option>Propia</option>
+                                </select>
 
 
                             </div>
 
-                            <!-- /.col -->
+                        </div>
+                        <div class="form-group">
+                            <label>APELLIDO (*)</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa  fa-keyboard-o"></i>
+                                </div>
+                                <input type="text" name="apellido" class="form-control"
+                                    #name="ngModel"
+                                    [(ngModel)]="contratoService.selectedContrato.apellido"
+                                    required>
+
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label>REFERENCIA (*)</label>
+
+
+                            <textarea class="form-control" name="referencia" #name="ngModel"
+                                [(ngModel)]="contratoService.selectedContrato.referencia" cols="30"
+                                rows="8"></textarea>
 
 
 
 
                         </div>
-                        <!-- /.tab-pane -->
+
 
                     </div>
-                    <!-- /.tab-content -->
-
-
-
-
-                </form>
+                </div>
+                <!-- /.row -->
             </div>
-            <!-- nav-tabs-custom -->
 
-            <!-- /.col -->
+          <div>
+            <button mat-button  mat-flat-button	matStepperNext>Siguiente</button>
+          </div>
+        </mat-step>
+    
+        <mat-step label="Datos del Plan" state="chat">
+          <div class="box-body">
+            <div class="row">
 
-        </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">TIPO DE PLAN (*)</label>
+                        <div class="input-group ">
+                            <span class="input-group-addon">
+                                <i class="fa fa-server"></i>
 
-        <!-- /.box-footer-->
-    </div>
+                            </span>
+                            <select class="form-control select2" name="tipo_servicio" #name="ngModel"
+                                [(ngModel)]="contratoService.selectedContrato.tipo_servicio"
+                                style="width: 100%;" required>
+                                <option selected="selected">Tipo de plan</option>
+                                <option *ngFor="let servicio of servicioService.servicios">
+                                    {{servicio.nombre_plan}} </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+                 
+                </div>
+                <!-- /.col-lg-6 -->
+                <div class="col-md-6 ">
+                    <div class="form-group">
+                        <label for="">TIPO DE ENLACE (*)</label>
+                        <div class="input-group ">
+
+                            <span class="input-group-addon">
+                                <i class="fa  fa-share-alt"></i>
+                            </span>
+                            <select name="tipo_enlace" #name="ngModel"
+                                [(ngModel)]="contratoService.selectedContrato.tipo_enlace"
+                                class="form-control" required>
+                                <option value="select">Enlace...</option>
+                                <option>Inalambrico</option>
+                                <option>Fibra Optica</option>
+                            </select>
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>
+          </div>
+          <div>
+            <button mat-button   matStepperPrevious>Atras</button>
+            <button mat-button  matStepperNext>Siguiente</button>
+          </div>
+        </mat-step>
+    
+        <mat-step label="Orden de Instalacion">
+          <div class="box-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">FECHA DE INSTALACION (*)</label>
+                        <div class="input-group ">
+                            <span class="input-group-addon">
+                                <i class="fa  fa-calendar"></i>
+                            </span>
+                            <input type="date" class="form-control"
+                                data-inputmask="'alias': 'dd/mm/yyyy'" name="dia_instalacion"
+                                #name="ngModel"
+                                [(ngModel)]="contratoService.selectedContrato.dia_instalacion"
+                                data-mask>
+                        </div>
+                    </div>
+
+                    <!-- /input-group -->
+                </div>
+
+
+                <div class="col-md-6 ">
+                    <div class="form-group">
+                        <label for="">HORA DE INSTALACION (*)</label>
+
+                        <div class="input-group">
+
+                            <input type="time" name="hora_instalacion" #name="ngModel"
+                                [(ngModel)]="contratoService.selectedContrato.hora_instalacion"
+                                class="form-control timepicker1">
 
 
 
+                        </div>
+                        <!-- /input-group -->
+                    </div>
+                </div>
+
+                 <!-- /.col-lg-6 -->
+                 <div class="col-lg-6 ">
+                    <label for=""> EQUIPOP ISP</label>
+
+                    <div class="input-group ">
+                        <a 	mat-raised-button data-toggle="modal"
+                            data-target="#myModal">Agregar</a>
+
+                    </div>
+                    <!-- /input-group -->
+                </div>
+                <!-- Table row -->
+                <div class="row">
+
+                    <div class="col-xs-12 table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+
+                                    <th>EQUIPO</th>
+                                    <th>DESCRIPCION</th>
+                                    <th>SERIE</th>
+                                    <th>CANTIDAD</th>
+                                    <th>TOTAL</th>
+                                    <th>ACCION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let equipo of  equiposISp">
+
+                                    <td *ngIf="equipo.cantidad != '' " style="text-align: left ;">
+                                        {{equipo.equipo_n}}</td>
+                                    <td *ngIf="equipo.cantidad != '' " style="text-align: left ;">
+                                        {{equipo.descripcion}}</td>
+                                    <td *ngIf="equipo.cantidad != '' ">{{equipo.serie}}</td>
+                                    <td *ngIf="equipo.cantidad != '' ">{{equipo.cantidad}}</td>
+                                    <td *ngIf="equipo.cantidad != '' ">$ {{equipo.precio }}</td>
+
+                                    <td *ngIf="equipo.cantidad != '' ">
+                                        <a class="btn   btn-sm btn-danger  pull-left" style="margin: 2px;"
+                                            (click)="deleteCategory(equipo.id)">
+                                            <i class="fa fa-times"></i>
+                                        </a></td>
+
+                                    <td style="text-align: left ;"></td>
+                                    <td style="text-align: left ;"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <!-- accepted payments column -->
+
+                    <!-- /.col -->
+                    <div class="col-xs-6">
 
 
+                        <div class="table-responsive">
+                            <table class="table">
+
+                                <tr>
+                                    <th>Total:</th>
+                                    <td>$ {{total}}</td>
+
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+                <button mat-raised-button  (click) = "addContrato(contratoForm)">
+                    Guardar</button>
+              
 
 
+            </div>
+          </div>
+        </mat-step>
+    
+    
+      </mat-vertical-stepper>
+    </form>
 
-
-
+     </div>
 </section>
 
-
-
-
 <div class="modal modal-defaul" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span

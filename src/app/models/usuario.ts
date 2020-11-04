@@ -1,6 +1,6 @@
 export class Usuario {
 
-    constructor(idusuario = '',
+    constructor(
         nombre = '',
         apellido = '',
         email = '',
@@ -9,8 +9,7 @@ export class Usuario {
         telefono ='',
         p =''
     ) {
-        this.idusuario = idusuario,
-            this.nombre = nombre,
+                    this.nombre = nombre,
             this.apellido = apellido,
             this.email = email,
             this.pass_usuario = pass_usuario,
@@ -19,7 +18,7 @@ export class Usuario {
             this.p = p
 
     }
-    idusuario: string;
+    idusuario: number;
     nombre: string;
     apellido: string;
     email: string;
@@ -27,4 +26,5 @@ export class Usuario {
     t_usuario: string;
     telefono: string;
     p: string
+    token?: string;
 }
