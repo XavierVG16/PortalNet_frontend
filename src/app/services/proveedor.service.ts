@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Proveedor } from '../models/proveedor';
+import { environment } from 'src/environments/environment';
 @Injectable({ providedIn: 'root' })
 export class ProveedorService {
 
     selectedProveedor: Proveedor;
     proveedores: Proveedor[];
-    readonly URL_API = 'https://sistemaportalnet.herokuapp.com/proveedor/';
+    readonly URL_API = `${environment.apiUrl}/proveedor/`;
 
     constructor(private http: HttpClient) {
         this.selectedProveedor = new Proveedor();

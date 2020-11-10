@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {DetalleEquipo} from '../models/detalle-equipo';
-
+import {environment} from './../../environments/environment'
 @Injectable({
   providedIn: 'root'
 })
@@ -9,7 +9,7 @@ export class DetalleEquipoService {
   selectedDetalleEquipo: DetalleEquipo;
   detalleEquipos: DetalleEquipo[];
 
-  readonly URL_API = 'https://sistemaportalnet.herokuapp.com/detalle/';
+  readonly URL_API = `${environment.apiUrl}/detalle/`;
   constructor(private http: HttpClient) {
     this.selectedDetalleEquipo = new DetalleEquipo();
    }

@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { CookieService } from "ngx-cookie-service";
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import {environment} from './../../environments/environment'
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 
 const USER_KEY = 'token';
@@ -15,7 +16,7 @@ export class AuthService {
   selectedUsuario: Usuario;
   usuario: Usuario[];
 
-  readonly URL_API = 'https://sistemaportalnet.herokuapp.com/signin/';
+  readonly URL_API = `${environment.apiUrl}/signin/`;
 
 
   constructor(private http: HttpClient, private router: Router) {

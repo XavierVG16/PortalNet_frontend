@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Cliente } from '../models/cliente';
+import {environment} from './../../environments/environment'
+
 @Injectable({
   providedIn: 'root'
 })
@@ -8,7 +10,7 @@ export class ClienteService {
 
   selectedCliente: Cliente;
   clientes: Cliente[];
-  readonly URL_API = 'https://sistemaportalnet.herokuapp.com/cliente/';
+  readonly URL_API = `${environment.apiUrl}/cliente/`;
 
   constructor(private http: HttpClient) {
     this.selectedCliente = new Cliente();

@@ -17,7 +17,7 @@
   <div class="nav-tabs-custom">
     <ul class="nav nav-tabs pull-right">
       <li class="active"><a href="#tab_1-1" data-toggle="tab">Datos</a></li>
-      <li><a href="#tab_2-2" data-toggle="tab">Contratos</a></li>
+      <li><a href="#tab_2-2" data-toggle="tab">Servicios</a></li>
       <li><a href="#tab_3-3" data-toggle="tab">Visita Tecnica</a></li>
       <li><a href="#tab_4-4" data-toggle="tab">Factura</a></li>  
      
@@ -137,116 +137,76 @@
       </div>
       <!-- /.tab-pane -->
       <div class="tab-pane" id="tab_2-2">
-          <ng-container *ngFor="let element of contrato; let i = index " >
-            <mat-accordion class="example-headers-align">
-                <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                      Detalle 
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        Contrato #{{i+1}}
-                      <mat-icon>bookmark</mat-icon>
-                    </mat-panel-description>
-                  </mat-expansion-panel-header>
-              
-                  <div class="row">
-    
-    
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="">TIPO DE PLAN (*)</label>
-                            <div class="input-group ">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-server"></i>
-    
-                                </span>
-                                <select class="form-control select2" name="tipo_servicio" disabled>                                  style="width: 100%;" required>
-                                    <option selected="selected">{{element.nombre_plan}}</option>
-                                    <option *ngFor="let servicio of servicioService.servicios">
-                                        {{servicio.nombre_plan}} </option>
-    
-                                </select>
-    
-                            </div>
-    
-    
-                        </div>
-                        <div class="form-group">
-                            <label>COMPARTICION (*)</label>
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-share-alt"></i>
+        <div class="row">  
+            <div class="pull-right">
+            <a class="btn  btn-xm btn-primary" data-toggle="modal" style="margin: 15px;" data-target="#myModal"><span> Agregar</span></a>
+            </div>
+            <div class="col-xs-12 table-responsive">
+                <mat-form-field>
+                    <mat-label>Buscar</mat-label>
+                    <input matInput type="text" class="form-control" (keyup)="applyFilter2($event)" placeholder="..." #input>
+                </mat-form-field>
+                
+                <table bordered="true" mat-table [dataSource]="data" class="table table-bordered" matSort>
+                
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="plan">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> PLAN </th>
+                
+                        <td mat-cell *matCellDef="let contrato"> {{contrato.nombre_plan}} </td>
+                
+                
+                    </ng-container>
+                
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="direccion">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> DIRECCION </th>
+                        <td mat-cell *matCellDef="let element"> {{element.direccion}}</td>
+                    </ng-container>
+                
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="enlace">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> ENLACE </th>
+                        <td mat-cell *matCellDef="let element"> {{element.tipo_enlace}} </td>
+                    </ng-container>
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="precio">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> PRECIO </th>
+                        <td mat-cell *matCellDef="let element">$ {{element.precio}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="estado">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> ESTADO </th>
+                        <td mat-cell *matCellDef="let element">
+                            <span *ngIf="element.estado == '0' ; else elseBlock" class="label label-danger">Inactivo</span>
+                            <ng-template #elseBlock> <samp class="label label-success">Activo</samp></ng-template> 
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="accion">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> ACCION </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button *ngIf="element.estado == '0' ; else elseBlock"  class="btn btn-sm btn-primary" style="margin: 3px;" title="Activar"><i class="fa fa-power-off"></i></button>
+                            <ng-template #elseBlock><button class="btn btn-sm btn-danger" style="margin: 3px;" title="Desactivar"><i class="fa fa-power-off"></i></button>
+                            </ng-template>
+      
+                              <button  class="btn btn-sm btn-warning"  style="margin: 3px;"  title="Editar"><i class=" fa fa-edit"></i></button>
+                              <button class="btn btn-sm btn-info" style="margin: 3px;"  title="Eliminar"><i class="fa  fa-print"></i></button>
+                        </td>
+                    </ng-container>
+                
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+                
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No se econtraron "{{input.value}}"</td>
+                    </tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            
                                 </div>
-                            <input type="number" name="comparticion"  [value]="element.comparticion"
-                                class="form-control" disabled required>
-
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label> VELOCIDAD MINIMA DE CARGA (kbps)</label>
-                            <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa  fa-cloud-upload"></i>
-                            </div>
-                                <input type="text" name="m_subida_kbps" [value]="element.m_subida_kbps"
-                                    class="form-control" disabled required>
-                            
-                            </div>
-                       
-                        </div>
-                    </div>
-                    <!-- /.col-lg-6 -->
-                    <div class="col-md-6 ">
-                        <div class="form-group">
-                            <label for="">TIPO DE ENLACE (*)</label>
-                            <div class="input-group ">
-    
-                                <span class="input-group-addon">
-                                    <i class="fa  fa-share-alt"></i>
-                                </span>
-                                <select name="tipo_enlace"   class="form-control" required>
-                                    <option value="select">{{element.tipo_enlace}}</option>
-                                    <option>Inalambrico</option>
-                                    <option>Fibra Optica</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>PRECIO (*)</label>
-                            
-                            <div class="input-group">
-                                <span class="input-group-addon">$</span>
-                                <input type="text" name="precio"  [value]="element.precio"
-                                class="form-control" disabled>
-                                <span class="input-group-addon">.00</span>
-                              </div>
-                        </div>
-                        <div class="form-group">
-                            <label> VELOCIDAD MINIMA DE DESCARGA (kbps)</label>
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-cloud-download"></i>
-                                </div>
-                            <input type="text" name="m_bajada_kbps" [value]="element.m_bajada_kbps"    class="form-control" disabled required>
-                            
-                            </div>
-                        </div>
-                     
-                    </div>
-    
-    
-                </div>
-                  <mat-action-row>
-                    <button mat-button color="warn" >Imprimir</button>
-                    <button mat-button color="primary">Editar</button>
-                  </mat-action-row>
-                </mat-expansion-panel>
-              
-              </mat-accordion>
-          </ng-container>
-        
+          
+    </div>
+       
       </div>
       <!-- /.tab-pane -->
       <div class="tab-pane" id="tab_3-3">
@@ -260,13 +220,80 @@
       </div>
       <!-- /.tab-pane -->
       <div class="tab-pane" id="tab_4-4">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-        It has survived not only five centuries, but also the leap into electronic typesetting,
-        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-        sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-        like Aldus PageMaker including versions of Lorem Ipsum.
+        <mat-form-field>
+            <mat-label>Buscar Cliente</mat-label>
+            <input matInput type="text" class="form-control" (keyup)="applyFilter($event)" placeholder="..." #input autofocus>
+        </mat-form-field>
+<div class="table-responsive">
+<table bordered="true" mat-table [dataSource]="dataFactura" class="table table-bordered"  matSort>
+
+<!-- Position Column -->
+<ng-container matColumnDef="nombre">
+<th mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRE </th>
+
+<td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+
+
+</ng-container>
+
+<!-- Name Column -->
+<ng-container matColumnDef="apellido">
+<th mat-header-cell *matHeaderCellDef mat-sort-header> APELLIDO </th>
+<td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+</ng-container>
+<!-- Name Column -->
+<ng-container matColumnDef="cedula">
+<th mat-header-cell *matHeaderCellDef mat-sort-header> CEDULA </th>
+<td mat-cell *matCellDef="let element"> {{element.cedula}} </td>
+</ng-container>
+
+<!-- Weight Column -->
+<ng-container matColumnDef="direccion">
+<th mat-header-cell *matHeaderCellDef mat-sort-header> DIRECCION </th>
+<td mat-cell *matCellDef="let element"> {{element.direccion}} </td>
+</ng-container>
+
+<!-- Symbol Column -->
+<ng-container matColumnDef="telefono">
+<th mat-header-cell *matHeaderCellDef mat-sort-header> TELEFONO </th>
+<td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
+</ng-container>
+<!-- Symbol Column -->
+<ng-container matColumnDef="plan">
+<th mat-header-cell *matHeaderCellDef mat-sort-header> PLAN </th>
+<td mat-cell *matCellDef="let element"> {{element.nombre_plan}} </td>
+</ng-container>
+
+<!-- Symbol Column -->
+<ng-container matColumnDef="estado">
+<th mat-header-cell *matHeaderCellDef mat-sort-header> ESTADO </th>
+<td mat-cell *matCellDef="let element"> <span class="label label-danger" *ngIf="element.estado == 0">
+        Pendiente</span>
+    <span class="label label-success" *ngIf="element.estado != 0">Pagado</span> </td>
+</ng-container>
+<ng-container matColumnDef="accion">
+<th mat-header-cell *matHeaderCellDef mat-sort-header> ACCION </th>
+<td mat-cell *matCellDef="let element">
+    <a class="btn   btn-sm btn-primary pull-left" (click)="editFactura(element) " style="margin: 2px;"
+        data-toggle="modal" data-target="#myModalFactura">
+        <i class="fa  fa-pencil-square-o"></i></a>
+    <a *ngIf="element.estado != 0" class="btn   btn-sm btn-warning pull-left" style="margin: 2px;"(click)="generatePdf(element)">
+        <i class="fa  fa-print"></i></a>
+
+</td>
+</ng-container>
+
+<tr mat-header-row *matHeaderRowDef="displayedColumnsFactura"></tr>
+<tr mat-row *matRowDef="let row; columns: displayedColumnsFactura;"></tr>
+
+<!-- Row shown when there is no matching data. -->
+<tr class="mat-row" *matNoDataRow>
+<td class="mat-cell" colspan="4">No se encontro "{{input.value}}"</td>
+</tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+        </div>
       </div>
       <!-- /.tab-pane -->
     </div>
@@ -277,7 +304,466 @@
     </div>
 </section>
   
+<div class="modal modal-defaul" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form #contratoForm="ngForm" (ngSubmit)="addServicio_contrato(contratoForm)">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Agregar Servicio</h4>
+            </div>
+            <div class="modal-body">
+              
+                <mat-horizontal-stepper>
+
+                    <mat-step label="Datos del Plan" state="phone">
+                        <div class="box-body">
+                            <div class="row">
+                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">TIPO DE PLAN (*)</label>
+                                        <div class="input-group ">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-server"></i>
+                
+                                            </span>
+                                            <select class="form-control select2" name="tipo_servicio" #name="ngModel"
+                                                [(ngModel)]="contratoService.selectedContrato.tipo_servicio"
+                                                style="width: 100%;" required>
+                                                <option selected="selected">Tipo de plan</option>
+                                                <option *ngFor="let servicio of servicioService.servicios">
+                                                    {{servicio.nombre_plan}} </option>
+                
+                                            </select>
+                
+                                        </div>
+                
+                
+                                    </div>
+                                 
+                                </div>
+                                <!-- /.col-lg-6 -->
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label for="">TIPO DE ENLACE (*)</label>
+                                        <div class="input-group ">
+                
+                                            <span class="input-group-addon">
+                                                <i class="fa  fa-share-alt"></i>
+                                            </span>
+                                            <select name="tipo_enlace" #name="ngModel"
+                                                [(ngModel)]="contratoService.selectedContrato.tipo_enlace"
+                                                class="form-control" required>
+                                                <option value="select">Enlace...</option>
+                                                <option>Inalambrico</option>
+                                                <option>Fibra Optica</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>DIRECCION (*)</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-map-pin"></i>
+                                            </div>
+                                            <input type="text" name="direccion" class="form-control"
+                                                #name="ngModel"
+                                                [(ngModel)]="contratoService.selectedContrato.direccion"
+                                                required>
+                                        </div>        
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                      <div>
+                        <button mat-button  mat-flat-button	matStepperNext>Siguiente</button>
+                      </div>
+                    </mat-step>
+                
+                    <mat-step label="Orden de Instalacion" state="chat">
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">FECHA DE INSTALACION (*)</label>
+                                        <div class="input-group ">
+                                            <span class="input-group-addon">
+                                                <i class="fa  fa-calendar"></i>
+                                            </span>
+                                            <input type="date" class="form-control"
+                                                data-inputmask="'alias': 'dd/mm/yyyy'" name="dia_instalacion"
+                                                #name="ngModel"
+                                                [(ngModel)]="contratoService.selectedContrato.dia_instalacion"
+                                                data-mask>
+                                        </div>
+                                    </div>
+                
+                                    <!-- /input-group -->
+                                </div>
+                
+                
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label for="">HORA DE INSTALACION (*)</label>
+                
+                                        <div class="input-group">
+                
+                                            <input type="time" name="hora_instalacion" #name="ngModel"
+                                                [(ngModel)]="contratoService.selectedContrato.hora_instalacion"
+                                                class="form-control timepicker1">
+                
+                
+                
+                                        </div>
+                                        <!-- /input-group -->
+                                    </div>
+                                </div>
+                
+                                 <!-- /.col-lg-6 -->
+                                 <div class="col-lg-6 ">
+                                    <label for=""> EQUIPOP ISP</label>
+                
+                                    <div class="input-group ">
+                                        <a 	mat-raised-button data-toggle="modal"
+                                            data-target="#myModal1">Agregar</a>
+                
+                                    </div>
+                                    <!-- /input-group -->
+                                </div>
+                                <!-- Table row -->
+                                <div class="row">
+                
+                                    <div class="col-xs-12 table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                
+                                                    <th>EQUIPO</th>
+                                                    <th>DESCRIPCION</th>
+                                                    <th>SERIE</th>
+                                                    <th>CANTIDAD</th>
+                                                    <th>TOTAL</th>
+                                                    <th>ACCION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let equipo of  equiposISp">
+                
+                                                    <td *ngIf="equipo.cantidad != '' " style="text-align: left ;">
+                                                        {{equipo.equipo_n}}</td>
+                                                    <td *ngIf="equipo.cantidad != '' " style="text-align: left ;">
+                                                        {{equipo.descripcion}}</td>
+                                                    <td *ngIf="equipo.cantidad != '' ">{{equipo.serie}}</td>
+                                                    <td *ngIf="equipo.cantidad != '' ">{{equipo.cantidad}}</td>
+                                                    <td *ngIf="equipo.cantidad != '' ">$ {{equipo.precio }}</td>
+                
+                                                    <td *ngIf="equipo.cantidad != '' ">
+                                                        <a class="btn   btn-sm btn-danger  pull-left" style="margin: 2px;"
+                                                            (click)="deleteCategory(equipo.id)">
+                                                            <i class="fa fa-times"></i>
+                                                        </a></td>
+                
+                                                    <td style="text-align: left ;"></td>
+                                                    <td style="text-align: left ;"></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                
+                                                </tr>
+                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                                <!-- /.row -->
+                
+                                <div class="row">
+                                    <!-- accepted payments column -->
+                
+                                    <!-- /.col -->
+                                    <div class="col-xs-6">
+                
+                
+                                        <div class="table-responsive">
+                                            <table class="table">
+                
+                                                <tr>
+                                                    <th>Total:</th>
+                                                    <td>$ {{total}}</td>
+                
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>                               
+                            </div>
+                          </div>
+                      <div>
+                        <button mat-button   matStepperPrevious>Atras</button>
+                        <button mat-button  matStepperNext>Guardar</button>
+                      </div>
+                    </mat-step>               
+                
+                  </mat-horizontal-stepper>
+            </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline pull-left" data-dismiss="modal"><i
+                            class="fa fa-remove"></i> Cerrar</button>
+
+                    <button class="btn btn-outline"> <i class="fa  fa-folder"></i> Guardar</button>
+                </div>
+            </form>
+         
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-defaul" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Agregar Equipo ISP</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="box-body">
+
+                    <div class="col-xs-12 table-responsive">
+    <mat-form-field>
+        <mat-label>Buscar</mat-label>
+        <input matInput type="text" class="form-control" (keyup)="applyFilter($event)" placeholder="..." #input autofocus>
+    </mat-form-field>
+    
+    <table bordered="true" mat-table [dataSource]="dataSource" class="table table-bordered" matSort>
+    
+        <!-- Position Column -->
+        <ng-container matColumnDef="equipo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> EQUIPO </th>
+    
+            <td mat-cell *matCellDef="let element"> {{element.equipo}} </td>
+    
+    
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> DESCRIPCION </th>
+            <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+        </ng-container>
+    
+        <!-- Weight Column -->
+        <ng-container matColumnDef="cantidad">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> CANTIDAD </th>
+            <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+        </ng-container>
+    
+    
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ESTADO </th>
+            <td mat-cell *matCellDef="let element">
+                <span *ngIf="element.cantidad == 0" class="label label-warning">Asignado</span>
+                <span *ngIf="element.cantidad != 0" class="label label-success">Disponible</span> </td>
+        </ng-container>
+        <ng-container matColumnDef="accion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ACCION </th>
+            <td mat-cell *matCellDef="let element">
+   
+
+                            <a *ngIf="element.cantidad != 0" class="btn   btn-sm btn-primary pull-left" (click)="selectEquipo(element)"
+                                style="margin: 2px;">
+                                <i class="fa fa-pencil"></i> Seleccionar
+                            
+                            </a>
+            </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No se econtraron "{{input.value}}"</td>
+        </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+                    </div>
+                </div>
 
 
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+
+        </div>
+    </div>
+</div>
   
 
+<div class="modal modal-defaul" id="myModalFactura" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Detalle Pago</h4>
+            </div>
+            <form  #facturaForm="ngForm" (ngSubmit)="addFactura(facturaForm)">
+                <div class="modal-body">
+
+                    <div class="box-body">
+
+                        <input type="hidden" name="idusuario" #idusuario  [(ngModel)] = "usuario.idusuario" >
+
+<input type="hidden" name="idfactura" #idfactura  [(ngModel)]="facturaService.selectedContrato.idfactura" >
+                        <div class="row">
+                            <div class="col-md-6">
+                              
+                                <div class="form-group">
+                                    <label>NOMBRE (*)</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input type="text" name="nombre" class="form-control" #name="ngModel"
+                                            [(ngModel)]="facturaService.selectedContrato.nombre" disabled>
+                                    </div>
+                        
+                        
+                                </div>
+                            <div class="form-group">
+                                <label>N DE CEDULA </label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-credit-card"></i>
+                                    </div>
+                                    <input type="text" name="cedula" class="form-control" #name="ngModel"
+                                        [(ngModel)]="facturaService.selectedContrato.cedula" disabled>
+                                </div>
+                            
+                            
+                            </div>
+                               
+                            <div class="form-group">
+                                <label for="">PROXIMO PAGO</label>
+                                <div class="input-group ">
+                                    <span class="input-group-addon">
+                                        <i class="fa  fa-calendar"></i>
+                                    </span>
+                                    <input type="date" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'"  name="fecha_pago_prox"
+                                        #name="ngModel" [(ngModel)]="facturaService.selectedContrato.fecha_pago_prox" required>
+                                </div>
+                            </div>
+                         
+                            </div>
+                            <div class="col-md-6">
+                            
+                                <div class="form-group">
+                                    <label>APELLIDO</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input type="text" name="apellido" class="form-control" #name="ngModel"
+                                            [(ngModel)]="facturaService.selectedContrato.apellido" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">FECHA PAGO</label>
+                                    <div class="input-group ">
+                                        <span class="input-group-addon">
+                                            <i class="fa  fa-calendar"></i>
+                                        </span>
+                                        <div *ngIf="facturaService.selectedContrato.fecha_pago; else elseBlock"><input type="date" class="form-control"  name="fecha_pago"
+                                            data-inputmask="'alias': 'dd/mm/yyyy'" #name="ngModel" [(ngModel)]="facturaService.selectedContrato.fecha_pago" ></div>
+<ng-template #elseBlock>
+    <input type="date" class="form-control"  name="fecha_pago2" data-inputmask="'alias': 'dd/mm/yyyy'"
+    #name="ngModel" [(ngModel)]="facturaService.selectedContrato.fecha_pago2" required></ng-template>
+                                        
+                                    </div>
+                                </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            </div>
+                        
+                         
+                        </div>
+                        <!-- /.row -->
+
+                        <div class="row">
+                            <div class="col-xs-12 table-responsive">
+                                <table class="table table-striped table-bordered"  >
+                                    <thead>
+                                        <tr >
+                                            <th>#</th>
+                                            <th>PLAN</th>
+                                          
+                                            <th>DESCRIPCION</th>
+                                            <th>SUBTOTAL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>{{facturaService.selectedContrato.nombre_plan}}</td>
+                                           
+                                            <td>{{facturaService.selectedContrato.descripcion}}</td>
+                                            <td>$ {{facturaService.selectedContrato.precio}}</td>
+                                        </tr>
+                                       
+                                      
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+
+                        <div class="row">
+                           
+                            <div class="col-xs-6">
+                             
+                        
+                                <div class="table-responsive">
+                                    <table class="table">
+                                     
+                                        <tr>
+                                            <th>Total:</th>
+                                            <td>$ {{facturaService.selectedContrato.precio}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn pull-left" data-dismiss="modal" ><i
+                            class="fa fa-remove"></i> Cerrar</button>
+                    
+                    <button class="btn  btn-primary"> <i class="fa  fa-folder"></i> Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { OrdenInstalacion } from '../models/orden-instalacion';
+import {environment} from './../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { OrdenInstalacion } from '../models/orden-instalacion';
 export class OrdenInstalacionService {
   selectedOrdeninstalacion: OrdenInstalacion;
   Ordeninstalaciones: OrdenInstalacion[];
-  readonly URL_API = 'https://sistemaportalnet.herokuapp.com/orden/';
+  readonly URL_API = `${environment.apiUrl}/orden/`;
 
   constructor(private http: HttpClient) {
     this.selectedOrdeninstalacion = new OrdenInstalacion();

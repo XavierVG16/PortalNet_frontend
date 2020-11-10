@@ -8,6 +8,8 @@ import { ClienteService } from '../../services/cliente.service';
 import { ActivatedRoute, Router } from '@angular/router'
 import { Form ,FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { ServicioService } from '../../services/servicio.service';
+import { Servicio } from '../../models/servicio';
 
 @Component({
   selector: 'app-cliente',
@@ -26,7 +28,7 @@ export class ClienteComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  constructor(public clienteService: ClienteService, private router: Router, private toastr: ToastrService) {
+  constructor(public clienteService: ClienteService, public servicioService: ServicioService,private router: Router, private toastr: ToastrService) {
     this.getCliente();
 
   }
@@ -35,6 +37,7 @@ export class ClienteComponent implements OnInit {
 
   ngOnInit(): void {
  this.getCliente();
+ this.getServicios();
 
   }
 
@@ -56,23 +59,25 @@ getCliente(){
 
   })
 }
+getServicios() {
+  this.servicioService.getServicios().subscribe(res => {
+      this.servicioService.servicios = res as Servicio[];
+  });
+}
   selectedCliente(id: string) {
     console.log(id)
     this.router.navigate(['/detalle', id]);
   }
   addCliente(form?: NgForm){
- 
+ console.log(form.value)
     this.clienteService.postCliente(form.value)
     .subscribe( data =>{
-      console.log(data);
+      this.resetForm();
       this.getCliente()
       this.toastr.success('Guardado con éxito!', 'Cliente');
       this.router.navigate(['/detalle',data]);     
-
-      this.resetForm();
-
     }, err =>{
-      this.toastr.warning('El cliente esta registrado!')
+      this.toastr.warning('El cliente esta registrado!','Cliente')
       this.resetForm();
       this.router.navigate(['/detalle', err.error.cliente.idcliente]);     
       this.getCliente()

@@ -24,7 +24,6 @@
             <div class="pull-right">
                 <a class="btn   btn-xm btn-primary" data-toggle="modal" data-target="#myModal">
                     <span> Agregar</span></a>
-
             </div>
             
 <!-- Material input -->
@@ -238,7 +237,7 @@
                     <button class="btn btn-outline pull-left" data-dismiss="modal" (click)="resetForm(clienteForm)"><i
                             class="fa fa-remove"></i> Cerrar</button>
 
-                    <button class="btn btn-outline" (click)="addCliente(clienteForm)"> <i class="fa  fa-folder"></i> Guardar</button>
+                    <button class="btn btn-outline" (click)="addCliente(clienteForm)" data-dismiss="modal"> <i class="fa  fa-folder"></i> Guardar</button>
                 </div>
             </form>
         </div>

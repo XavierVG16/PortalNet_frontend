@@ -23,7 +23,7 @@ export class FacturaComponent implements OnInit {
   usuario: Usuario;
   factura_usuario: Usuario;
   id: string;
-  displayedColumns: string[] = ['nombre', 'apellido', 'cedula','direccion', 'telefono','estado', 'accion'];
+  displayedColumns: string[] = ['nombre', 'apellido', 'cedula','direccion', 'telefono','plan','estado', 'accion'];
   displayedColumns2: string[] = ['nombre', 'apellido', 'cedula', 'direccion', 'telefono', 'fecha_pago','dia_pago' ,'estado'];
 
   dataSource;
@@ -35,7 +35,7 @@ export class FacturaComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  constructor(public facturaService: FacturaService, public authService: AuthService, public usuarioService : UsuarioService,private toastr: ToastrService) {
+  constructor(public facturaService: FacturaService, public authService: AuthService, public usuarioService : UsuarioService, private toastr: ToastrService) {
     this.facturaService.getFacturas()
     .subscribe(res=>{
       this.facturaService.facturas = res as Contrato[];
@@ -66,8 +66,6 @@ export class FacturaComponent implements OnInit {
       .subscribe(res => {
       
         this.facturaService.facturas = res as Contrato[];
-
-       console.log(this.facturas)
       },
       err => console.log(err)
       );
@@ -80,19 +78,16 @@ export class FacturaComponent implements OnInit {
     if(form.valid){
       console.log(form.value)
       this.facturaService.putFactura(form.value)
-      .subscribe(res =>{
-        this.getFacturas();
-        
+      .subscribe(res =>{       
         this.toastr.success('Pago con éxito!', 'Factura');
-    
-      }
-        )
+      })
      
     }
     else {
       this.toastr.error('Complete los campos', 'Por favor!');
 
     }
+    this.getFacturas();
     
   }
 
