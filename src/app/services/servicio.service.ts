@@ -7,7 +7,7 @@ export class ServicioService {
     selectedServicio: Servicio;
     servicios: Servicio[];
     readonly URL_API = `${environment.apiUrl}/servicio/`;
-
+    readonly url = 'https://sistemaportalnet.herokuapp.com/servicio'
     constructor(private http: HttpClient) {
         this.selectedServicio = new Servicio();
     }
@@ -17,7 +17,7 @@ export class ServicioService {
     }
 
     postServicio(servicio: Servicio) {
-        return this.http.post(this.URL_API, servicio);
+        return this.http.post(this.url, servicio);
     }
 
     putServicio(servicio: Servicio) {
