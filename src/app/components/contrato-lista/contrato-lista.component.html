@@ -1,1 +1,446 @@
-<p>contrato-lista works!</p>
+<section class="content-header">
+    <h1>
+        Abonado
+        <small>Seccion Configuracion de Equipos ISP </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a routerLink="/inicio"><i class="fa fa-dashboard"></i> Inicia</a></li>
+        <li><a routerLink="/abonados"><i class="fa fa-dashboard"></i> Abonados</a></li>
+        <li routerActive="active">Configuracion</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Configuracion Equipos ISP </h3>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+                    <i class="fa fa-minus"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">TIPO DE PLAN (*)</label>
+                        <div class="input-group ">
+                            <span class="input-group-addon">
+                                <i class="fa fa-server"></i>
+                            </span>
+                            <select class="form-control select2" name="tipo_servicio" 
+                                style="width: 100%;" [value] = 'contrato.nombre_plan' required>
+                                <option selected="select">{{contrato.nombre_plan}}</option>
+                                <option *ngFor="let servicio of servicioService.servicios">
+                                    {{servicio.nombre_plan}} </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+                 
+                </div>
+                <!-- /.col-lg-6 -->
+                <div class="col-md-6 ">
+                    <div class="form-group">
+                        <label for="">TIPO DE ENLACE (*)</label>
+                        <div class="input-group ">
+
+                            <span class="input-group-addon">
+                                <i class="fa  fa-share-alt"></i>
+                            </span>
+                            <select name="tipo_enlace" 
+                                class="form-control" required>
+                                <option value="select">{{contrato.tipo_enlace}}</option>
+                                <option>Inalambrico</option>
+                                <option>Fibra Optica</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>DIRECCION (*)</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-map-pin"></i>
+                            </div>
+                            <input type="text" name="direccion" class="form-control"
+                                #name="ngModel"
+                                [(ngModel)]="contrato.direccion"
+                                required>
+                        </div>        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>PRECIO</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa  fa-dollar"></i>
+                            </div>
+                            <input type="text" name="precio" class="form-control"
+                                #name="ngModel"
+                                [(ngModel)]="'$'+ contrato.precio " disabled>
+                        </div>        
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>COMPARTICION</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa  fa-code-fork"></i>
+                            </div>
+                            <input type="text" name="comparticion" class="form-control"
+                                #name="ngModel"
+                                [(ngModel)]="contrato.comparticion"
+                                disabled>
+                        </div>        
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>VELOCIDAD DE CARGAR (kbps)</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <input type="text" name="m_subida_kbps" class="form-control"
+                                #name="ngModel"
+                                [(ngModel)]="contrato.m_subida_kbps"
+                                disabled>
+                        </div>        
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>DESCRIPCION</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa  fa-navicon"></i>
+                            </div>
+                            <input type="text" name="descripcion" class="form-control"
+                                #name="ngModel"
+                                [(ngModel)]="contrato.descripcion"
+                                disabled>
+                        </div>        
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">FECHA DE INSTALACION (*)</label>
+                        <div class="input-group ">
+                            <span class="input-group-addon">
+                                <i class="fa  fa-calendar"></i>
+                            </span>
+                            <input type="date" class="form-control"
+                                data-inputmask="'alias': 'dd/mm/yyyy'" name="dia_instalacion"
+                                #name="ngModel"
+                                [(ngModel)]="contrato.dia_instalacion"
+                                data-mask>
+                        </div>
+                    </div>
+
+                    <!-- /input-group -->
+                </div>
+                <div class="col-md-6 ">
+                    <div class="form-group">
+                        <label for="">HORA DE INSTALACION (*)</label>
+
+                        <div class="input-group">
+
+                            <input type="time" name="hora_instalacion" #name="ngModel"
+                                [(ngModel)]="contrato.hora_instalacion"
+                                class="form-control timepicker1">
+                        </div>
+                        <!-- /input-group -->
+                    </div>
+                </div>
+            </div>           
+
+            <div class="col-xs-12 table-responsive">
+                <table mat-table [dataSource]="dataSource"  class="table table-striped" matSort>
+              
+                  <!-- ID Column -->
+                  <ng-container matColumnDef="equipo">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> EQUIPO </th>
+                    <td mat-cell *matCellDef="let row"> {{row.equipo}} </td>
+                    <td mat-footer-cell *matFooterCellDef> Total </td>
+                  </ng-container>
+              
+                  <!-- Progress Column -->
+                  <ng-container matColumnDef="serie">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> SERIE </th>
+                    <td mat-cell *matCellDef="let row"> {{row.serie}} </td>
+                  </ng-container>
+              
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="cantidad">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> CANTIDAD </th>
+                    <td mat-cell *matCellDef="let row"> 1 </td>
+                  </ng-container>
+              
+                  <!-- Color Column -->
+                  <ng-container matColumnDef="precio">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> PRECIO </th>
+                    <td mat-cell *matCellDef="let row" > {{row.precio  | currency}} </td>
+                  </ng-container>
+              
+                      <!-- Color Column -->
+                      <ng-container matColumnDef="accion">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> ACCION </th>
+                        <td mat-cell *matCellDef="let row" > 
+                            
+                        <button  class="btn btn-sm btn-primary"  style="margin: 3px;" (click)= "selectDetalleEquipo(row)"  title="Configurar" data-toggle="modal" data-target="#myModal"><i class=" fa fa-wrench"></i></button>
+                        <button class="btn btn-sm btn-danger" style="margin: 3px;" (click)="deleteEquipo(row.iddetalle_equipo)"  title="Eliminar"><i class="fa  fa-remove"></i></button>
+            
+                        </td>
+                      </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  
+              
+                  
+                </table>
+            
+                <div class="col-xs-6">
+                
+                
+                    <div class="table-responsive">
+                        <table class="table">
+            
+                            <tr>
+                                <th>Total:</th>
+                                <td>{{getTotalCost()  | currency}}</td>
+            
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+              
+              </div>
+          </div>
+        <div class="box-footer">
+
+        </div>
+    </div>
+</section>
+
+
+  <div class="modal modal-primary" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Configuracion  {{detalleEquipoService.selectedDetalleEquipo.equipo}}</h4>
+            </div>
+            <form #configuracioForm="ngForm" (submit)="addConfiguracion(configuracioForm)" >
+                <input type="hidden" name="idinfo_tec" #idinfo_tec="ngModel"  [(ngModel)]="detalleEquipoService.selectedDetalleEquipo.idinfo_tec">
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="hidden" name="detalle_equipo" #name="ngModel"  [(ngModel)]="detalleEquipoService.selectedDetalleEquipo.detalle_equipo">
+
+                     
+                     
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>NOMBRE WIFI</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa   fa-wifi"></i>
+                                    </div>
+                                    <input type="text" name="wifi_nombre" class="form-control"
+                                        #name="ngModel"
+                                        [(ngModel)]="detalleEquipoService.selectedDetalleEquipo.wifi_nombre"
+                                        required>
+                                </div>        
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>CLAVE WIFI</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa   fa-wifi"></i>
+                                    </div>
+                                    <input type="text" name="wifi_clave" class="form-control"
+                                        #name="ngModel"
+                                        [(ngModel)]="detalleEquipoService.selectedDetalleEquipo.wifi_clave"
+                                        required>
+                                </div>        
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>ANTENA EMISORA - AP</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa  fa-road"></i>
+                                    </div>
+                                    <input type="text" name="antena_emisora_ap" class="form-control"
+                                        #name="ngModel"
+                                        [(ngModel)]="detalleEquipoService.selectedDetalleEquipo.antena_emisora_ap"
+                                        required>
+                                </div>        
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>ANTENA RECEPTORA - CPE</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa  fa-road"></i>
+                                    </div>
+                                    <input type="text" name="antena_receptora_cpe" class="form-control"
+                                        #name="ngModel"
+                                        [(ngModel)]="detalleEquipoService.selectedDetalleEquipo.antena_receptora_cpe"
+                                        required>
+                                </div>        
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>POTENCIA</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa  fa-signal"></i>
+                                    </div>
+                                    <input type="text" name="potencia" class="form-control"
+                                        #name="ngModel"
+                                        [(ngModel)]="detalleEquipoService.selectedDetalleEquipo.potencia"
+                                        required>
+                                </div>        
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>ALINEACIÓN ANTENA</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa   fa-sort-amount-asc"></i>
+                                    </div>
+                                    <input type="text" name="aliniacion_antena" class="form-control"
+                                        #name="ngModel"
+                                        [(ngModel)]="detalleEquipoService.selectedDetalleEquipo.aliniacion_antena"
+                                        required>
+                                </div>        
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>IP WAN</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa  fa-laptop"></i>
+                                    </div>
+                                    <input type="text" name="ip_wan" class="form-control"
+                                        #name="ngModel"
+                                        [(ngModel)]="detalleEquipoService.selectedDetalleEquipo.ip_wan"
+                                        required>
+                                </div>        
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>IP LAN</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa  fa-laptop"></i>
+                                    </div>
+                                    <input type="text" name="ip_lan" class="form-control"
+                                        #name="ngModel"
+                                        [(ngModel)]="detalleEquipoService.selectedDetalleEquipo.ip_lan"
+                                        required>
+                                </div>        
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>ROUTER - ACCESO REMOTO</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa  fa-laptop"></i>
+                                    </div>
+                                    <input type="text" name="router_acceso_remoto" class="form-control"
+                                        #name="ngModel"
+                                        [(ngModel)]="detalleEquipoService.selectedDetalleEquipo.router_acceso_remoto"
+                                        required>
+                                </div>        
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>RUTA</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa   fa-object-group"></i>
+                                    </div>
+                                    <input type="text" name="ruta" class="form-control"
+                                        #name="ngModel"
+                                        [(ngModel)]="detalleEquipoService.selectedDetalleEquipo.ruta"
+                                        required>
+                                </div>        
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>NAP</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa  fa-genderless"></i>
+                                    </div>
+                                    <input type="text" name="nap" class="form-control"
+                                        #name="ngModel"
+                                        [(ngModel)]="detalleEquipoService.selectedDetalleEquipo.nap"
+                                        required>
+                                </div>        
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>PUERTO</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa   fa-terminal"></i>
+                                    </div>
+                                    <input type="text" name="puerto" class="form-control"
+                                        #name="ngModel"
+                                        [(ngModel)]="detalleEquipoService.selectedDetalleEquipo.puerto"
+                                        required>
+                                </div>        
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline pull-left" data-dismiss="modal" ><i
+                            class="fa fa-remove"></i> Cerrar</button>
+
+                    <button class="btn btn-outline" > <i class="fa  fa-folder"></i> Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

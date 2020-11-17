@@ -5,7 +5,8 @@ import { Equipo } from '../../models/equipo';
 import { EquipoService } from '../../services/equipo.service';
 import { Proveedor } from '../../models/proveedor';
 import { ProveedorService } from '../../services/proveedor.service';
-
+import { InformeTecnicoService } from '../../services/informe-tecnico.service';
+import { InformeTecnico } from '../../models/informe-tecnico';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -19,13 +20,14 @@ export class EquipoComponent implements OnInit {
   displayedColumns: string[] = ['equipo', 'descripcion', 'serie','proveedor','precio', 'cantidad', 'estado', 'accion'];
 
   dataSource;
+  informe : InformeTecnico;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  constructor(public equipoService: EquipoService, public proveedorService: ProveedorService, private toastr: ToastrService) { 
+  constructor(public equipoService: EquipoService, public proveedorService: ProveedorService, public informeTecnicoService: InformeTecnicoService, private toastr: ToastrService) { 
 
   }
  

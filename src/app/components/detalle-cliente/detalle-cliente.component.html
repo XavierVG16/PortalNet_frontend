@@ -188,7 +188,7 @@
                             <ng-template #elseBlock><button class="btn btn-sm btn-danger" style="margin: 3px;" title="Desactivar"><i class="fa fa-power-off"></i></button>
                             </ng-template>
       
-                              <button  class="btn btn-sm btn-warning"  style="margin: 3px;"  title="Editar"><i class=" fa fa-edit"></i></button>
+                              <button  class="btn btn-sm btn-warning"  style="margin: 3px;" (click)="selectedContrato(element.idcontrato_servicio)"  title="Ver mas"><i class=" fa  fa-eye"></i></button>
                               <button class="btn btn-sm btn-info" style="margin: 3px;"  title="Eliminar"><i class="fa  fa-print"></i></button>
                         </td>
                     </ng-container>
@@ -332,7 +332,7 @@
                                             <select class="form-control select2" name="tipo_servicio" #name="ngModel"
                                                 [(ngModel)]="contratoService.selectedContrato.tipo_servicio"
                                                 style="width: 100%;" required>
-                                                <option selected="selected">Tipo de plan</option>
+                                                <option selected="selecte">Tipo de plan</option>
                                                 <option *ngFor="let servicio of servicioService.servicios">
                                                     {{servicio.nombre_plan}} </option>
                 
@@ -377,6 +377,7 @@
                                         </div>        
                                     </div>
                                 </div>
+                                
                             </div>
                           </div>
                       <div>
@@ -404,8 +405,6 @@
                 
                                     <!-- /input-group -->
                                 </div>
-                
-                
                                 <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label for="">HORA DE INSTALACION (*)</label>

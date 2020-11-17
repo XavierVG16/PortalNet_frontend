@@ -21,9 +21,6 @@ export class ClienteService {
   getCliente(idcliente: string) {
     return this.http.get<Cliente>(this.URL_API + `/${idcliente}`);
   }
-
-
-
   postCliente(cliente: Cliente) {
     return this.http.post(this.URL_API, cliente);
   }
@@ -33,7 +30,8 @@ export class ClienteService {
   putCliente(id: string, cedula: string, nombre: string, apellido: string, direccion: string, propiedad: string, referencia: string, email: string, telefono: string) {
     return this.http.put(this.URL_API + `/${id}`, { cedula, nombre, apellido, direccion, propiedad, referencia, email, telefono })
   }
-  deleteCliente(idcliente: string) {
-    return this.http.delete(this.URL_API + `/${idcliente}`)
+  deleteCliente(id: string){
+    return this.http.delete(this.URL_API + `/${id}`);
   }
+  
 }

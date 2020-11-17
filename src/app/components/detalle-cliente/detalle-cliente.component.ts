@@ -721,4 +721,8 @@ this.usuarioService.getUsuario(this.facturaService.selectedContrato.idusuario)
   const pdfDoc = pdfMake.createPdf(documentDefinition).open();
   
  }
+ selectedContrato(id: string) {
+  console.log(id)
+  this.router.navigate(['/contrato_detalle', id]);
+}
 }

@@ -18,7 +18,9 @@ export class OrdenInstalacionService {
   getOrden_instalaciones() {
     return this.http.get(this.URL_API);
   }
-
+  getOrden_instalacion(id: string) {
+    return this.http.get(this.URL_API+ `/${id}`);
+  }
   postOrden_instalacion(ordeninstalacion: OrdenInstalacion) {
     return this.http.post(this.URL_API, ordeninstalacion);
   }

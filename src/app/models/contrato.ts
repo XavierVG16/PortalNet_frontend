@@ -98,7 +98,8 @@ export class Contrato {
     fecha_pago2: string;
     fecha_pago_prox: string;
     idusuario: string;
-  
+    comparticion: string;
+    m_subida_kbps: string;
   
 
     

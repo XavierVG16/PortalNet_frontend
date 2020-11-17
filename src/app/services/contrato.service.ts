@@ -18,6 +18,9 @@ export class ContratoService {
     getContrato(id: string) {
         return this.http.get(this.URL_API + `/${id}`);
     }
+    getContrato_Detalle(id: string) {
+        return this.http.get<Contrato>(this.URL_API + `/detalle/${id}`);
+    }
     postContrato(contrato: Contrato, orden_instalacion) { // return this.http.post(this.URL_API, contrato, orden_instalacion);
         return this.http.post(this.URL_API + `/${orden_instalacion}`, contrato);
     }

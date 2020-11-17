@@ -1,5 +1,5 @@
 export class OrdenInstalacion {
-    constructor(idorden_instalacion = '', dia_instalacion = '', hora_instalacion = '', n_equipo = '', cantidad = '') {
+    constructor(idorden_instalacion = '', dia_instalacion = '', hora_instalacion = '', n_equipo = '', cantidad = 0) {
         this.idorden_instalacion = idorden_instalacion,
             this.dia_instalacion = dia_instalacion,
             this.hora_instalacion = hora_instalacion,
@@ -10,6 +10,8 @@ export class OrdenInstalacion {
     dia_instalacion: string;
     hora_instalacion: string;
     n_equipo: string;
-    cantidad: string;
+    equipo: string;
+    cantidad: number;
+    precio: string;
 }
 

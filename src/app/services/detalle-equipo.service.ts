@@ -7,7 +7,7 @@ import {environment} from './../../environments/environment'
 })
 export class DetalleEquipoService {
   selectedDetalleEquipo: DetalleEquipo;
-  detalleEquipos: DetalleEquipo[];
+  detallequipos: DetalleEquipo[];
 
   readonly URL_API = `${environment.apiUrl}/detalle/`;
   constructor(private http: HttpClient) {
@@ -18,6 +18,9 @@ export class DetalleEquipoService {
      return this.http.get(this.URL_API);
    }
    getDetalleEquipo(id: string){
-     return this.http.get<DetalleEquipo>(this.URL_API+`/${id}`)
+     return this.http.get(this.URL_API+`/${id}`)
    }
+   deleteDetalleEquipo(id: string){
+    return this.http.delete(this.URL_API+`/${id}`)
+  }
 }
