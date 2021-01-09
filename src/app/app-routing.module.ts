@@ -48,29 +48,30 @@ const routes: Routes = [
   },
   {
     path: 'factura',
-    component: FacturaComponent]
+    component: FacturaComponent
   },
-{
-  path: 'contrato_detalle/:id',
+  {
+    path: 'contrato_detalle/:id',
     component: ContratoListaComponent
-},
-{
-  path: 'abonados',
+  },
+  {
+    path: 'abonados',
     component: ClienteComponent
-},
-{
-  path: 'detalle/:id',
+  },
+  {
+    path: 'detalle/:id',
     component: DetalleClienteComponent
 
-},
-{
-  path: 'perfil/:id',
+  },
+  {
+    path: 'perfil/:id',
     component: PerfilComponent
-},
-{
-  path: '**',
+
+  },
+  {
+    path: '**',
     component: ErrorComponent
-}
+  }
 ];
 
 @NgModule({
