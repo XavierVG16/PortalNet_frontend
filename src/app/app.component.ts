@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router'
 import { Usuario } from 'src/app/models/usuario';
 import { UsuarioService } from './services/usuario.service';
-import {AuthService} from './services/auth.service'
+import { AuthService } from './services/auth.service'
 
 @Component({
   selector: 'app-root',
@@ -21,28 +21,20 @@ export class AppComponent {
   }
 
   getUsuario(form?: NgForm) {
- // console.log(form.value)
-  this.authService.postUsuario(form.value)
-  .subscribe(
-    res=>{
-    
-    console.log(res);
+    // console.log(form.value)
+    this.authService.postUsuario(form.value)
+      .subscribe(
+        res => {
 
-      localStorage.setItem('token', res.token);
-      this.router.navigate(['/inicio']);
+          console.log(res);
 
-      this.toastr.success(`ss`, 'Bienvenido!');
+          localStorage.setItem('token', res.token);
+          this.router.navigate(['/inicio']);
+        },
+        err => {
 
-
-    },
-    err =>{
-   
-      console.log(err.error.message)
-      this.toastr.error(`${(err.error.message)}`, 'Error!');
-
-    }
-
-  )
+          console.log(err.error.message)
+        });
   }
 
 }

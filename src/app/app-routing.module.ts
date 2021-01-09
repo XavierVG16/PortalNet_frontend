@@ -12,31 +12,27 @@ import { ContratoListaComponent } from './components/contrato-lista/contrato-lis
 import { ClienteComponent } from './components/cliente/cliente.component';
 import { DetalleClienteComponent } from './components/detalle-cliente/detalle-cliente.component';
 import { ErrorComponent } from './components/error/error.component';
-import {PerfilComponent} from './components/perfil/perfil.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 import { Cliente } from './models/cliente';
-import { AuthGuard} from './auth.guard'
+import { AuthGuard } from './auth.guard'
 const routes: Routes = [
 
   {
     path: 'inicio',
-    component: EscritorioComponent,
-    canActivate: [AuthGuard]
+    component: EscritorioComponent
   },
 
   {
     path: 'proveedores',
-    component: ProveedorComponent,
-    canActivate: [AuthGuard]
+    component: ProveedorComponent
   },
   {
     path: 'servicios',
-    component: ServicioComponent,
-    canActivate: [AuthGuard]
+    component: ServicioComponent
   },
   {
     path: 'equipos',
-    component: EquipoComponent,
-    canActivate: [AuthGuard]
+    component: EquipoComponent
   },
   {
     path: 'productos',
@@ -44,44 +40,37 @@ const routes: Routes = [
   },
   {
     path: 'usuarios',
-    component: UsuarioComponent,
-    canActivate: [AuthGuard]
+    component: UsuarioComponent
   },
   {
     path: 'contratos',
-    component: ContratoComponent,
-    canActivate: [AuthGuard]
+    component: ContratoComponent
   },
   {
     path: 'factura',
-    component: FacturaComponent,
-    canActivate: [AuthGuard]
+    component: FacturaComponent]
   },
-  {
-    path: 'contrato_detalle/:id',
-    component: ContratoListaComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'abonados',
-    component: ClienteComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'detalle/:id',
-    component: DetalleClienteComponent,
-    canActivate: [AuthGuard]
+{
+  path: 'contrato_detalle/:id',
+    component: ContratoListaComponent
+},
+{
+  path: 'abonados',
+    component: ClienteComponent
+},
+{
+  path: 'detalle/:id',
+    component: DetalleClienteComponent
 
-  },
-  {
-    path: 'perfil/:id',
-    component: PerfilComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: '**',
+},
+{
+  path: 'perfil/:id',
+    component: PerfilComponent
+},
+{
+  path: '**',
     component: ErrorComponent
-  }
+}
 ];
 
 @NgModule({
